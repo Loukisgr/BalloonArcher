@@ -17,7 +17,11 @@ public class WorldRenderer implements Disposable
     private WorldController worldController;
     private float current_animation_time;
     private int current_animation;
-    public WorldRenderer (WorldController worldController) { }
+
+    public WorldRenderer (WorldController worldController)
+    {
+        this.worldController=worldController;
+    }
 
     private void init ()
     {
@@ -27,7 +31,7 @@ public class WorldRenderer implements Disposable
         current_animation_time=0;
         current_animation=0;
         archer_texture[0] = new TextureRegion(img, 0, 0, 162, 255);
-        archer_texture[1] = new TextureRegion(img, 186, 0f, 162, 255);
+        archer_texture[1] = new TextureRegion(img, 186, 0, 162, 255);
         archer_texture[2] = new TextureRegion(img, 0, 256, 162, 255);
         archer_texture[3] = new TextureRegion(img, 186, 256, 162, 255);
     }
@@ -61,7 +65,7 @@ public class WorldRenderer implements Disposable
             current_animation=0;
         }
 
-        batch.draw(archer_texture[current_animation], 0, 0);
+        batch.draw(archer_texture[current_animation], 0, worldController.get_Archer_pos());
         batch.end();
     }
 

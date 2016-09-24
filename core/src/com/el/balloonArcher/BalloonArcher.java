@@ -18,10 +18,10 @@ public class BalloonArcher extends ApplicationAdapter {
 		// Set Libgdx log level to DEBU
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		// Initialize controller and renderer
-		worldController = new WorldController();
+		player = new com.el.balloonArcher.Archer(1,0);
+		worldController = new WorldController(this);
 		worldRenderer = new com.el.balloonArcher.WorldRenderer(worldController);
 		paused = false;
-		player = new com.el.balloonArcher.Archer(1);
 	}
 
 	@Override
@@ -62,6 +62,11 @@ public class BalloonArcher extends ApplicationAdapter {
 	public void resume ()
 	{
 		paused = false;
+	}
+
+	public Archer get_Archer()
+	{
+		return player;
 	}
 
 }

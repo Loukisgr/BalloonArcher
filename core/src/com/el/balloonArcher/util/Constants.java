@@ -15,4 +15,5 @@ public class Constants
     public static final float VIEWPORT_GUI_HEIGHT = 480.0f;
     public static final float ANIMATION_TIMER  = 4f;
     public static final int ANIMATION_SPLITS = 4;
+    public static final float ARCHER_SPEED = 50f;
 }
