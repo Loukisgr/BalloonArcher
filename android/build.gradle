@@ -15,7 +15,7 @@ android {
         instrumentTest.setRoot('tests')
     }
     defaultConfig {
-        applicationId "com.el.baloonarcher"
+        applicationId "com.el.balloonArcher"
         minSdkVersion 8
         targetSdkVersion 24
     }
@@ -68,7 +68,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.el.baloonarcher/com.el.baloonarcher.AndroidLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.el.balloonArcher/AndroidLauncher'
 }
 
 // sets up the Android Eclipse project, using the old Ant based build.

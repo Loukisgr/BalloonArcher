@@ -1,4 +1,4 @@
-package com.el.baloonarcher;
+package com.el.balloonArcher;
 
 /**
  * Created by Louki on 20/9/2016.
@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
-import com.el.baloonarcher.util.Constants;
+import com.el.balloonArcher.util.Constants;
 
 public class WorldRenderer implements Disposable
 {

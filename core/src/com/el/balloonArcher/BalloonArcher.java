@@ -1,16 +1,15 @@
-package com.el.baloonarcher;
+package com.el.balloonArcher;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 
-public class BaloonArcher extends ApplicationAdapter {
-	private Archer player;
-	private static final String TAG = BaloonArcher.class.getName();
+public class BalloonArcher extends ApplicationAdapter {
+	private com.el.balloonArcher.Archer player;
+	private static final String TAG = BalloonArcher.class.getName();
 	private WorldController worldController;
-	private WorldRenderer worldRenderer;
+	private com.el.balloonArcher.WorldRenderer worldRenderer;
 	private boolean paused;
 	
 	@Override
@@ -20,9 +19,9 @@ public class BaloonArcher extends ApplicationAdapter {
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		// Initialize controller and renderer
 		worldController = new WorldController();
-		worldRenderer = new WorldRenderer(worldController);
+		worldRenderer = new com.el.balloonArcher.WorldRenderer(worldController);
 		paused = false;
-		player = new Archer(1);
+		player = new com.el.balloonArcher.Archer(1);
 	}
 
 	@Override
