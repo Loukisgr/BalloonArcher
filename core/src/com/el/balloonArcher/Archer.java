@@ -45,10 +45,15 @@ public class Archer
 
     public void shoot()
     {
-        if(arrows.size() >0)
+
+        for (int i =0 ; i < arrows.size();i++)
         {
-            arrows.remove(0);
+            if(!arrows.get(i).is_shot())
+            {
+                arrows.get(i).shoot(Constants.ARCHER_HEIGHT/2+this.y);
+            }
         }
+
     }
 
     public void move(float pix)

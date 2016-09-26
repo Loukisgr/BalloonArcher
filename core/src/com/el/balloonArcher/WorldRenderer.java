@@ -90,7 +90,7 @@ public class WorldRenderer implements Disposable
 
         for (Arrow arrow: worldController.get_arrows())
         {
-            if (arrow.is_shot())
+            if (arrow.is_shot() && !arrow.to_remove())
             {
                 batch.draw(arrow_texture,arrow.get_x(),arrow.get_y());
             }

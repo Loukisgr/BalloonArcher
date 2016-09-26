@@ -75,6 +75,7 @@ public class WorldController extends InputAdapter
         }
         if (Gdx.input.isKeyPressed(Keys.W)) app.get_Archer().move(-Constants.ARCHER_SPEED*deltaTime);
         if (Gdx.input.isKeyPressed(Keys.S))  app.get_Archer().move(Constants.ARCHER_SPEED*deltaTime);
+        if (Gdx.input.isKeyPressed(Keys.SPACE))  app.get_Archer().shoot();
 
         if (Gdx.input.isTouched())
         {
@@ -84,14 +85,21 @@ public class WorldController extends InputAdapter
             }
             else
             {
-                if (app.get_Archer().get_pos() < Gdx.input.getY()) {
-                    app.get_Archer().move(-Constants.ARCHER_SPEED * deltaTime);
+                //shoot
+                if(Gdx.input.getX() >= Constants.VIEWPORT_GUI_WIDTH /2)
+                {
+                    app.get_Archer().shoot();
                 }
+                //move
                 else
                 {
-                    app.get_Archer().move(Constants.ARCHER_SPEED * deltaTime);
+                    if (app.get_Archer().get_pos() < Gdx.input.getY()) {
+                        app.get_Archer().move(-Constants.ARCHER_SPEED * deltaTime);
+                    } else {
+                        app.get_Archer().move(Constants.ARCHER_SPEED * deltaTime);
+                    }
+                    System.out.println(Gdx.input.getY());
                 }
-                System.out.println(Gdx.input.getY());
             }
         }
     }
