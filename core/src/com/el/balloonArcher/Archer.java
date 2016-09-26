@@ -9,47 +9,29 @@ import java.util.ArrayList;
  */
 public class Archer
 {
-
-    private ArrayList<Balloon> balloons;
     private ArrayList<Arrow> arrows;
-    private int score;
-    private int level;
     private float y=Constants.VIEWPORT_GUI_HEIGHT;
 
-    public Archer(int level,int score)
+    public Archer(int level)
     {
-        this.level=level;
-        balloons = new ArrayList<Balloon>();
         arrows = new ArrayList<Arrow>();
-        init_level(this.level);
-
-        if (level ==1)
-        {
-            this.score=0;
-        }
-        else
-        {
-            this.score=score;
-        }
+        init_level(level);
     }
 
     public void init_level(int level)
     {
         arrows.clear();
-        balloons.clear();
 
         int i = level;
+
+        //limit arrows to 100
+        if (i>Constants.NO_OF_ARROW_LIMIT)
+        {
+            i=100;
+        }
+
         while (i>0)
         {
-            if (i%10==0)
-            {
-                balloons.add(new Balloon(true,level));
-            }
-            else
-            {
-                balloons.add(new Balloon(false,level));
-            }
-
             arrows.add(new Arrow(level));
             i-=1;
         }
@@ -59,11 +41,6 @@ public class Archer
     public float get_pos()
     {
         return y;
-    }
-
-    public int get_no_of_baloons()
-    {
-       return balloons.size();
     }
 
     public void shoot()
@@ -89,6 +66,21 @@ public class Archer
             y=y+pix;
             System.out.println("YEP"+y);
         }
+    }
+
+    public void move_arrows(float deltaTime)
+    {
+
+        for (Arrow i : arrows)
+        {
+
+            i.move(deltaTime);
+        }
+    }
+
+    public ArrayList<Arrow> get_arrows()
+    {
+        return arrows;
     }
 
 

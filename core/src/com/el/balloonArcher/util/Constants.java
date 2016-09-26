@@ -16,4 +16,7 @@ public class Constants
     public static final float ANIMATION_TIMER  = 4f;
     public static final int ANIMATION_SPLITS = 4;
     public static final float ARCHER_SPEED = 50f;
+    public static final float BALLOON_STARTING_SPEED=20f;
+    public static final float ARROW_STARTING_SPEED=20f;
+    public static final int NO_OF_ARROW_LIMIT=100;
 }

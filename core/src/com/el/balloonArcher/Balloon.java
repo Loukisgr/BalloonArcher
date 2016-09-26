@@ -9,15 +9,14 @@ public class Balloon
 {
     private boolean has_gift;
     private float speed;
-    private static float STARTING_SPEED=20f;
     private boolean is_hit=false;
-    private float x,y = 0;
+    private float y = Constants.VIEWPORT_GUI_HEIGHT;
 
 
     public Balloon(boolean has_gift, float speed)
     {
         this.has_gift=has_gift;
-        this.speed=speed+20f;
+        this.speed=speed+Constants.BALLOON_STARTING_SPEED;
     }
 
     public boolean get_has_gift()
@@ -27,7 +26,7 @@ public class Balloon
 
     public boolean is_top()
     {
-        if(y<= 0)
+        if(y< 0)
         {
             return true;
         }
@@ -37,7 +36,7 @@ public class Balloon
         }
     }
 
-    private boolean is_hit()
+    public boolean is_hit()
     {
         return is_hit;
     }
@@ -48,7 +47,7 @@ public class Balloon
         {
             if(is_top())
             {
-                y=-10;
+                y= Constants.VIEWPORT_GUI_HEIGHT;
             }
             else
             {

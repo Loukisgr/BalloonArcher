@@ -11,6 +11,8 @@ public class BalloonArcher extends ApplicationAdapter {
 	private WorldController worldController;
 	private com.el.balloonArcher.WorldRenderer worldRenderer;
 	private boolean paused;
+	private int level=1;
+	private int score=0;
 	
 	@Override
 	public void create ()
@@ -18,7 +20,7 @@ public class BalloonArcher extends ApplicationAdapter {
 		// Set Libgdx log level to DEBU
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		// Initialize controller and renderer
-		player = new com.el.balloonArcher.Archer(1,0);
+		player = new com.el.balloonArcher.Archer(level);
 		worldController = new WorldController(this);
 		worldRenderer = new com.el.balloonArcher.WorldRenderer(worldController);
 		paused = false;
@@ -32,12 +34,12 @@ public class BalloonArcher extends ApplicationAdapter {
 		if(!paused)
 		{
 			worldController.update(Gdx.graphics.getDeltaTime());
+			Gdx.gl.glClearColor(0, 0, 0, 1);
+			// Clears the screen
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+			// Render game world to screen
+			worldRenderer.render(Gdx.graphics.getDeltaTime());
 		}
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		// Clears the screen
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		// Render game world to screen
-		worldRenderer.render(Gdx.graphics.getDeltaTime());
 	}
 
 	@Override
@@ -67,6 +69,16 @@ public class BalloonArcher extends ApplicationAdapter {
 	public Archer get_Archer()
 	{
 		return player;
+	}
+
+	public boolean is_paused()
+	{
+		return paused;
+	}
+
+	public int get_level()
+	{
+		return level;
 	}
 
 }
