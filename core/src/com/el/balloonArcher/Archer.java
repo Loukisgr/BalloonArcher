@@ -53,18 +53,17 @@ public class Archer
 
     public void move(float pix)
     {
-        /*if(y+pix > Constants.VIEWPORT_HEIGHT)
+       /* if(y+pix > Constants.VIEWPORT_HEIGHT)
         {
             y=Constants.VIEWPORT_HEIGHT;
         }
-        else */ if(y+pix <0 )
-        {            System.out.println("oh"+pix);
+        else */if(y+pix <0 )
+        {
             y=0;
         }
         else
         {
             y=y+pix;
-            System.out.println("YEP"+y);
         }
     }
 

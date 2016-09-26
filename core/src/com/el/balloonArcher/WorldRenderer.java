@@ -36,7 +36,7 @@ public class WorldRenderer implements Disposable
         archer_texture[2] = new TextureRegion(archer_img, 0, 256, 162, 255);
         archer_texture[3] = new TextureRegion(archer_img, 186, 256, 162, 255);
 
-        items_img = new Texture("items.bmp");
+        items_img = new Texture("archer.jpg");
         balloon_texture = new TextureRegion[2];
 
         balloon_texture[0] = new TextureRegion(items_img, 65, 1, 25, 27);
@@ -55,6 +55,7 @@ public class WorldRenderer implements Disposable
         batch.begin();
         paint_archer(deltaTime);
         paint_arrows();
+        paint_balloons();
         batch.end();
     }
 
@@ -92,6 +93,26 @@ public class WorldRenderer implements Disposable
             if (arrow.is_shot())
             {
                 batch.draw(arrow_texture,arrow.get_x(),arrow.get_y());
+            }
+        }
+
+    }
+
+    private void paint_balloons()
+    {
+
+        for (Balloon b: worldController.get_baloons())
+        {
+            if (!b.is_hit())
+            {
+                if(b.get_has_gift())
+                {
+                    batch.draw(balloon_texture[1], b.get_x(),b.get_y());
+                }
+                else
+                {
+                    batch.draw(balloon_texture[0], b.get_x(),b.get_y());
+                }
             }
         }
 

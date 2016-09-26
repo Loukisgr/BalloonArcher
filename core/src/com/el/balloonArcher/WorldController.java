@@ -58,6 +58,7 @@ public class WorldController extends InputAdapter
 
     private void handle_Input(float deltaTime)
     {
+        if (app.is_paused()) {return;}
         //if (Gdx.app.getType() != Application.ApplicationType.Desktop) return;
         // Selected Sprite Controls
         //pause\resume
@@ -105,6 +106,11 @@ public class WorldController extends InputAdapter
         return app.get_Archer().get_arrows();
     }
 
+    public ArrayList<Balloon> get_baloons()
+    {
+        return balloons;
+    }
+
     public int get_no_of_baloons()
     {
         return balloons.size();
@@ -119,11 +125,11 @@ public class WorldController extends InputAdapter
             {
                 i.move(deltaTime);
             }
+
         }
 
         //move arrows
         app.get_Archer().move_arrows(deltaTime);
-
 
     }
 
