@@ -36,7 +36,7 @@ public class WorldRenderer implements Disposable
         archer_texture[2] = new TextureRegion(archer_img, 0, 256, 162, 255);
         archer_texture[3] = new TextureRegion(archer_img, 186, 256, 162, 255);
 
-        items_img = new Texture("archer.jpg");
+        items_img = new Texture("items.bmp");
         balloon_texture = new TextureRegion[2];
 
         balloon_texture[0] = new TextureRegion(items_img, 65, 1, 25, 27);
