@@ -107,11 +107,11 @@ public class WorldRenderer implements Disposable
             {
                 if(b.get_has_gift())
                 {
-                    batch.draw(balloon_texture[1], b.get_x(),b.get_y());
+                    batch.draw(balloon_texture[1], b.get_x(),b.get_y(),BalloonArcher.GUI_WIDTH/10,BalloonArcher.GUI_HEIGHT/12);
                 }
                 else
                 {
-                    batch.draw(balloon_texture[0], b.get_x(),b.get_y());
+                    batch.draw(balloon_texture[0], b.get_x(),b.get_y(),BalloonArcher.GUI_WIDTH/10,BalloonArcher.GUI_HEIGHT/12);
                 }
             }
         }

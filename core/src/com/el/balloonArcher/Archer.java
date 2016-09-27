@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Archer
 {
     private ArrayList<Arrow> arrows;
-    private float y=Constants.VIEWPORT_GUI_HEIGHT;
+    private float y=BalloonArcher.GUI_HEIGHT;
 
     public Archer(int level)
     {

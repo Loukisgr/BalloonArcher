@@ -9,7 +9,7 @@ public class Arrow
 {
 
     private float speed;
-    private float x = 0;
+    private float x = 100;
     private float y = 0;
     private boolean shot;
     private boolean remove=false;
@@ -41,7 +41,7 @@ public class Arrow
     {
         if (is_shot())
         {
-            if(x>Constants.VIEWPORT_GUI_WIDTH)
+            if(x>BalloonArcher.GUI_WIDTH)
             {
                 remove=true;
             }

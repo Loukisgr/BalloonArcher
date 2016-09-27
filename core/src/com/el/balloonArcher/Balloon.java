@@ -12,8 +12,8 @@ public class Balloon
     private boolean has_gift;
     private float speed;
     private boolean is_hit=false;
-    private float y = Constants.VIEWPORT_GUI_HEIGHT;
-    private float x = Constants.VIEWPORT_GUI_WIDTH-100;
+    private float y = BalloonArcher.GUI_HEIGHT;
+    private float x = BalloonArcher.GUI_WIDTH/2;
 
 
     public Balloon(boolean has_gift, float speed)
@@ -21,7 +21,7 @@ public class Balloon
         this.has_gift=has_gift;
         this.speed=speed+Constants.BALLOON_STARTING_SPEED;
         Random rnd = new Random();
-        x=rnd.nextInt(100)+Constants.VIEWPORT_GUI_WIDTH-100;
+        //x=rnd.nextInt(100)+50;
     }
 
     public Balloon(boolean has_gift, float speed, float x)
@@ -38,7 +38,7 @@ public class Balloon
 
     public boolean is_top()
     {
-        if(y< 0)
+        if(y>= BalloonArcher.GUI_HEIGHT)
         {
             return true;
         }
@@ -59,7 +59,7 @@ public class Balloon
         {
             if(is_top())
             {
-                y= Constants.VIEWPORT_GUI_HEIGHT;
+                y= 0;
             }
             else
             {

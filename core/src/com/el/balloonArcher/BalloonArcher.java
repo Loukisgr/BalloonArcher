@@ -13,6 +13,7 @@ public class BalloonArcher extends ApplicationAdapter {
 	private boolean paused;
 	private int level=1;
 	private int score=0;
+	public static int GUI_WIDTH,GUI_HEIGHT;
 	
 	@Override
 	public void create ()
@@ -24,6 +25,8 @@ public class BalloonArcher extends ApplicationAdapter {
 		worldController = new WorldController(this);
 		worldRenderer = new com.el.balloonArcher.WorldRenderer(worldController);
 		paused = false;
+		GUI_WIDTH= Gdx.graphics.getWidth();
+		GUI_HEIGHT= Gdx.graphics.getHeight();
 	}
 
 	@Override

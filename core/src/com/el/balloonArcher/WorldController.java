@@ -86,7 +86,7 @@ public class WorldController extends InputAdapter
             else
             {
                 //shoot
-                if(Gdx.input.getX() >= Constants.VIEWPORT_GUI_WIDTH /2)
+                if(Gdx.input.getX() >= BalloonArcher.GUI_WIDTH /2)
                 {
                     app.get_Archer().shoot();
                 }
