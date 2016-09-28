@@ -8,7 +8,7 @@ import com.el.balloonArcher.util.Constants;
 import java.util.ArrayList;
 
 /**
- * Created by Louki on 20/9/2016.
+ * Created by Loukis on 20/9/2016.
  */
 public class WorldController extends InputAdapter
 {
@@ -52,8 +52,13 @@ public class WorldController extends InputAdapter
 
     public void update (float deltaTime)
     {
-        handle_Input(deltaTime);
-        move_objects(deltaTime);
+
+        game_status();
+        if(!is_game_over())
+        {
+            handle_Input(deltaTime);
+            move_objects(deltaTime);
+        }
     }
 
     private void handle_Input(float deltaTime)
@@ -140,5 +145,45 @@ public class WorldController extends InputAdapter
         app.get_Archer().move_arrows(deltaTime);
 
     }
+
+    private boolean  has_remaining_balloons()
+    {
+
+        for (Balloon b : balloons)
+        {
+            if (!b.is_hit())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean is_game_over()
+    {
+        //if balloon exists but no arrows
+        if((!app.get_Archer().has_remaining_arrows()) && (has_remaining_balloons()))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void game_status()
+    {
+        if( app.get_game_state().equals(Constants.Game_State.ACTIVE))
+        {
+            //if balloon exists but no arrows
+            if ((!app.get_Archer().has_remaining_arrows()) && (has_remaining_balloons())) {
+                app.set_game_state(Constants.Game_State.GAME_OVER);
+            } else if ((app.get_Archer().has_remaining_arrows()) && (!has_remaining_balloons())) {
+                app.set_game_state(Constants.Game_State.GAME_WINNER);
+            }
+        }
+
+    }
+
 
 }

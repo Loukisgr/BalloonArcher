@@ -1,9 +1,10 @@
 package com.el.balloonArcher;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.el.balloonArcher.util.Constants;
 
 /**
- * Created by Louki on 18/9/2016.
+ * Created by Loukis on 18/9/2016.
  */
 public class Arrow
 {
@@ -13,11 +14,13 @@ public class Arrow
     private float y = 0;
     private boolean shot;
     private boolean remove=false;
+    private Rectangle body;
 
 
     public Arrow(float speed)
     {
         this.speed=speed+ Constants.ARROW_STARTING_SPEED;
+        this.body = new Rectangle();
         shot=false;
     }
 
@@ -48,6 +51,7 @@ public class Arrow
             else
             {
                 x=x+speed*deltaTime;
+                body.set(x,y,Constants.ARROW_WIDTH,Constants.ARROW_HEIGHT);
             }
         }
     }
@@ -61,5 +65,11 @@ public class Arrow
     {
         return y;
     }
+
+    public Rectangle get_body()
+    {
+        return body;
+    }
+
 
 }

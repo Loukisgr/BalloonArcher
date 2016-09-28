@@ -1,5 +1,6 @@
 package com.el.balloonArcher;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.el.balloonArcher.util.Constants;
 
 import java.util.Random;
@@ -13,13 +14,16 @@ public class Balloon
     private float speed;
     private boolean is_hit=false;
     private float y = BalloonArcher.GUI_HEIGHT;
-    private float x = BalloonArcher.GUI_WIDTH/2;
+    private float x = BalloonArcher.GUI_WIDTH/3 *2;
+    private Rectangle body;
 
 
     public Balloon(boolean has_gift, float speed)
     {
         this.has_gift=has_gift;
         this.speed=speed+Constants.BALLOON_STARTING_SPEED;
+        this.body= new Rectangle();
+
         Random rnd = new Random();
         //x=rnd.nextInt(100)+50;
     }
@@ -28,6 +32,7 @@ public class Balloon
     {
         this.has_gift=has_gift;
         this.speed=speed+Constants.BALLOON_STARTING_SPEED;
+        this.body= new Rectangle();
         this.x=x;
     }
 
@@ -60,12 +65,19 @@ public class Balloon
             if(is_top())
             {
                 y= 0;
+                body.set(x,y,Constants.BALLOON_WIDTH,Constants.BALLOON_HEIGHT);
             }
             else
             {
                 y=y+this.speed*deltaTime;
+                body.set(x,y,Constants.BALLOON_WIDTH,Constants.BALLOON_HEIGHT);
             }
         }
+    }
+
+    public Rectangle get_body()
+    {
+        return body;
     }
 
     public float get_y()

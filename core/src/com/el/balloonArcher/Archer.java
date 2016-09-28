@@ -87,5 +87,33 @@ public class Archer
         return arrows;
     }
 
+    public int remaining_arrows()
+    {
+        int i=0;
+
+        for (int j =0 ; j < arrows.size(); j++)
+        {
+            if(!arrows.get(j).is_shot())
+            {
+                i++;
+            }
+        }
+
+        return i;
+    }
+
+    public boolean has_remaining_arrows()
+    {
+
+        for (int i =0 ; i < arrows.size();i++)
+        {
+            if(!arrows.get(i).is_shot())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }
