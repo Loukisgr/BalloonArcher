@@ -10,7 +10,8 @@ import java.util.ArrayList;
 public class Archer
 {
     private ArrayList<Arrow> arrows;
-    private float y=BalloonArcher.GUI_HEIGHT;
+    private float y=BalloonArcher.GUI_HEIGHT/10;
+    private float shoot_timer=0;
 
     public Archer(int level)
     {
@@ -36,6 +37,14 @@ public class Archer
             i-=1;
         }
 
+        if (level <10)
+        {
+            for (int j =0 ; j < 5; j++)
+            {
+                arrows.add(new Arrow(level));
+            }
+        }
+
     }
 
     public float get_pos()
@@ -45,12 +54,15 @@ public class Archer
 
     public void shoot()
     {
-
-        for (int i =0 ; i < arrows.size();i++)
+        if(shoot_timer==0)
         {
-            if(!arrows.get(i).is_shot())
-            {
-                arrows.get(i).shoot(Constants.ARCHER_HEIGHT/2+this.y);
+            for (int i = 0; i < arrows.size(); i++) {
+                if (!arrows.get(i).is_shot())
+                {
+                    arrows.get(i).shoot(Constants.ARCHER_HEIGHT / 2 + this.y);
+                    shoot_timer = Constants.SHOOT_TIMER;
+                    return;
+                }
             }
         }
 
@@ -107,13 +119,25 @@ public class Archer
 
         for (int i =0 ; i < arrows.size();i++)
         {
-            if(!arrows.get(i).is_shot())
+            if((!arrows.get(i).is_shot()) ||(!arrows.get(i).to_remove()))
             {
                 return true;
             }
         }
 
         return false;
+    }
+
+    public void update_timers(float deltaTime)
+    {
+       if (shoot_timer>0)
+       {
+           this.shoot_timer -= deltaTime;
+           if (this.shoot_timer<0)
+           {
+               this.shoot_timer=0;
+           }
+       }
     }
 
 }

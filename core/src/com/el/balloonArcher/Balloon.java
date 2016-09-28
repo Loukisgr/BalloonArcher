@@ -14,7 +14,7 @@ public class Balloon
     private float speed;
     private boolean is_hit=false;
     private float y = BalloonArcher.GUI_HEIGHT;
-    private float x = BalloonArcher.GUI_WIDTH/3 *2;
+    private float x = BalloonArcher.GUI_WIDTH /3 *2;
     private Rectangle body;
 
 
@@ -24,8 +24,8 @@ public class Balloon
         this.speed=speed+Constants.BALLOON_STARTING_SPEED;
         this.body= new Rectangle();
 
-        Random rnd = new Random();
-        //x=rnd.nextInt(100)+50;
+        //Random rnd = new Random();
+        //x=rnd.nextInt((int)BalloonArcher.GUI_WIDTH/4)+x;
     }
 
     public Balloon(boolean has_gift, float speed, float x)

@@ -26,6 +26,7 @@ public class Constants
     public static final int BALLOON_HEIGHT= BalloonArcher.GUI_HEIGHT/12;
     public static final int ARROW_WIDTH= 53;
     public static final int ARROW_HEIGHT=14;
+    public static final float SHOOT_TIMER=1f;
 
 
     public enum Game_State

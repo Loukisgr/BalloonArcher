@@ -20,6 +20,8 @@ public class BalloonArcher extends ApplicationAdapter {
 	@Override
 	public void create ()
 	{
+		GUI_WIDTH= Gdx.graphics.getWidth();
+		GUI_HEIGHT= Gdx.graphics.getHeight();
 		state= Constants.Game_State.LOADING;
 		// Set Libgdx log level to DEBU
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
@@ -28,8 +30,6 @@ public class BalloonArcher extends ApplicationAdapter {
 		worldController = new WorldController(this);
 		worldRenderer = new com.el.balloonArcher.WorldRenderer(worldController);
 		//paused = false;
-		GUI_WIDTH= Gdx.graphics.getWidth();
-		GUI_HEIGHT= Gdx.graphics.getHeight();
 		state= Constants.Game_State.ACTIVE;
 	}
 
@@ -41,7 +41,7 @@ public class BalloonArcher extends ApplicationAdapter {
 		if(!is_paused())
 		{
 			worldController.update(Gdx.graphics.getDeltaTime());
-			Gdx.gl.glClearColor(0, 0, 0, 1);
+			Gdx.gl.glClearColor(1, 1, 1, 1);
 			// Clears the screen
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			// Render game world to screen
