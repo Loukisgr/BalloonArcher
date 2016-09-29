@@ -59,6 +59,7 @@ public class WorldController extends InputAdapter
             app.get_Archer().update_timers(deltaTime);
             handle_Input(deltaTime);
             move_objects(deltaTime);
+            check_collisions();
         }
     }
 
@@ -101,9 +102,12 @@ public class WorldController extends InputAdapter
                 //move
                 else
                 {
-                    if (app.get_Archer().get_pos() < Gdx.input.getY()) {
+                    if (app.get_Archer().get_pos() < Gdx.input.getY())
+                    {
                         app.get_Archer().move(-Constants.ARCHER_SPEED * deltaTime);
-                    } else {
+                    }
+                    else
+                    {
                         app.get_Archer().move(Constants.ARCHER_SPEED * deltaTime);
                     }
                 }
@@ -126,9 +130,19 @@ public class WorldController extends InputAdapter
         return balloons;
     }
 
-    public int get_no_of_baloons()
+    public int get_score()
+    {
+        return app.get_score();
+    }
+
+    public int get_no_of_balloons()
     {
         return balloons.size();
+    }
+
+    public int get_no_of_left_arrows()
+    {
+        return app.get_Archer().remaining_arrows();
     }
 
     private void move_objects(float deltaTime)
@@ -162,10 +176,11 @@ public class WorldController extends InputAdapter
         return false;
     }
 
+
     private boolean is_game_over()
     {
         //if balloon exists but no arrows
-        if((!app.get_Archer().has_remaining_arrows()) && (has_remaining_balloons()))
+        if(app.get_game_state().equals((Constants.Game_State.GAME_OVER)))
         {
             return true;
         }
@@ -185,6 +200,31 @@ public class WorldController extends InputAdapter
             }
         }
 
+    }
+
+    private void check_collisions()
+    {
+        if((app.get_Archer().has_remaining_arrows()) && (has_remaining_balloons()))
+        {
+
+            for (int  b=0; b<balloons.size(); b++)
+            {
+                if(!balloons.get(b).is_hit())
+                {
+                    for (int a=0; a<app.get_Archer().get_arrows().size(); a++)
+                    {
+                        if((app.get_Archer().get_arrows().get(a).is_shot()) && ((!app.get_Archer().get_arrows().get(a).to_remove())))
+                        {
+                            if(balloons.get(b).collides_with(app.get_Archer().get_arrows().get(a)))
+                            {
+                                app.add_to_score(app.get_level());
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
     }
 
 

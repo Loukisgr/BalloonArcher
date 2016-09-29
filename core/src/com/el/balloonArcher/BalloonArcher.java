@@ -4,6 +4,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.utils.StringBuilder;
 import com.el.balloonArcher.util.Constants;
 
 public class BalloonArcher extends ApplicationAdapter {
@@ -46,6 +47,16 @@ public class BalloonArcher extends ApplicationAdapter {
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			// Render game world to screen
 			worldRenderer.render(Gdx.graphics.getDeltaTime());
+
+			if(is_won())
+			{
+				worldRenderer.set_text_to_display(new StringBuilder("WON!!!"));
+			}
+			else if(is_game_over())
+			{
+				worldRenderer.set_text_to_display(new StringBuilder("GAME OVER!"));
+			}
+
 		}
 	}
 
@@ -87,6 +98,25 @@ public class BalloonArcher extends ApplicationAdapter {
 		return false;
 	}
 
+	public boolean is_won()
+	{
+		if (state.equals(Constants.Game_State.GAME_WINNER))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public boolean is_game_over()
+	{
+		if (state.equals(Constants.Game_State.GAME_OVER))
+		{
+			return true;
+		}
+		return false;
+	}
+
+
 	public int get_level()
 	{
 		return level;
@@ -100,6 +130,21 @@ public class BalloonArcher extends ApplicationAdapter {
 	public void  set_game_state(Constants.Game_State s)
 	{
 		state=s;
+	}
+
+	public int get_score()
+	{
+		return score;
+	}
+
+	public void add_to_score(int add)
+	{
+		score+=add;
+	}
+
+	public void set_score(int s)
+	{
+		score=s;
 	}
 
 }

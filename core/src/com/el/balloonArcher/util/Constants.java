@@ -24,9 +24,15 @@ public class Constants
     public static final int NO_OF_ARROW_LIMIT=100;
     public static final int BALLOON_WIDTH= BalloonArcher.GUI_WIDTH/10;
     public static final int BALLOON_HEIGHT= BalloonArcher.GUI_HEIGHT/12;
-    public static final int ARROW_WIDTH= 53;
-    public static final int ARROW_HEIGHT=14;
+    public static final int ARROW_WIDTH= 54;
+    public static final int ARROW_HEIGHT=13;
     public static final float SHOOT_TIMER=1f;
+    public static final int SCORE_TEXT_X=BalloonArcher.GUI_WIDTH/2;
+    public static final int SCORE_TEXT_Y=BalloonArcher.GUI_HEIGHT/20 * 19;
+    public static final int ARROW_TEXT_X=BalloonArcher.GUI_WIDTH/4;
+    public static final int ARROW_TEXT_Y=BalloonArcher.GUI_HEIGHT/20 * 19;
+    public static final int INFO_TEXT_X=BalloonArcher.GUI_WIDTH/2;
+    public static final int INFO_TEXT_Y=BalloonArcher.GUI_HEIGHT/2;
 
 
     public enum Game_State

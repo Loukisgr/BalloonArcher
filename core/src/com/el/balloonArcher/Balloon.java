@@ -1,5 +1,6 @@
 package com.el.balloonArcher;
 
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.el.balloonArcher.util.Constants;
 
@@ -88,6 +89,18 @@ public class Balloon
     public float get_x()
     {
         return x;
+    }
+
+    public boolean collides_with(Arrow a)
+    {
+        if(Intersector.overlaps(this.get_body(), a.get_body()))
+        {
+            this.is_hit=true;
+            return true;
+        }
+
+        return false;
+
     }
 
 }
