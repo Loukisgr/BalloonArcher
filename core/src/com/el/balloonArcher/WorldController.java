@@ -102,14 +102,15 @@ public class WorldController extends InputAdapter
                 //move
                 else
                 {
-                    if (app.get_Archer().get_pos() < Gdx.input.getY())
-                    {
-                        app.get_Archer().move(-Constants.ARCHER_SPEED * deltaTime);
-                    }
-                    else
+                    if (app.get_Archer().get_pos() < (BalloonArcher.GUI_HEIGHT - Gdx.input.getY()))
                     {
                         app.get_Archer().move(Constants.ARCHER_SPEED * deltaTime);
                     }
+                    else
+                    {
+                        app.get_Archer().move(-Constants.ARCHER_SPEED * deltaTime);
+                    }
+                    System.out.println(app.get_Archer().get_pos()+" y="+(BalloonArcher.GUI_HEIGHT - Gdx.input.getY()));
                 }
             }
         }
@@ -225,6 +226,11 @@ public class WorldController extends InputAdapter
             }
 
         }
+    }
+
+    public int get_level()
+    {
+        return app.get_level();
     }
 
 

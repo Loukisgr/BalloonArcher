@@ -3,6 +3,7 @@ package com.el.balloonArcher;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.StringBuilder;
 import com.el.balloonArcher.util.Constants;
@@ -50,11 +51,17 @@ public class BalloonArcher extends ApplicationAdapter {
 
 			if(is_won())
 			{
-				worldRenderer.set_text_to_display(new StringBuilder("WON!!!"));
+				//worldRenderer.set_text_to_display(new StringBuilder("WON!!!"));
+                worldRenderer.set_text_to_display(new StringBuilder("Starting Next Level..."));
+                this.add_level();
+                player.init_level(get_level());
+                worldController.load_level();
+                this.state=Constants.Game_State.ACTIVE;
+                worldRenderer.clear_text_to_display();
 			}
 			else if(is_game_over())
 			{
-				worldRenderer.set_text_to_display(new StringBuilder("GAME OVER!"));
+				worldRenderer.set_text_to_display(new StringBuilder("GAME OVER!"),Color.RED);
 			}
 
 		}
@@ -121,6 +128,10 @@ public class BalloonArcher extends ApplicationAdapter {
 	{
 		return level;
 	}
+    public void add_level()
+    {
+        level++;
+    }
 
 	public Constants.Game_State get_game_state()
 	{

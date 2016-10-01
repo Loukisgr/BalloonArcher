@@ -3,6 +3,7 @@ package com.el.balloonArcher;
 /**
  * Created by Louki on 20/9/2016.
  */
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -23,6 +24,7 @@ public class WorldRenderer implements Disposable
     private StringBuilder text;
     private StringBuilder info_text;
     private BitmapFont bitmap_font;
+    private Color info_color;
 
     public WorldRenderer (WorldController worldController)
     {
@@ -35,6 +37,7 @@ public class WorldRenderer implements Disposable
         info_text = new StringBuilder();
         bitmap_font = new BitmapFont();
         batch = new SpriteBatch();
+        info_color= new Color(Color.BLACK);
 
         archer_img = new Texture("archer.jpg");
         archer_texture = new TextureRegion[Constants.ANIMATION_SPLITS];
@@ -92,7 +95,7 @@ public class WorldRenderer implements Disposable
             current_animation=0;
         }
 
-        batch.draw(archer_texture[current_animation], 0, worldController.get_Archer_pos());
+        batch.draw(archer_texture[current_animation], 0, worldController.get_Archer_pos(),Constants.ARCHER_WIDTH,Constants.ARCHER_HEIGHT);
     }
 
     private void paint_arrows()
@@ -102,7 +105,7 @@ public class WorldRenderer implements Disposable
         {
             if (arrow.is_shot() && !arrow.to_remove())
             {
-                batch.draw(arrow_texture,arrow.get_x(),arrow.get_y());
+                batch.draw(arrow_texture,arrow.get_x(),arrow.get_y(),Constants.ARROW_WIDTH,Constants.ARROW_HEIGHT);
             }
         }
 
@@ -133,7 +136,7 @@ public class WorldRenderer implements Disposable
     private void print_text()
     {
         text.delete(0,text.length());
-        text.insert(0,"Score: "+worldController.get_score());
+        text.insert(0,"Level:"+worldController.get_level()+" Score: "+worldController.get_score());
         bitmap_font.setColor(0, 0, 0, 1.0f);
         bitmap_font.draw(batch, text, Constants.SCORE_TEXT_X, Constants.SCORE_TEXT_Y);
 
@@ -144,6 +147,7 @@ public class WorldRenderer implements Disposable
 
         if(info_text.length() >0)
         {
+            bitmap_font.setColor(info_color);
             bitmap_font.draw(batch, info_text, Constants.INFO_TEXT_X, Constants.INFO_TEXT_Y);
         }
 
@@ -151,6 +155,14 @@ public class WorldRenderer implements Disposable
 
     public void set_text_to_display(StringBuilder s)
     {
+        info_color=Color.BLACK;
+        info_text.delete(0,info_text.length());
+        info_text.insert(0,s);
+    }
+
+    public void set_text_to_display(StringBuilder s,Color c)
+    {
+        info_color=c;
         info_text.delete(0,info_text.length());
         info_text.insert(0,s);
     }

@@ -25,8 +25,8 @@ public class Balloon
         this.speed=speed+Constants.BALLOON_STARTING_SPEED;
         this.body= new Rectangle();
 
-        //Random rnd = new Random();
-        //x=rnd.nextInt((int)BalloonArcher.GUI_WIDTH/4)+x;
+        Random rnd = new Random();
+        x=rnd.nextInt((int)BalloonArcher.GUI_WIDTH/6)+(int)BalloonArcher.GUI_WIDTH/3 *2 ;
     }
 
     public Balloon(boolean has_gift, float speed, float x)
