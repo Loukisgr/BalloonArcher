@@ -3,9 +3,11 @@ package com.el.balloonArcher;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.StringBuilder;
+import com.el.balloonArcher.util.Assets;
 import com.el.balloonArcher.util.Constants;
 
 public class BalloonArcher extends ApplicationAdapter {
@@ -22,6 +24,7 @@ public class BalloonArcher extends ApplicationAdapter {
 	@Override
 	public void create ()
 	{
+        Assets.instance.init(new AssetManager());
 		GUI_WIDTH= Gdx.graphics.getWidth();
 		GUI_HEIGHT= Gdx.graphics.getHeight();
 		state= Constants.Game_State.LOADING;
@@ -77,6 +80,7 @@ public class BalloonArcher extends ApplicationAdapter {
 	public void dispose()
 	{
 		worldRenderer.dispose();
+        Assets.instance.dispose();
 	}
 
 	@Override
@@ -88,6 +92,7 @@ public class BalloonArcher extends ApplicationAdapter {
 	@Override
 	public void resume ()
 	{
+        Assets.instance.init(new AssetManager());
 		state= Constants.Game_State.ACTIVE;
 	}
 
