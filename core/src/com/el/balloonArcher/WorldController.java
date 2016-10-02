@@ -3,9 +3,12 @@ package com.el.balloonArcher;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
+import com.el.balloonArcher.util.Assets;
 import com.el.balloonArcher.util.Constants;
+import com.el.balloonArcher.util.AudioManager;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Loukis on 20/9/2016.
@@ -34,19 +37,26 @@ public class WorldController extends InputAdapter
         balloons.clear();
 
         int i = app.get_level();
+        Random rnd = new Random();
+        int base=0;
+        float r=0;
 
         while (i>0)
         {
+            r=rnd.nextInt(10);
+            r=r/10+base;
+
             if (i%10==0)
             {
-                balloons.add(new Balloon(true,app.get_level()));
+                balloons.add(new Balloon(true,app.get_level(),r));
             }
             else
             {
-                balloons.add(new Balloon(false,app.get_level()));
+                balloons.add(new Balloon(false,app.get_level(),r));
             }
 
             i-=1;
+            base+=1;
         }
     }
 
@@ -61,11 +71,15 @@ public class WorldController extends InputAdapter
             move_objects(deltaTime);
             check_collisions();
         }
+        else
+        {
+            handle_game_over_Input();
+        }
     }
 
     private void handle_Input(float deltaTime)
     {
-        if (app.is_paused()) {return;}
+        //if (app.is_paused()) {return;}
         //if (Gdx.app.getType() != Application.ApplicationType.Desktop) return;
         // Selected Sprite Controls
         //pause\resume
@@ -80,14 +94,21 @@ public class WorldController extends InputAdapter
                 app.pause();
             }
         }
-        if (Gdx.input.isKeyPressed(Keys.W)) app.get_Archer().move(-Constants.ARCHER_SPEED*deltaTime);
-        if (Gdx.input.isKeyPressed(Keys.S))  app.get_Archer().move(Constants.ARCHER_SPEED*deltaTime);
-        if (Gdx.input.isKeyPressed(Keys.SPACE))  app.get_Archer().shoot();
+
+        if(!app.is_paused())
+        {
+            if (Gdx.input.isKeyPressed(Keys.W))
+                app.get_Archer().move(-Constants.ARCHER_SPEED * deltaTime);
+            if (Gdx.input.isKeyPressed(Keys.S))
+                app.get_Archer().move(Constants.ARCHER_SPEED * deltaTime);
+            if (Gdx.input.isKeyPressed(Keys.SPACE)) app.get_Archer().shoot();
+        }
 
         if (Gdx.input.isTouched())
         {
-            System.out.println("W="+BalloonArcher.GUI_WIDTH+",H="+BalloonArcher.GUI_HEIGHT);
-            System.out.println("X="+Gdx.input.getX()+",Y="+Gdx.input.getY());
+            //System.out.println("W="+BalloonArcher.GUI_WIDTH+",H="+BalloonArcher.GUI_HEIGHT);
+            //System.out.println("X="+Gdx.input.getX()+",Y="+Gdx.input.getY());
+            //TODO: 2/10/2016  add pause fo mobile
             if(app.is_paused())
             {
                 app.resume();
@@ -102,14 +123,15 @@ public class WorldController extends InputAdapter
                 //move
                 else
                 {
-                    if (app.get_Archer().get_pos() < Gdx.input.getY())
-                    {
-                        app.get_Archer().move(-Constants.ARCHER_SPEED * deltaTime);
-                    }
-                    else
+                    if (app.get_Archer().get_pos() < (BalloonArcher.GUI_HEIGHT - Gdx.input.getY()))
                     {
                         app.get_Archer().move(Constants.ARCHER_SPEED * deltaTime);
                     }
+                    else
+                    {
+                        app.get_Archer().move(-Constants.ARCHER_SPEED * deltaTime);
+                    }
+                    System.out.println(app.get_Archer().get_pos()+" y="+(BalloonArcher.GUI_HEIGHT - Gdx.input.getY()));
                 }
             }
         }
@@ -218,6 +240,12 @@ public class WorldController extends InputAdapter
                             if(balloons.get(b).collides_with(app.get_Archer().get_arrows().get(a)))
                             {
                                 app.add_to_score(app.get_level());
+                                AudioManager.instance.play(Assets.instance.sounds.pop);
+
+                                if (balloons.get(b).get_has_gift())
+                                {
+                                    app.get_Archer().add_arrow(app.get_level());
+                                }
                             }
                         }
                     }
@@ -225,6 +253,20 @@ public class WorldController extends InputAdapter
             }
 
         }
+    }
+
+    public int get_level()
+    {
+        return app.get_level();
+    }
+
+    private void handle_game_over_Input()
+    {
+        if ((Gdx.input.isKeyPressed(Keys.SPACE)) || (Gdx.input.isTouched()))
+        {
+            app.new_game();
+        }
+
     }
 
 

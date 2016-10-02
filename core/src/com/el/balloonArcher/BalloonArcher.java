@@ -3,8 +3,11 @@ package com.el.balloonArcher;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.StringBuilder;
+import com.el.balloonArcher.util.Assets;
 import com.el.balloonArcher.util.Constants;
 
 public class BalloonArcher extends ApplicationAdapter {
@@ -21,6 +24,7 @@ public class BalloonArcher extends ApplicationAdapter {
 	@Override
 	public void create ()
 	{
+        Assets.instance.init(new AssetManager());
 		GUI_WIDTH= Gdx.graphics.getWidth();
 		GUI_HEIGHT= Gdx.graphics.getHeight();
 		state= Constants.Game_State.LOADING;
@@ -50,11 +54,17 @@ public class BalloonArcher extends ApplicationAdapter {
 
 			if(is_won())
 			{
-				worldRenderer.set_text_to_display(new StringBuilder("WON!!!"));
+				//worldRenderer.set_text_to_display(new StringBuilder("WON!!!"));
+                worldRenderer.set_text_to_display(new StringBuilder("Starting Next Level..."));
+                this.add_level();
+                player.init_level(get_level());
+                worldController.load_level();
+                this.state=Constants.Game_State.ACTIVE;
+                worldRenderer.clear_text_to_display();
 			}
 			else if(is_game_over())
 			{
-				worldRenderer.set_text_to_display(new StringBuilder("GAME OVER!"));
+				worldRenderer.set_text_to_display(new StringBuilder("GAME OVER! Tap for New Game"),Color.RED);
 			}
 
 		}
@@ -70,6 +80,7 @@ public class BalloonArcher extends ApplicationAdapter {
 	public void dispose()
 	{
 		worldRenderer.dispose();
+        Assets.instance.dispose();
 	}
 
 	@Override
@@ -81,6 +92,7 @@ public class BalloonArcher extends ApplicationAdapter {
 	@Override
 	public void resume ()
 	{
+        Assets.instance.init(new AssetManager());
 		state= Constants.Game_State.ACTIVE;
 	}
 
@@ -121,6 +133,10 @@ public class BalloonArcher extends ApplicationAdapter {
 	{
 		return level;
 	}
+    public void add_level()
+    {
+        level++;
+    }
 
 	public Constants.Game_State get_game_state()
 	{
@@ -146,5 +162,22 @@ public class BalloonArcher extends ApplicationAdapter {
 	{
 		score=s;
 	}
+
+    public void new_game()
+    {
+        score=0;
+        level=1;
+
+        //is used to determine if a new game has been requested after played games
+        if(!state.equals(Constants.Game_State.LOADING))
+        {
+            state= Constants.Game_State.LOADING;
+            player.init_level(level);
+            worldController.load_level();
+            worldRenderer.clear_text_to_display();
+        }
+
+        state= Constants.Game_State.ACTIVE;
+    }
 
 }

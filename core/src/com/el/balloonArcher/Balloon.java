@@ -17,6 +17,7 @@ public class Balloon
     private float y = BalloonArcher.GUI_HEIGHT;
     private float x = BalloonArcher.GUI_WIDTH /3 *2;
     private Rectangle body;
+    private float show_timer=0;
 
 
     public Balloon(boolean has_gift, float speed)
@@ -25,16 +26,28 @@ public class Balloon
         this.speed=speed+Constants.BALLOON_STARTING_SPEED;
         this.body= new Rectangle();
 
-        //Random rnd = new Random();
-        //x=rnd.nextInt((int)BalloonArcher.GUI_WIDTH/4)+x;
+        Random rnd = new Random();
+        x=rnd.nextInt((int)BalloonArcher.GUI_WIDTH/6)+(int)BalloonArcher.GUI_WIDTH/3 *2 ;
     }
 
-    public Balloon(boolean has_gift, float speed, float x)
+    public Balloon(boolean has_gift, float speed, float show_timer)
+    {
+        this.has_gift=has_gift;
+        this.speed=speed+Constants.BALLOON_STARTING_SPEED;
+        this.body= new Rectangle();
+
+        Random rnd = new Random();
+        x=rnd.nextInt((int)BalloonArcher.GUI_WIDTH/6)+(int)BalloonArcher.GUI_WIDTH/3 *2 ;
+        this.show_timer=show_timer;
+    }
+
+    public Balloon(boolean has_gift, float speed, float show_timer,float x)
     {
         this.has_gift=has_gift;
         this.speed=speed+Constants.BALLOON_STARTING_SPEED;
         this.body= new Rectangle();
         this.x=x;
+        this.show_timer=show_timer;
     }
 
     public boolean get_has_gift()
@@ -63,16 +76,26 @@ public class Balloon
     {
         if (!is_hit())
         {
-            if(is_top())
+
+            if(show_timer==0)
             {
-                y= 0;
-                body.set(x,y,Constants.BALLOON_WIDTH,Constants.BALLOON_HEIGHT);
+                if (is_top()) {
+                    y = 0;
+                    body.set(x, y, Constants.BALLOON_WIDTH, Constants.BALLOON_HEIGHT);
+                } else {
+                    y = y + this.speed * deltaTime;
+                    body.set(x, y, Constants.BALLOON_WIDTH, Constants.BALLOON_HEIGHT);
+                }
+            }
+            else if(show_timer-deltaTime >0)
+            {
+                show_timer-=deltaTime;
             }
             else
             {
-                y=y+this.speed*deltaTime;
-                body.set(x,y,Constants.BALLOON_WIDTH,Constants.BALLOON_HEIGHT);
+                show_timer=0;
             }
+
         }
     }
 
@@ -100,7 +123,6 @@ public class Balloon
         }
 
         return false;
-
     }
 
 }

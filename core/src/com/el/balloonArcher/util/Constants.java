@@ -18,20 +18,21 @@ public class Constants
     public static final float ANIMATION_TIMER  = 4f;
     public static final int ANIMATION_SPLITS = 4;
     public static final float ARCHER_SPEED = 200f;
-    public static final int ARCHER_HEIGHT = 255;
-    public static final float BALLOON_STARTING_SPEED=50f;
+    public static final int ARCHER_HEIGHT = BalloonArcher.GUI_HEIGHT/6;
+    public static final int ARCHER_WIDTH = BalloonArcher.GUI_WIDTH/8;
+    public static final float BALLOON_STARTING_SPEED=140f;
     public static final float ARROW_STARTING_SPEED=200f;
     public static final int NO_OF_ARROW_LIMIT=100;
-    public static final int BALLOON_WIDTH= BalloonArcher.GUI_WIDTH/10;
-    public static final int BALLOON_HEIGHT= BalloonArcher.GUI_HEIGHT/12;
-    public static final int ARROW_WIDTH= 54;
-    public static final int ARROW_HEIGHT=13;
+    public static final int BALLOON_WIDTH= BalloonArcher.GUI_WIDTH/20;
+    public static final int BALLOON_HEIGHT= BalloonArcher.GUI_HEIGHT/24;
+    public static final int ARROW_WIDTH= BalloonArcher.GUI_WIDTH/25;
+    public static final int ARROW_HEIGHT=BalloonArcher.GUI_HEIGHT/80;
     public static final float SHOOT_TIMER=1f;
     public static final int SCORE_TEXT_X=BalloonArcher.GUI_WIDTH/2;
     public static final int SCORE_TEXT_Y=BalloonArcher.GUI_HEIGHT/20 * 19;
     public static final int ARROW_TEXT_X=BalloonArcher.GUI_WIDTH/4;
     public static final int ARROW_TEXT_Y=BalloonArcher.GUI_HEIGHT/20 * 19;
-    public static final int INFO_TEXT_X=BalloonArcher.GUI_WIDTH/2;
+    public static final int INFO_TEXT_X=BalloonArcher.GUI_WIDTH/6 * 2;
     public static final int INFO_TEXT_Y=BalloonArcher.GUI_HEIGHT/2;
 
 

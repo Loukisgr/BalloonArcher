@@ -21,6 +21,7 @@ public class Archer
 
     public void init_level(int level)
     {
+        shoot_timer=Constants.SHOOT_TIMER;
         arrows.clear();
 
         int i = level;
@@ -86,11 +87,18 @@ public class Archer
 
     public void move_arrows(float deltaTime)
     {
-
         for (Arrow i : arrows)
         {
 
             i.move(deltaTime);
+        }
+    }
+
+    public void add_arrow(int level)
+    {
+        if(arrows.size()<Constants.NO_OF_ARROW_LIMIT)
+        {
+            arrows.add(new Arrow(level));
         }
     }
 
