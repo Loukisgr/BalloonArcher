@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.audio.Sound;
 
 
 /**
@@ -25,6 +26,7 @@ public class Assets implements Disposable,AssetErrorListener
     public Asset_Arrow asset_arrow;
     public Asset_Normal_Balloon asset_normal_balloon;
     public Asset_Bonus_Balloon asset_bonus_balloon;
+    public Asset_Sounds sounds;
 
 
     private Assets(){};
@@ -37,6 +39,7 @@ public class Assets implements Disposable,AssetErrorListener
         // load texture
         assetManager.load("images/archer.jpg", Texture.class);
         assetManager.load("images/items.bmp", Texture.class);
+        assetManager.load("sounds/Balloon_Popping.wav", Sound.class);
 // start loading assets and wait until finished
         assetManager.finishLoading();
         Gdx.app.debug(TAG, "# of assets loaded: " + assetManager.getAssetNames().size);
@@ -59,6 +62,7 @@ public class Assets implements Disposable,AssetErrorListener
         asset_arrow = new Asset_Arrow(textures.get(0));
         asset_normal_balloon = new Asset_Normal_Balloon(textures.get(0));
         asset_bonus_balloon = new Asset_Bonus_Balloon(textures.get(0));
+        sounds = new Asset_Sounds(assetManager);
     }
 
     public class Asset_Archer
@@ -110,6 +114,16 @@ public class Assets implements Disposable,AssetErrorListener
         {
             arrow_img=t;
             arrow_texture = new TextureRegion(arrow_img, 4, 7, 54, 13);
+        }
+    }
+
+    public class Asset_Sounds
+    {
+        public final Sound pop;
+
+        public Asset_Sounds(AssetManager am)
+        {
+            pop = am.get("sounds/Balloon_Popping.wav",Sound.class);
         }
     }
 

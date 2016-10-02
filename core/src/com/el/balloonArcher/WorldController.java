@@ -3,7 +3,9 @@ package com.el.balloonArcher;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
+import com.el.balloonArcher.util.Assets;
 import com.el.balloonArcher.util.Constants;
+import com.el.balloonArcher.util.AudioManager;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -238,6 +240,8 @@ public class WorldController extends InputAdapter
                             if(balloons.get(b).collides_with(app.get_Archer().get_arrows().get(a)))
                             {
                                 app.add_to_score(app.get_level());
+                                AudioManager.instance.play(Assets.instance.sounds.pop);
+
                                 if (balloons.get(b).get_has_gift())
                                 {
                                     app.get_Archer().add_arrow(app.get_level());
