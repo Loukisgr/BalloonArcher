@@ -61,7 +61,7 @@ public class BalloonArcher extends ApplicationAdapter {
 			}
 			else if(is_game_over())
 			{
-				worldRenderer.set_text_to_display(new StringBuilder("GAME OVER!"),Color.RED);
+				worldRenderer.set_text_to_display(new StringBuilder("GAME OVER! Tap for New Game"),Color.RED);
 			}
 
 		}

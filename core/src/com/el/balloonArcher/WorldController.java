@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.el.balloonArcher.util.Constants;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Loukis on 20/9/2016.
@@ -34,19 +35,26 @@ public class WorldController extends InputAdapter
         balloons.clear();
 
         int i = app.get_level();
+        Random rnd = new Random();
+        int base=0;
+        float r=0;
 
         while (i>0)
         {
+            r=rnd.nextInt(10);
+            r=r/10+base;
+
             if (i%10==0)
             {
-                balloons.add(new Balloon(true,app.get_level()));
+                balloons.add(new Balloon(true,app.get_level(),r));
             }
             else
             {
-                balloons.add(new Balloon(false,app.get_level()));
+                balloons.add(new Balloon(false,app.get_level(),r));
             }
 
             i-=1;
+            base+=1;
         }
     }
 
@@ -86,12 +94,16 @@ public class WorldController extends InputAdapter
 
         if (Gdx.input.isTouched())
         {
-            System.out.println("W="+BalloonArcher.GUI_WIDTH+",H="+BalloonArcher.GUI_HEIGHT);
-            System.out.println("X="+Gdx.input.getX()+",Y="+Gdx.input.getY());
+            //System.out.println("W="+BalloonArcher.GUI_WIDTH+",H="+BalloonArcher.GUI_HEIGHT);
+            //System.out.println("X="+Gdx.input.getX()+",Y="+Gdx.input.getY());
             if(app.is_paused())
             {
                 app.resume();
             }
+ /*           else if(app.is_game_over())
+            {
+                app.
+            } */
             else
             {
                 //shoot
