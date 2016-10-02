@@ -238,6 +238,10 @@ public class WorldController extends InputAdapter
                             if(balloons.get(b).collides_with(app.get_Archer().get_arrows().get(a)))
                             {
                                 app.add_to_score(app.get_level());
+                                if (balloons.get(b).get_has_gift())
+                                {
+                                    app.get_Archer().add_arrow(app.get_level());
+                                }
                             }
                         }
                     }
