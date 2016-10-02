@@ -21,6 +21,7 @@ public class Archer
 
     public void init_level(int level)
     {
+        shoot_timer=Constants.SHOOT_TIMER;
         arrows.clear();
 
         int i = level;

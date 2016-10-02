@@ -158,4 +158,21 @@ public class BalloonArcher extends ApplicationAdapter {
 		score=s;
 	}
 
+    public void new_game()
+    {
+        score=0;
+        level=1;
+
+        //is used to determine if a new game has been requested after played games
+        if(!state.equals(Constants.Game_State.LOADING))
+        {
+            state= Constants.Game_State.LOADING;
+            player.init_level(level);
+            worldController.load_level();
+            worldRenderer.clear_text_to_display();
+        }
+
+        state= Constants.Game_State.ACTIVE;
+    }
+
 }

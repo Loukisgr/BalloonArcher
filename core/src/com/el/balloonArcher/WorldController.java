@@ -69,6 +69,10 @@ public class WorldController extends InputAdapter
             move_objects(deltaTime);
             check_collisions();
         }
+        else
+        {
+            handle_game_over_Input();
+        }
     }
 
     private void handle_Input(float deltaTime)
@@ -246,6 +250,15 @@ public class WorldController extends InputAdapter
     public int get_level()
     {
         return app.get_level();
+    }
+
+    private void handle_game_over_Input()
+    {
+        if ((Gdx.input.isKeyPressed(Keys.SPACE)) || (Gdx.input.isTouched()))
+        {
+            app.new_game();
+        }
+
     }
 
 
