@@ -73,7 +73,7 @@ public class WorldController extends InputAdapter
 
     private void handle_Input(float deltaTime)
     {
-        if (app.is_paused()) {return;}
+        //if (app.is_paused()) {return;}
         //if (Gdx.app.getType() != Application.ApplicationType.Desktop) return;
         // Selected Sprite Controls
         //pause\resume
@@ -88,22 +88,25 @@ public class WorldController extends InputAdapter
                 app.pause();
             }
         }
-        if (Gdx.input.isKeyPressed(Keys.W)) app.get_Archer().move(-Constants.ARCHER_SPEED*deltaTime);
-        if (Gdx.input.isKeyPressed(Keys.S))  app.get_Archer().move(Constants.ARCHER_SPEED*deltaTime);
-        if (Gdx.input.isKeyPressed(Keys.SPACE))  app.get_Archer().shoot();
+
+        if(!app.is_paused())
+        {
+            if (Gdx.input.isKeyPressed(Keys.W))
+                app.get_Archer().move(-Constants.ARCHER_SPEED * deltaTime);
+            if (Gdx.input.isKeyPressed(Keys.S))
+                app.get_Archer().move(Constants.ARCHER_SPEED * deltaTime);
+            if (Gdx.input.isKeyPressed(Keys.SPACE)) app.get_Archer().shoot();
+        }
 
         if (Gdx.input.isTouched())
         {
             //System.out.println("W="+BalloonArcher.GUI_WIDTH+",H="+BalloonArcher.GUI_HEIGHT);
             //System.out.println("X="+Gdx.input.getX()+",Y="+Gdx.input.getY());
+            //TODO: 2/10/2016  add pause fo mobile
             if(app.is_paused())
             {
                 app.resume();
             }
- /*           else if(app.is_game_over())
-            {
-                app.
-            } */
             else
             {
                 //shoot
