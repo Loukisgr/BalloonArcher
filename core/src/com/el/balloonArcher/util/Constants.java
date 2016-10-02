@@ -20,7 +20,7 @@ public class Constants
     public static final float ARCHER_SPEED = 200f;
     public static final int ARCHER_HEIGHT = BalloonArcher.GUI_HEIGHT/6;
     public static final int ARCHER_WIDTH = BalloonArcher.GUI_WIDTH/8;
-    public static final float BALLOON_STARTING_SPEED=150f;
+    public static final float BALLOON_STARTING_SPEED=140f;
     public static final float ARROW_STARTING_SPEED=200f;
     public static final int NO_OF_ARROW_LIMIT=100;
     public static final int BALLOON_WIDTH= BalloonArcher.GUI_WIDTH/20;
@@ -32,7 +32,7 @@ public class Constants
     public static final int SCORE_TEXT_Y=BalloonArcher.GUI_HEIGHT/20 * 19;
     public static final int ARROW_TEXT_X=BalloonArcher.GUI_WIDTH/4;
     public static final int ARROW_TEXT_Y=BalloonArcher.GUI_HEIGHT/20 * 19;
-    public static final int INFO_TEXT_X=BalloonArcher.GUI_WIDTH/2;
+    public static final int INFO_TEXT_X=BalloonArcher.GUI_WIDTH/6 *2;
     public static final int INFO_TEXT_Y=BalloonArcher.GUI_HEIGHT/2;
 
 
