@@ -32,7 +32,7 @@ public class Constants
     public static final int SCORE_TEXT_Y=BalloonArcher.GUI_HEIGHT/20 * 19;
     public static final int ARROW_TEXT_X=BalloonArcher.GUI_WIDTH/4;
     public static final int ARROW_TEXT_Y=BalloonArcher.GUI_HEIGHT/20 * 19;
-    public static final int INFO_TEXT_X=BalloonArcher.GUI_WIDTH/6 *2;
+    public static final int INFO_TEXT_X=BalloonArcher.GUI_WIDTH/6 * 2;
     public static final int INFO_TEXT_Y=BalloonArcher.GUI_HEIGHT/2;
 
 

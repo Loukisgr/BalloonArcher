@@ -107,10 +107,6 @@ public class WorldController extends InputAdapter
             {
                 app.resume();
             }
- /*           else if(app.is_game_over())
-            {
-                app.
-            } */
             else
             {
                 //shoot
