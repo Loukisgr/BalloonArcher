@@ -143,9 +143,9 @@ public class WorldRenderer implements Disposable
         bitmap_font.setColor(0, 0, 0, 1.0f);
         bitmap_font.draw(batch, text, Constants.SCORE_TEXT_X, Constants.SCORE_TEXT_Y);
 
-
         text.delete(0,text.length());
-        text.insert(0,"Arrows Left: "+worldController.get_no_of_left_arrows());
+        text.insert(0,worldController.get_no_of_left_arrows());
+        batch.draw(Assets.instance.asset_arrow.arrow_texture,Constants.ARROW_TEXT_X,Constants.ARROW_TEXT_Y,Constants.ARROW_WIDTH*2,Constants.ARROW_HEIGHT*1.5f);
         bitmap_font.draw(batch, text, Constants.ARROW_TEXT_X, Constants.ARROW_TEXT_Y);
 
         if(info_text.length() >0)
