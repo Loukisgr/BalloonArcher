@@ -3,6 +3,7 @@ package com.el.balloonArcher;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
+import com.el.balloonArcher.screens.GameScreen;
 import com.el.balloonArcher.util.Assets;
 import com.el.balloonArcher.util.Constants;
 import com.el.balloonArcher.util.AudioManager;
@@ -16,6 +17,7 @@ import java.util.Random;
 public class WorldController extends InputAdapter
 {
     private static final String TAG = WorldController.class.getName();
+    private GameScreen app_screen;
     private BalloonArcher app;
     private ArrayList<Balloon> balloons;
 
@@ -23,6 +25,13 @@ public class WorldController extends InputAdapter
     {
         Gdx.input.setInputProcessor(this);
         this.app = app;
+        init();
+    }
+
+    public WorldController(GameScreen app_screen)
+    {
+        Gdx.input.setInputProcessor(this);
+        this.app_screen = app_screen;
         init();
     }
 

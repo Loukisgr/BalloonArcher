@@ -146,7 +146,7 @@ public class WorldRenderer implements Disposable
         text.delete(0,text.length());
         text.insert(0,worldController.get_no_of_left_arrows());
         batch.draw(Assets.instance.asset_arrow.arrow_texture,Constants.ARROW_TEXT_X,Constants.ARROW_TEXT_Y,Constants.ARROW_WIDTH*2,Constants.ARROW_HEIGHT*1.5f);
-        bitmap_font.draw(batch, text, Constants.ARROW_TEXT_X, Constants.ARROW_TEXT_Y);
+        bitmap_font.draw(batch, text, Constants.ARROW_TEXT_X*1.2f, Constants.ARROW_TEXT_Y);
 
         if(info_text.length() >0)
         {

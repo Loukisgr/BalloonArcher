@@ -10,7 +10,8 @@ import com.badlogic.gdx.utils.StringBuilder;
 import com.el.balloonArcher.util.Assets;
 import com.el.balloonArcher.util.Constants;
 
-public class BalloonArcher extends ApplicationAdapter {
+public class BalloonArcher extends ApplicationAdapter
+{
 	private com.el.balloonArcher.Archer player;
 	private static final String TAG = BalloonArcher.class.getName();
 	private WorldController worldController;
@@ -20,7 +21,7 @@ public class BalloonArcher extends ApplicationAdapter {
 	private int level=1;
 	private int score=0;
 	public static int GUI_WIDTH,GUI_HEIGHT;
-	
+
 	@Override
 	public void create ()
 	{
