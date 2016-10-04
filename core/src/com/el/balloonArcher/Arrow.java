@@ -1,6 +1,7 @@
 package com.el.balloonArcher;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.el.balloonArcher.screens.GameScreen;
 import com.el.balloonArcher.util.Constants;
 
 /**
@@ -44,7 +45,7 @@ public class Arrow
     {
         if (is_shot())
         {
-            if(x>BalloonArcher.GUI_WIDTH)
+            if(x> GameScreen.GUI_WIDTH)
             {
                 remove=true;
             }

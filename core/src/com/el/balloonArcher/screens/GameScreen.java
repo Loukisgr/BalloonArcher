@@ -46,10 +46,9 @@ public class GameScreen extends AbstractGameScreen
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         // Initialize controller and renderer
         player = new com.el.balloonArcher.Archer(level);
-        worldController = new WorldController(this);
+        worldController = new WorldController(this,game);
         worldRenderer = new com.el.balloonArcher.WorldRenderer(worldController);
         Gdx.input.setCatchBackKey(false);
-        //paused = false;
         state= Constants.Game_State.ACTIVE;
     }
 
@@ -68,7 +67,6 @@ public class GameScreen extends AbstractGameScreen
 
             if(is_won())
             {
-                //worldRenderer.set_text_to_display(new StringBuilder("WON!!!"));
                 worldRenderer.set_text_to_display(new StringBuilder("Starting Next Level..."));
                 this.add_level();
                 player.init_level(get_level());
@@ -117,29 +115,17 @@ public class GameScreen extends AbstractGameScreen
 
     public boolean is_paused()
     {
-        if (state.equals(Constants.Game_State.PAUSED))
-        {
-            return true;
-        }
-        return false;
+        return state.equals(Constants.Game_State.PAUSED);
     }
 
     public boolean is_won()
     {
-        if (state.equals(Constants.Game_State.GAME_WINNER))
-        {
-            return true;
-        }
-        return false;
+        return state.equals(Constants.Game_State.GAME_WINNER);
     }
 
     public boolean is_game_over()
     {
-        if (state.equals(Constants.Game_State.GAME_OVER))
-        {
-            return true;
-        }
-        return false;
+        return state.equals(Constants.Game_State.GAME_OVER);
     }
 
 
@@ -147,6 +133,7 @@ public class GameScreen extends AbstractGameScreen
     {
         return level;
     }
+
     public void add_level()
     {
         level++;

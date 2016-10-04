@@ -1,9 +1,11 @@
 package com.el.balloonArcher;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.el.balloonArcher.screens.GameScreen;
+import com.el.balloonArcher.screens.MenuScreen;
 import com.el.balloonArcher.util.Assets;
 import com.el.balloonArcher.util.Constants;
 import com.el.balloonArcher.util.AudioManager;
@@ -17,24 +19,25 @@ import java.util.Random;
 public class WorldController extends InputAdapter
 {
     private static final String TAG = WorldController.class.getName();
-    private GameScreen app_screen;
-    private BalloonArcher app;
+    private GameScreen app;
+    private Game main_app;
     private ArrayList<Balloon> balloons;
 
-    public WorldController(BalloonArcher app)
+    public WorldController(GameScreen app_screen,Game main_app)
     {
         Gdx.input.setInputProcessor(this);
-        this.app = app;
+        this.main_app = main_app;
+        this.app=app_screen;
         init();
     }
 
-    public WorldController(GameScreen app_screen)
+/*    public WorldController(GameScreen app_screen)
     {
         Gdx.input.setInputProcessor(this);
-        this.app_screen = app_screen;
+        this.app = app_screen;
         init();
     }
-
+*/
     private void init ()
     {
         balloons = new ArrayList<Balloon>();
@@ -90,7 +93,13 @@ public class WorldController extends InputAdapter
     {
         //if (app.is_paused()) {return;}
         //if (Gdx.app.getType() != Application.ApplicationType.Desktop) return;
-        // Selected Sprite Controls
+
+        if (Gdx.input.isKeyPressed(Keys.ESCAPE) || Gdx.input.isKeyPressed(Keys.BACK))
+        {
+            backToMenu();
+            return;
+        }
+
         //pause\resume
         if (Gdx.input.isKeyPressed(Keys.P))
         {
@@ -125,14 +134,14 @@ public class WorldController extends InputAdapter
             else
             {
                 //shoot
-                if(Gdx.input.getX() >= BalloonArcher.GUI_WIDTH /2)
+                if(Gdx.input.getX() >= GameScreen.GUI_WIDTH /2)
                 {
                     app.get_Archer().shoot();
                 }
                 //move
                 else
                 {
-                    if (app.get_Archer().get_pos() < (BalloonArcher.GUI_HEIGHT - Gdx.input.getY()))
+                    if (app.get_Archer().get_pos() < (GameScreen.GUI_HEIGHT - Gdx.input.getY()))
                     {
                         app.get_Archer().move(Constants.ARCHER_SPEED * deltaTime);
                     }
@@ -140,7 +149,7 @@ public class WorldController extends InputAdapter
                     {
                         app.get_Archer().move(-Constants.ARCHER_SPEED * deltaTime);
                     }
-                    System.out.println(app.get_Archer().get_pos()+" y="+(BalloonArcher.GUI_HEIGHT - Gdx.input.getY()));
+                    System.out.println(app.get_Archer().get_pos()+" y="+(GameScreen.GUI_HEIGHT - Gdx.input.getY()));
                 }
             }
         }
@@ -211,12 +220,8 @@ public class WorldController extends InputAdapter
     private boolean is_game_over()
     {
         //if balloon exists but no arrows
-        if(app.get_game_state().equals((Constants.Game_State.GAME_OVER)))
-        {
-            return true;
-        }
+        return app.get_game_state().equals((Constants.Game_State.GAME_OVER));
 
-        return false;
     }
 
     private void game_status()
@@ -276,6 +281,12 @@ public class WorldController extends InputAdapter
             app.new_game();
         }
 
+    }
+
+    private void backToMenu ()
+    {
+        // switch to menu screen
+        main_app.setScreen(new MenuScreen(main_app));
     }
 
 

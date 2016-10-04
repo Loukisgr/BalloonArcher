@@ -29,7 +29,7 @@ public class Assets implements Disposable,AssetErrorListener
     public Asset_Sounds sounds;
 
 
-    private Assets(){};
+    private Assets(){}
 
     public void init (AssetManager assetManager)
     {
@@ -137,11 +137,11 @@ public class Assets implements Disposable,AssetErrorListener
     @Override
     public void error(AssetDescriptor asset, Throwable throwable)
     {
-        Gdx.app.error(TAG, "Couldn't load asset '" + asset.fileName + "'", (Exception)throwable);
+        Gdx.app.error(TAG, "Couldn't load asset '" + asset.fileName + "'", throwable);
     }
 
     public void error (String filename, Class type, Throwable throwable)
     {
-        Gdx.app.error(TAG, "Couldn't load asset '" + filename + "'", (Exception)throwable);
+        Gdx.app.error(TAG, "Couldn't load asset '" + filename + "'", throwable);
     }
 }

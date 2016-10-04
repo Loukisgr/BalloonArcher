@@ -1,5 +1,6 @@
 package com.el.balloonArcher;
 
+import com.el.balloonArcher.screens.GameScreen;
 import com.el.balloonArcher.util.Constants;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 public class Archer
 {
     private ArrayList<Arrow> arrows;
-    private float y=BalloonArcher.GUI_HEIGHT/10;
+    private float y= GameScreen.GUI_HEIGHT/10;
     private float shoot_timer=0;
 
     public Archer(int level)
