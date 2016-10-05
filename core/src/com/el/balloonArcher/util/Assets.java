@@ -37,8 +37,8 @@ public class Assets implements Disposable,AssetErrorListener
 // set asset manager error handler
         assetManager.setErrorListener(this);
         // load texture
-        assetManager.load("images/archer.jpg", Texture.class);
-        assetManager.load("images/items.bmp", Texture.class);
+        assetManager.load("images/archer.png", Texture.class);
+        assetManager.load("images/items.png", Texture.class);
         assetManager.load("sounds/Balloon_Popping.wav", Sound.class);
 // start loading assets and wait until finished
         assetManager.finishLoading();
