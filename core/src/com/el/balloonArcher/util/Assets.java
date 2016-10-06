@@ -26,6 +26,7 @@ public class Assets implements Disposable,AssetErrorListener
     public Asset_Arrow asset_arrow;
     public Asset_Normal_Balloon asset_normal_balloon;
     public Asset_Bonus_Balloon asset_bonus_balloon;
+    public Asset_Morning_Background asset_morning_background;
     public Asset_Sounds sounds;
 
 
@@ -39,6 +40,7 @@ public class Assets implements Disposable,AssetErrorListener
         // load texture
         assetManager.load("images/archer.png", Texture.class);
         assetManager.load("images/items.png", Texture.class);
+        assetManager.load("images/background.png", Texture.class);
         assetManager.load("sounds/Balloon_Popping.wav", Sound.class);
 // start loading assets and wait until finished
         assetManager.finishLoading();
@@ -58,10 +60,11 @@ public class Assets implements Disposable,AssetErrorListener
         }
 
         // create game resource objects
-        asset_archer = new Asset_Archer(textures.get(1));
-        asset_arrow = new Asset_Arrow(textures.get(0));
-        asset_normal_balloon = new Asset_Normal_Balloon(textures.get(0));
-        asset_bonus_balloon = new Asset_Bonus_Balloon(textures.get(0));
+        asset_archer = new Asset_Archer(textures.get(2));
+        asset_arrow = new Asset_Arrow(textures.get(1));
+        asset_normal_balloon = new Asset_Normal_Balloon(textures.get(1));
+        asset_bonus_balloon = new Asset_Bonus_Balloon(textures.get(1));
+        asset_morning_background = new Asset_Morning_Background(textures.get(0));
         sounds = new Asset_Sounds(assetManager);
     }
 
@@ -124,6 +127,18 @@ public class Assets implements Disposable,AssetErrorListener
         public Asset_Sounds(AssetManager am)
         {
             pop = am.get("sounds/Balloon_Popping.wav",Sound.class);
+        }
+    }
+
+    public class Asset_Morning_Background
+    {
+        public final Texture background_img;
+        public final TextureRegion background_texture;
+
+        public Asset_Morning_Background(Texture  t)
+        {
+            background_img=t;
+            background_texture = new TextureRegion(background_img, 0, 0, 255, 512);
         }
     }
 

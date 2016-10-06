@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.StringBuilder;
+import com.el.balloonArcher.screens.GameScreen;
 import com.el.balloonArcher.util.Assets;
 import com.el.balloonArcher.util.Constants;
 
@@ -45,6 +46,7 @@ public class WorldRenderer implements Disposable
             init();
         }
         batch.begin();
+        paint_game_background();
         print_text();
         paint_archer(deltaTime);
         paint_arrows();
@@ -110,6 +112,11 @@ public class WorldRenderer implements Disposable
             }
         }
 
+    }
+
+    private void paint_game_background()
+    {
+        batch.draw(Assets.instance.asset_morning_background.background_texture,0,0, GameScreen.GUI_WIDTH,GameScreen.GUI_HEIGHT);
     }
 
     public void resize (int width, int height) { }
