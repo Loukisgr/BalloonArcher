@@ -37,7 +37,8 @@ public class Constants
     public static final int INFO_TEXT_Y=GameScreen.GUI_HEIGHT/2;
     public static final String SKIN_LIBGDX_UI = "images/uiskin.json";
     public static final String SKIN_BALLOONARCHER_UI = "images/balloonarcher-ui.json";
-
+    //public static final String TEXTURE_ATLAS_UI = "images/canyonbunny-ui.pack";
+    public static final String TEXTURE_ATLAS_LIBGDX_UI = "images/uiskin.atlas";
 
     public enum Game_State
     {
