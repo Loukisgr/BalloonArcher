@@ -153,11 +153,16 @@ public class MenuScreen extends AbstractGameScreen
         Table layer = new Table();
         imgBalloons = new Image(skinBalloonArcher.getRegion("balloons"));
         layer.addActor(imgBalloons);
-        imgBalloons.setPosition(135, 80);
+        imgBalloons.setSize(Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/10);
+        imgBalloons.setPosition(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/8 * 5);
+        //imgBalloons.setPosition(135, 80);
+
 
         imgArcher = new Image(skinBalloonArcher.getRegion("archer"));
         layer.addActor(imgArcher);
-        imgArcher.setPosition(355, 40);
+        imgArcher.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/3);
+        imgArcher.setPosition(0,Gdx.graphics.getHeight()/2);
+        //imgArcher.setPosition(355, 40);
         return layer;
     }
 
@@ -166,6 +171,8 @@ public class MenuScreen extends AbstractGameScreen
         Table layer = new Table();
         imgLogo = new Image(skinBalloonArcher.getRegion("logo"));
         layer.addActor(imgLogo);
+        imgLogo.setSize(Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/10);
+        imgLogo.setPosition(0,Gdx.graphics.getHeight()/20 *18);
         layer.row().expandY();
 
         imgInfo = new Image(skinBalloonArcher.getRegion("info"));
