@@ -12,7 +12,9 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.StringBuilder;
 import com.el.balloonArcher.screens.GameScreen;
 import com.el.balloonArcher.util.Assets;
+import com.el.balloonArcher.util.CharacterSkin;
 import com.el.balloonArcher.util.Constants;
+import com.el.balloonArcher.util.GamePreferences;
 
 public class WorldRenderer implements Disposable
 {
@@ -24,6 +26,7 @@ public class WorldRenderer implements Disposable
     private StringBuilder info_text;
     private BitmapFont bitmap_font;
     private Color info_color;
+    private Color batchColor;
 
     public WorldRenderer (WorldController worldController)
     {
@@ -37,6 +40,7 @@ public class WorldRenderer implements Disposable
         bitmap_font = new BitmapFont();
         batch = new SpriteBatch();
         info_color= new Color(Color.BLACK);
+        batchColor = batch.getColor();
     }
 
     public void render(float deltaTime)
@@ -51,11 +55,15 @@ public class WorldRenderer implements Disposable
         paint_archer(deltaTime);
         paint_arrows();
         paint_balloons();
+        //if (GamePreferences.instance.showFpsCounter)
+        //    renderGuiFpsCounter(batch);
         batch.end();
     }
 
     private void paint_archer(float deltaTime)
     {
+
+
         if(current_animation_time < Constants.ANIMATION_TIMER)
         {
             current_animation_time+= deltaTime;
@@ -78,7 +86,10 @@ public class WorldRenderer implements Disposable
         }
 
         //batch.draw(archer_texture[current_animation], 0, worldController.get_Archer_pos(),Constants.ARCHER_WIDTH,Constants.ARCHER_HEIGHT);
+        //Color c = batch.getColor();
+        batch.setColor(CharacterSkin.values()[GamePreferences.instance.charSkin].getColor());
         batch.draw(Assets.instance.asset_archer.archer_texture[current_animation], 0, worldController.get_Archer_pos(),Constants.ARCHER_WIDTH,Constants.ARCHER_HEIGHT);
+        batch.setColor(batchColor);
     }
 
     private void paint_arrows()

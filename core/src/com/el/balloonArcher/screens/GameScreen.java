@@ -13,6 +13,7 @@ import com.el.balloonArcher.WorldController;
 import com.el.balloonArcher.WorldRenderer;
 import com.el.balloonArcher.util.Assets;
 import com.el.balloonArcher.util.Constants;
+import com.el.balloonArcher.util.GamePreferences;
 
 /**
  * Created by Louki on 3/10/2016.
@@ -38,6 +39,7 @@ public class GameScreen extends AbstractGameScreen
     @Override
     public void show()
     {
+        GamePreferences.instance.load();
         Assets.instance.init(new AssetManager());
         GUI_WIDTH= Gdx.graphics.getWidth();
         GUI_HEIGHT= Gdx.graphics.getHeight();

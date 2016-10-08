@@ -360,17 +360,17 @@ public class MenuScreen extends AbstractGameScreen
 // + Drop down box filled with skin items
         selCharSkin = new SelectBox<CharacterSkin>(skinLibgdx);
         selCharSkin.setItems(CharacterSkin.values());
-        selCharSkin.addListener(new ChangeListener() {
+        selCharSkin.addListener(new ChangeListener()
+        {
             @Override
             public void changed(ChangeEvent event, Actor actor)
             {
-                onCharSkinSelected(((SelectBox<CharacterSkin>)
-                        actor).getSelectedIndex());
+                onCharSkinSelected(((SelectBox<CharacterSkin>) actor).getSelectedIndex());
             }
         });
         tbl.add(selCharSkin).width(120).padRight(20);
 // + Skin preview image
-        imgCharSkin = new Image(Assets.instance.asset_archer.archer_img);
+        imgCharSkin = new Image(Assets.instance.asset_archer.archer_texture[0]);
         tbl.add(imgCharSkin).width(50).height(50);
         return tbl;
     }
