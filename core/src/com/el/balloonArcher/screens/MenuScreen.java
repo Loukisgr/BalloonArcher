@@ -132,13 +132,17 @@ public class MenuScreen extends AbstractGameScreen
         skinBalloonArcher.add("play",new TextureRegion(new Texture("images/main_screen_background.png"),463,393,49,28));
         skinBalloonArcher.add("options",new TextureRegion(new Texture("images/main_screen_background.png"),463,452,49,28));
 */
-        skinBalloonArcher.add("logo",new TextureRegion(new Texture("images/main_screen_background.png"),518,0,200,94));
-        skinBalloonArcher.add("balloons",new TextureRegion(new Texture("images/main_screen_background.png"),376,142,270,122));
-        skinBalloonArcher.add("archer",new TextureRegion(new Texture("images/main_screen_background.png"),0,0,296,406));
-        skinBalloonArcher.add("info",new TextureRegion(new Texture("images/main_screen_background.png"),788,966,236,59));
-        skinBalloonArcher.add("background",new TextureRegion(new Texture("images/main_screen_background.png"),500,0,1,1));
-        skinBalloonArcher.add("play",new TextureRegion(new Texture("images/main_screen_background.png"),926,786,98,57));
-        skinBalloonArcher.add("options",new TextureRegion(new Texture("images/main_screen_background.png"),926,904,98,57));
+
+        Texture menu_texture=new Texture("images/main_screen_background.png");
+        menu_texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        skinBalloonArcher.add("logo",new TextureRegion(menu_texture,518,0,200,94));
+        skinBalloonArcher.add("balloons",new TextureRegion(menu_texture,376,142,270,122));
+        skinBalloonArcher.add("archer",new TextureRegion(menu_texture,0,0,296,406));
+        skinBalloonArcher.add("info",new TextureRegion(menu_texture,788,966,236,57));
+        skinBalloonArcher.add("background",new TextureRegion(menu_texture,500,0,1,1));
+        skinBalloonArcher.add("play",new TextureRegion(menu_texture,926,786,98,57));
+        skinBalloonArcher.add("options",new TextureRegion(menu_texture,926,904,98,57));
 
         skinLibgdx = new Skin(Gdx.files.internal(Constants.SKIN_LIBGDX_UI),
                         new TextureAtlas(Constants.TEXTURE_ATLAS_LIBGDX_UI));

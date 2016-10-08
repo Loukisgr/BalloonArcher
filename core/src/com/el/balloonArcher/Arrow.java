@@ -1,5 +1,7 @@
 package com.el.balloonArcher;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Rectangle;
 import com.el.balloonArcher.screens.GameScreen;
 import com.el.balloonArcher.util.Constants;
@@ -16,13 +18,15 @@ public class Arrow
     private boolean shot;
     private boolean remove=false;
     private Rectangle body;
-
+    private ParticleEffect dustParticles;
 
     public Arrow(float speed)
     {
         this.speed=speed+ Constants.ARROW_STARTING_SPEED;
         this.body = new Rectangle();
+        dustParticles = new ParticleEffect();
         shot=false;
+        dustParticles.load(Gdx.files.internal("particles/dust.pfx"), Gdx.files.internal("particles"));
     }
 
     public void shoot(float y)
@@ -48,11 +52,14 @@ public class Arrow
             if(x> GameScreen.GUI_WIDTH)
             {
                 remove=true;
+                dustParticles.allowCompletion();
             }
             else
             {
                 x=x+speed*deltaTime;
                 body.set(x,y,Constants.ARROW_WIDTH,Constants.ARROW_HEIGHT);
+                dustParticles.setPosition(x,y);
+                dustParticles.update(deltaTime);
             }
         }
     }
@@ -72,5 +79,8 @@ public class Arrow
         return body;
     }
 
-
+    public ParticleEffect get_DustParticles()
+    {
+        return dustParticles;
+    }
 }
