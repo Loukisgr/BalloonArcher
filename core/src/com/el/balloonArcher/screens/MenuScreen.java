@@ -124,13 +124,21 @@ public class MenuScreen extends AbstractGameScreen
                 new TextureAtlas(Constants.TEXTURE_ATLAS_UI));*/
 
         skinBalloonArcher = new Skin();
-        skinBalloonArcher.add("logo",new TextureRegion(new Texture("images/main_screen_background.png"),258,0,100,47));
+        /*skinBalloonArcher.add("logo",new TextureRegion(new Texture("images/main_screen_background.png"),258,0,100,47));
         skinBalloonArcher.add("balloons",new TextureRegion(new Texture("images/main_screen_background.png"),188,71,135,61));
         skinBalloonArcher.add("archer",new TextureRegion(new Texture("images/main_screen_background.png"),0,0,148,203));
         skinBalloonArcher.add("info",new TextureRegion(new Texture("images/main_screen_background.png"),394,483,118,29));
         skinBalloonArcher.add("background",new TextureRegion(new Texture("images/main_screen_background.png"),500,0,1,1));
         skinBalloonArcher.add("play",new TextureRegion(new Texture("images/main_screen_background.png"),463,393,49,28));
-        skinBalloonArcher.add("options",new TextureRegion(new Texture("images/main_screen_background.png"),463,500,49,28));
+        skinBalloonArcher.add("options",new TextureRegion(new Texture("images/main_screen_background.png"),463,452,49,28));
+*/
+        skinBalloonArcher.add("logo",new TextureRegion(new Texture("images/main_screen_background.png"),518,0,200,94));
+        skinBalloonArcher.add("balloons",new TextureRegion(new Texture("images/main_screen_background.png"),376,142,270,122));
+        skinBalloonArcher.add("archer",new TextureRegion(new Texture("images/main_screen_background.png"),0,0,296,406));
+        skinBalloonArcher.add("info",new TextureRegion(new Texture("images/main_screen_background.png"),788,966,236,59));
+        skinBalloonArcher.add("background",new TextureRegion(new Texture("images/main_screen_background.png"),500,0,1,1));
+        skinBalloonArcher.add("play",new TextureRegion(new Texture("images/main_screen_background.png"),926,786,98,57));
+        skinBalloonArcher.add("options",new TextureRegion(new Texture("images/main_screen_background.png"),926,904,98,57));
 
         skinLibgdx = new Skin(Gdx.files.internal(Constants.SKIN_LIBGDX_UI),
                         new TextureAtlas(Constants.TEXTURE_ATLAS_LIBGDX_UI));
@@ -157,8 +165,8 @@ public class MenuScreen extends AbstractGameScreen
     {
         Table layer = new Table();
         imgBackground = new Image(skinBalloonArcher.getRegion("background"));
-        //layer.center();
-        //imgBackground.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        layer.left().bottom();
+        imgBackground.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         imgBackground.scaleBy(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         layer.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         layer.add(imgBackground );
@@ -170,7 +178,7 @@ public class MenuScreen extends AbstractGameScreen
         Table layer = new Table();
         imgBalloons = new Image(skinBalloonArcher.getRegion("balloons"));
         layer.addActor(imgBalloons);
-        //imgBalloons.setSize(Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/10);
+        imgBalloons.scaleBy(-0.2f);
         imgBalloons.setPosition(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/8 * 5);
         //imgBalloons.setPosition(135, 80);
 
@@ -178,6 +186,7 @@ public class MenuScreen extends AbstractGameScreen
         imgArcher = new Image(skinBalloonArcher.getRegion("archer"));
         layer.addActor(imgArcher);
         //imgArcher.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/3);
+        imgArcher.scaleBy(-0.3f);
         imgArcher.setPosition(0,Gdx.graphics.getHeight()/2);
         //imgArcher.setPosition(355, 40);
         return layer;
@@ -229,7 +238,7 @@ public class MenuScreen extends AbstractGameScreen
         Image imgMenuoptions = new Image(skinBalloonArcher.getRegion("options"));
         btnMenuOptions = new Button(imgMenuoptions.getDrawable());
 
-        layer.add(btnMenuOptions);
+        layer.add(btnMenuOptions).bottom();
         btnMenuOptions.addListener(new ChangeListener()
         {
             @Override
@@ -240,7 +249,6 @@ public class MenuScreen extends AbstractGameScreen
         });
 
         if (debugEnabled) layer.debug();
-
         return layer;
     }
 
