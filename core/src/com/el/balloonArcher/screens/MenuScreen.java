@@ -128,7 +128,7 @@ public class MenuScreen extends AbstractGameScreen
         Table layerObjects = buildObjectsLayer();
         Table layerLogos = buildLogosLayer();
         Table layerControls = buildControlsLayer();
-        Table layerOptionsWindow = buildOptionsWindowLayer();
+        //Table layerOptionsWindow = buildOptionsWindowLayer();
 // assemble stage for menu screen
         stage.clear();
         Stack stack = new Stack();
@@ -138,13 +138,16 @@ public class MenuScreen extends AbstractGameScreen
         stack.add(layerObjects);
         stack.add(layerLogos);
         stack.add(layerControls);
-        stage.addActor(layerOptionsWindow);
+        //stage.addActor(layerOptionsWindow);
     }
 
     private Table buildBackgroundLayer ()
     {
         Table layer = new Table();
         this.imgBackground = new Image(skinBalloonArcher.getRegion("background"));
+        //imgBackground.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //layer.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //layer.setPosition(0,0);
         return layer;
     }
 
@@ -169,10 +172,11 @@ public class MenuScreen extends AbstractGameScreen
     private Table buildLogosLayer ()
     {
         Table layer = new Table();
+        layer.left().top();
         imgLogo = new Image(skinBalloonArcher.getRegion("logo"));
-        layer.addActor(imgLogo);
-        imgLogo.setSize(Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/10);
-        imgLogo.setPosition(0,Gdx.graphics.getHeight()/20 *18);
+        layer.add(imgLogo);
+        //imgLogo.setSize(Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/10);
+       // imgLogo.setPosition(0,Gdx.graphics.getHeight()/20 *18);
         layer.row().expandY();
 
         imgInfo = new Image(skinBalloonArcher.getRegion("info"));
@@ -189,6 +193,7 @@ public class MenuScreen extends AbstractGameScreen
     private Table buildControlsLayer ()
     {
         Table layer = new Table();
+        layer.right().bottom();
         // + Play Button
         Image imgMenuPlay = new Image(skinBalloonArcher.getRegion("play"));
         btnMenuPlay = new Button(imgMenuPlay.getDrawable());
