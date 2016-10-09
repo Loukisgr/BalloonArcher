@@ -33,6 +33,7 @@ public class Arrow
     {
         this.shot=true;
         this.y=y;
+        dustParticles.start();
     }
 
     public boolean is_shot()
@@ -58,7 +59,7 @@ public class Arrow
             {
                 x=x+speed*deltaTime;
                 body.set(x+Constants.ARROW_WIDTH,y,Constants.ARROW_WIDTH/4,Constants.ARROW_HEIGHT);
-                dustParticles.setPosition(x-Constants.ARROW_WIDTH,y);
+                dustParticles.setPosition(x,y);
                 dustParticles.update(deltaTime);
             }
         }
