@@ -76,7 +76,7 @@ public class Archer
         {
             y=Constants.VIEWPORT_HEIGHT;
         }
-        else */if(y+pix <0 )
+        else */if(y+Constants.ARCHER_HEIGHT+pix <0 )
         {
             y=0;
         }

@@ -60,11 +60,11 @@ public class WorldController extends InputAdapter
 
             if (i%10==0)
             {
-                balloons.add(new Balloon(true,app.get_level(),r));
+                balloons.add(new Balloon(true,(GameScreen.GUI_HEIGHT/150)*app.get_level(),r));
             }
             else
             {
-                balloons.add(new Balloon(false,app.get_level(),r));
+                balloons.add(new Balloon(false,(GameScreen.GUI_HEIGHT/140)*app.get_level(),r));
             }
 
             i-=1;

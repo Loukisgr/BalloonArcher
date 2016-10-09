@@ -18,11 +18,14 @@ public class Constants
     public static final float VIEWPORT_GUI_HEIGHT = 480.0f;
     public static final float ANIMATION_TIMER  = 4f;
     public static final int ANIMATION_SPLITS = 4;
-    public static final float ARCHER_SPEED = 200f;
+    //public static final float ARCHER_SPEED = 200f;
+    public static final float ARCHER_SPEED = GameScreen.GUI_HEIGHT/4;
     public static final int ARCHER_HEIGHT = GameScreen.GUI_HEIGHT/6;
     public static final int ARCHER_WIDTH = GameScreen.GUI_WIDTH/8;
-    public static final float BALLOON_STARTING_SPEED=140f;
-    public static final float ARROW_STARTING_SPEED=200f;
+    //public static final float BALLOON_STARTING_SPEED=140f;
+    //public static final float ARROW_STARTING_SPEED=200f;
+    public static final float BALLOON_STARTING_SPEED=GameScreen.GUI_HEIGHT/6;
+    public static final float ARROW_STARTING_SPEED=GameScreen.GUI_WIDTH/2;
     public static final int NO_OF_ARROW_LIMIT=100;
     public static final int BALLOON_WIDTH= GameScreen.GUI_WIDTH/20;
     public static final int BALLOON_HEIGHT= GameScreen.GUI_HEIGHT/24;
