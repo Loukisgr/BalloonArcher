@@ -57,7 +57,7 @@ public class Arrow
             else
             {
                 x=x+speed*deltaTime;
-                body.set(x,y,Constants.ARROW_WIDTH,Constants.ARROW_HEIGHT);
+                body.set(x+Constants.ARROW_WIDTH,y,Constants.ARROW_WIDTH/4,Constants.ARROW_HEIGHT);
                 dustParticles.setPosition(x-Constants.ARROW_WIDTH,y);
                 dustParticles.update(deltaTime);
             }

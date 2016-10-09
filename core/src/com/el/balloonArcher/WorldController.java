@@ -126,7 +126,7 @@ public class WorldController extends InputAdapter
         {
             //System.out.println("W="+BalloonArcher.GUI_WIDTH+",H="+BalloonArcher.GUI_HEIGHT);
             //System.out.println("X="+Gdx.input.getX()+",Y="+Gdx.input.getY());
-            //TODO: 2/10/2016  add pause fo mobile
+            //TODO: 2/10/2016  add pause for mobile
             if(app.is_paused())
             {
                 app.resume();

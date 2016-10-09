@@ -72,11 +72,11 @@ public class Archer
 
     public void move(float pix)
     {
-       /* if(y+pix > Constants.VIEWPORT_HEIGHT)
+        if(y+pix+Constants.ARCHER_HEIGHT> GameScreen.GUI_HEIGHT)
         {
-            y=Constants.VIEWPORT_HEIGHT;
+            y=GameScreen.GUI_HEIGHT-Constants.ARCHER_HEIGHT;
         }
-        else */if(y+Constants.ARCHER_HEIGHT+pix <0 )
+        else if(y+pix <0 )
         {
             y=0;
         }
