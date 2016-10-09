@@ -149,4 +149,24 @@ public class Archer
        }
     }
 
+    public int get_frame()
+    {
+        if(shoot_timer>0)
+        {
+            float temp = Constants.ANIMATION_TIMER/(Constants.ARCHER_ANIMATION_SPLITS-1);
+            int i=Constants.ARCHER_ANIMATION_SPLITS-1;
+
+            while((temp <= shoot_timer) && (i>0))
+            {
+                temp+=Constants.ANIMATION_TIMER/(Constants.ARCHER_ANIMATION_SPLITS-1);
+                i--;
+            }
+
+            return i;
+        }
+
+        return 0;
+
+    }
+
 }

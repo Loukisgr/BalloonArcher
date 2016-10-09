@@ -289,5 +289,10 @@ public class WorldController extends InputAdapter
         main_app.setScreen(new MenuScreen(main_app));
     }
 
+    public int get_archer_frame()
+    {
+        return this.app.get_Archer().get_frame();
+    }
+
 
 }

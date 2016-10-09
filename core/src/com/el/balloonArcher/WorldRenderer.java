@@ -20,8 +20,6 @@ public class WorldRenderer implements Disposable
 {
     private SpriteBatch batch;
     private WorldController worldController;
-    private float current_animation_time;
-    private int current_animation;
     private StringBuilder text;
     private StringBuilder info_text;
     private BitmapFont bitmap_font;
@@ -52,7 +50,7 @@ public class WorldRenderer implements Disposable
         batch.begin();
         paint_game_background();
         print_text();
-        paint_archer(deltaTime);
+        paint_archer();
         paint_arrows();
         paint_balloons();
         //if (GamePreferences.instance.showFpsCounter)
@@ -60,35 +58,14 @@ public class WorldRenderer implements Disposable
         batch.end();
     }
 
-    private void paint_archer(float deltaTime)
+    private void paint_archer()
     {
 
-
-        if(current_animation_time < Constants.ANIMATION_TIMER)
-        {
-            current_animation_time+= deltaTime;
-
-            if((int)(current_animation_time /((Constants.ANIMATION_TIMER )/(Constants.ANIMATION_SPLITS))) != current_animation)
-            {
-                current_animation=current_animation+1;
-
-                if (current_animation >=Constants.ANIMATION_SPLITS)
-                {
-                    current_animation=0;
-                }
-            }
-
-        }
-        else
-        {
-            current_animation_time=current_animation_time-Constants.ANIMATION_TIMER+deltaTime;
-            current_animation=0;
-        }
 
         //batch.draw(archer_texture[current_animation], 0, worldController.get_Archer_pos(),Constants.ARCHER_WIDTH,Constants.ARCHER_HEIGHT);
         //Color c = batch.getColor();
         batch.setColor(CharacterSkin.values()[GamePreferences.instance.charSkin].getColor());
-        batch.draw(Assets.instance.asset_archer.archer_texture[current_animation], 0, worldController.get_Archer_pos(),Constants.ARCHER_WIDTH,Constants.ARCHER_HEIGHT);
+        batch.draw(Assets.instance.asset_archer.archer_texture[worldController.get_archer_frame()], 0, worldController.get_Archer_pos(),Constants.ARCHER_WIDTH,Constants.ARCHER_HEIGHT);
         batch.setColor(batchColor);
     }
 
