@@ -276,6 +276,7 @@ public class MenuScreen extends AbstractGameScreen
         if (debugEnabled) winOptions.debug();
 // Let TableLayout recalculate widget sizes and positions
         winOptions.pack();
+       // winOptions.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
 // Move options window to bottom right corner
         winOptions.setPosition(Constants.VIEWPORT_GUI_WIDTH - winOptions.getWidth() - 50, 50);
         return winOptions;

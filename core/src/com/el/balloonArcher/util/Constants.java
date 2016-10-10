@@ -40,6 +40,8 @@ public class Constants
     public static final int ARROW_TEXT_Y=GameScreen.GUI_HEIGHT/20 * 19;
     public static final int INFO_TEXT_X=GameScreen.GUI_WIDTH/6 * 2;
     public static final int INFO_TEXT_Y=GameScreen.GUI_HEIGHT/2;
+    public static final int FPS_TEXT_X=0;
+    public static final int FPS_TEXT_Y=GameScreen.GUI_HEIGHT/20 * 19;
     public static final String SKIN_LIBGDX_UI = "images/uiskin.json";
     public static final String SKIN_BALLOONARCHER_UI = "images/balloonarcher-ui.json";
     //public static final String TEXTURE_ATLAS_UI = "images/canyonbunny-ui.pack";

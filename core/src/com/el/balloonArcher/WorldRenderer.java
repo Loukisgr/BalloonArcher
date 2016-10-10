@@ -74,11 +74,11 @@ public class WorldRenderer implements Disposable
         paint_archer();
         paint_arrows();
         paint_balloons();
-        //if (GamePreferences.instance.showFpsCounter)
-        //    renderGuiFpsCounter(batch);
+        if (GamePreferences.instance.showFpsCounter) {paint_gui_fps_counter();}
         batch.setShader(null);
         batch.end();
     }
+
 
     private void paint_archer()
     {
@@ -129,6 +129,26 @@ public class WorldRenderer implements Disposable
     private void paint_game_background()
     {
         batch.draw(Assets.instance.asset_morning_background.background_texture,0,0, GameScreen.GUI_WIDTH,GameScreen.GUI_HEIGHT);
+    }
+
+    private void paint_gui_fps_counter()
+    {
+        int fps = Gdx.graphics.getFramesPerSecond();
+
+        if(fps<30)
+        {
+            bitmap_font.setColor(180, 0, 0, 1.0f);
+        }
+        else if (fps < 45)
+        {
+            bitmap_font.setColor(255, 255, 0, 1.0f);
+        }
+        else
+        {
+            bitmap_font.setColor(0, 200, 0, 1.0f);
+        }
+
+        bitmap_font.draw(batch,"FPS: "+fps,Constants.FPS_TEXT_X,Constants.FPS_TEXT_Y);
     }
 
     public void resize (int width, int height) { }
