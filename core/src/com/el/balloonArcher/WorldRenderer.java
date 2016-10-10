@@ -113,15 +113,27 @@ public class WorldRenderer implements Disposable
 
     private void print_text()
     {
+        //level
         text.delete(0,text.length());
-        text.insert(0,"Level:"+worldController.get_level()+" Score: "+worldController.get_score());
+        text.insert(0,"Level:"+worldController.get_level());
+        bitmap_font.setColor(180, 0, 0, 1.0f);
+        bitmap_font.draw(batch, text, Constants.LEVEL_TEXT_X, Constants.LEVEL_TEXT_Y);
+
+        text.delete(0,text.length());
+        text.insert(0,worldController.get_no_of_left_arrows());
+
+        //score
+        text.delete(0,text.length());
+        text.insert(0,"Score: "+worldController.get_score());
         bitmap_font.setColor(0, 0, 0, 1.0f);
         bitmap_font.draw(batch, text, Constants.SCORE_TEXT_X, Constants.SCORE_TEXT_Y);
 
         text.delete(0,text.length());
         text.insert(0,worldController.get_no_of_left_arrows());
-        batch.draw(Assets.instance.asset_arrow.arrow_texture,Constants.ARROW_TEXT_X,Constants.ARROW_TEXT_Y,Constants.ARROW_WIDTH*2,Constants.ARROW_HEIGHT*1.5f);
-        bitmap_font.draw(batch, text, Constants.ARROW_TEXT_X*1.2f, Constants.ARROW_TEXT_Y);
+
+        //arrow
+        batch.draw(Assets.instance.asset_arrow.arrow_texture,Constants.ARROW_TEXT_X,Constants.ARROW_TEXT_Y-(Constants.ARROW_HEIGHT*1.5f),Constants.ARROW_WIDTH*2,Constants.ARROW_HEIGHT*1.5f);
+        bitmap_font.draw(batch, text, Constants.ARROW_TEXT_X*1.6f, Constants.ARROW_TEXT_Y);
 
         if(info_text.length() >0)
         {

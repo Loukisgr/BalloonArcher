@@ -34,7 +34,9 @@ public class Constants
     public static final float SHOOT_TIMER=1f;
     public static final int SCORE_TEXT_X=GameScreen.GUI_WIDTH/2;
     public static final int SCORE_TEXT_Y=GameScreen.GUI_HEIGHT/20 * 19;
-    public static final int ARROW_TEXT_X=GameScreen.GUI_WIDTH/4;
+    public static final int LEVEL_TEXT_X=GameScreen.GUI_WIDTH/6*2;
+    public static final int LEVEL_TEXT_Y=GameScreen.GUI_HEIGHT/20 * 19;
+    public static final int ARROW_TEXT_X=GameScreen.GUI_WIDTH/6;
     public static final int ARROW_TEXT_Y=GameScreen.GUI_HEIGHT/20 * 19;
     public static final int INFO_TEXT_X=GameScreen.GUI_WIDTH/6 * 2;
     public static final int INFO_TEXT_Y=GameScreen.GUI_HEIGHT/2;
