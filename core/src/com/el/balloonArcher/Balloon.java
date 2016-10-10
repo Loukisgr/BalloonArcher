@@ -2,6 +2,7 @@ package com.el.balloonArcher;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.el.balloonArcher.screens.GameScreen;
 import com.el.balloonArcher.util.Constants;
 
 import java.util.Random;
@@ -14,8 +15,8 @@ public class Balloon
     private boolean has_gift;
     private float speed;
     private boolean is_hit=false;
-    private float y = BalloonArcher.GUI_HEIGHT;
-    private float x = BalloonArcher.GUI_WIDTH /3 *2;
+    private float y = GameScreen.GUI_HEIGHT;
+    private float x = GameScreen.GUI_WIDTH /3 *2;
     private Rectangle body;
     private float show_timer=0;
 
@@ -27,7 +28,7 @@ public class Balloon
         this.body= new Rectangle();
 
         Random rnd = new Random();
-        x=rnd.nextInt((int)BalloonArcher.GUI_WIDTH/6)+(int)BalloonArcher.GUI_WIDTH/3 *2 ;
+        x=rnd.nextInt(GameScreen.GUI_WIDTH /6)+ GameScreen.GUI_WIDTH /3 *2 ;
     }
 
     public Balloon(boolean has_gift, float speed, float show_timer)
@@ -37,7 +38,7 @@ public class Balloon
         this.body= new Rectangle();
 
         Random rnd = new Random();
-        x=rnd.nextInt((int)BalloonArcher.GUI_WIDTH/6)+(int)BalloonArcher.GUI_WIDTH/3 *2 ;
+        x=rnd.nextInt(GameScreen.GUI_WIDTH /6)+ GameScreen.GUI_WIDTH /3 *2 ;
         this.show_timer=show_timer;
     }
 
@@ -57,14 +58,7 @@ public class Balloon
 
     public boolean is_top()
     {
-        if(y>= BalloonArcher.GUI_HEIGHT)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return y >= GameScreen.GUI_HEIGHT;
     }
 
     public boolean is_hit()

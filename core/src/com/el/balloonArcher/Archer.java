@@ -1,5 +1,6 @@
 package com.el.balloonArcher;
 
+import com.el.balloonArcher.screens.GameScreen;
 import com.el.balloonArcher.util.Constants;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 public class Archer
 {
     private ArrayList<Arrow> arrows;
-    private float y=BalloonArcher.GUI_HEIGHT/10;
+    private float y= GameScreen.GUI_HEIGHT/10;
     private float shoot_timer=0;
 
     public Archer(int level)
@@ -71,11 +72,11 @@ public class Archer
 
     public void move(float pix)
     {
-       /* if(y+pix > Constants.VIEWPORT_HEIGHT)
+        if(y+pix+Constants.ARCHER_HEIGHT> GameScreen.GUI_HEIGHT)
         {
-            y=Constants.VIEWPORT_HEIGHT;
+            y=GameScreen.GUI_HEIGHT-Constants.ARCHER_HEIGHT;
         }
-        else */if(y+pix <0 )
+        else if(y+pix <0 )
         {
             y=0;
         }
@@ -146,6 +147,26 @@ public class Archer
                this.shoot_timer=0;
            }
        }
+    }
+
+    public int get_frame()
+    {
+        if(shoot_timer>0)
+        {
+            float temp = Constants.ANIMATION_TIMER/(Constants.ARCHER_ANIMATION_SPLITS-1);
+            int i=Constants.ARCHER_ANIMATION_SPLITS-1;
+
+            while((temp <= shoot_timer) && (i>0))
+            {
+                temp+=Constants.ANIMATION_TIMER/(Constants.ARCHER_ANIMATION_SPLITS-1);
+                i--;
+            }
+
+            return i;
+        }
+
+        return 0;
+
     }
 
 }

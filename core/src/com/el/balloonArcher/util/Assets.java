@@ -26,10 +26,11 @@ public class Assets implements Disposable,AssetErrorListener
     public Asset_Arrow asset_arrow;
     public Asset_Normal_Balloon asset_normal_balloon;
     public Asset_Bonus_Balloon asset_bonus_balloon;
+    public Asset_Morning_Background asset_morning_background;
     public Asset_Sounds sounds;
 
 
-    private Assets(){};
+    private Assets(){}
 
     public void init (AssetManager assetManager)
     {
@@ -37,8 +38,9 @@ public class Assets implements Disposable,AssetErrorListener
 // set asset manager error handler
         assetManager.setErrorListener(this);
         // load texture
-        assetManager.load("images/archer.jpg", Texture.class);
-        assetManager.load("images/items.bmp", Texture.class);
+        assetManager.load("images/archer.png", Texture.class);
+        assetManager.load("images/items.png", Texture.class);
+        assetManager.load("images/background.png", Texture.class);
         assetManager.load("sounds/Balloon_Popping.wav", Sound.class);
 // start loading assets and wait until finished
         assetManager.finishLoading();
@@ -58,10 +60,11 @@ public class Assets implements Disposable,AssetErrorListener
         }
 
         // create game resource objects
-        asset_archer = new Asset_Archer(textures.get(1));
-        asset_arrow = new Asset_Arrow(textures.get(0));
-        asset_normal_balloon = new Asset_Normal_Balloon(textures.get(0));
-        asset_bonus_balloon = new Asset_Bonus_Balloon(textures.get(0));
+        asset_archer = new Asset_Archer(textures.get(2));
+        asset_arrow = new Asset_Arrow(textures.get(1));
+        asset_normal_balloon = new Asset_Normal_Balloon(textures.get(1));
+        asset_bonus_balloon = new Asset_Bonus_Balloon(textures.get(1));
+        asset_morning_background = new Asset_Morning_Background(textures.get(0));
         sounds = new Asset_Sounds(assetManager);
     }
 
@@ -73,11 +76,11 @@ public class Assets implements Disposable,AssetErrorListener
         public Asset_Archer(Texture  t)
         {
             archer_img = t;
-            archer_texture = new TextureRegion[Constants.ANIMATION_SPLITS];
-            archer_texture[0] = new TextureRegion(t, 0, 0, 162, 255);
-            archer_texture[1] = new TextureRegion(t, 186, 0, 162, 255);
-            archer_texture[2] = new TextureRegion(t, 0, 256, 162, 255);
-            archer_texture[3] = new TextureRegion(t, 186, 256, 162, 255);
+            archer_texture = new TextureRegion[Constants.ARCHER_ANIMATION_SPLITS];
+            archer_texture[0] = new TextureRegion(t, 186, 0, 162, 255);
+            archer_texture[1] = new TextureRegion(t, 0, 256, 162, 255);
+            archer_texture[2] = new TextureRegion(t, 186, 256, 162, 255);
+            archer_texture[3] = new TextureRegion(t, 0, 0, 162, 255);
         }
     }
 
@@ -127,6 +130,18 @@ public class Assets implements Disposable,AssetErrorListener
         }
     }
 
+    public class Asset_Morning_Background
+    {
+        public final Texture background_img;
+        public final TextureRegion background_texture;
+
+        public Asset_Morning_Background(Texture  t)
+        {
+            background_img=t;
+            background_texture = new TextureRegion(background_img, 0, 0, 255, 512);
+        }
+    }
+
 
     @Override
     public void dispose()
@@ -137,11 +152,11 @@ public class Assets implements Disposable,AssetErrorListener
     @Override
     public void error(AssetDescriptor asset, Throwable throwable)
     {
-        Gdx.app.error(TAG, "Couldn't load asset '" + asset.fileName + "'", (Exception)throwable);
+        Gdx.app.error(TAG, "Couldn't load asset '" + asset.fileName + "'", throwable);
     }
 
     public void error (String filename, Class type, Throwable throwable)
     {
-        Gdx.app.error(TAG, "Couldn't load asset '" + filename + "'", (Exception)throwable);
+        Gdx.app.error(TAG, "Couldn't load asset '" + filename + "'", throwable);
     }
 }

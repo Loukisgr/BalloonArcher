@@ -14,17 +14,22 @@ public class AudioManager
 
     public void play (Sound sound)
     {
-        play(sound,1);
+        if(GamePreferences.instance.sound)
+        {
+            play(sound, GamePreferences.instance.volSound);
+        }
     }
 
     public void play (Sound sound, float volume)
     {
         play(sound, volume, 1);
     }
+
     public void play (Sound sound, float volume, float pitch)
     {
         play(sound, volume, pitch, 0);
     }
+
     public void play (Sound sound, float volume, float pitch, float pan)
     {
   //      if (!GamePreferences.instance.sound) return;
