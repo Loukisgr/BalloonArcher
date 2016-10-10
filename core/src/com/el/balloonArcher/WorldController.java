@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
+import com.el.balloonArcher.screens.DirectedGame;
 import com.el.balloonArcher.screens.GameScreen;
 import com.el.balloonArcher.screens.MenuScreen;
 import com.el.balloonArcher.util.Assets;
@@ -20,10 +21,10 @@ public class WorldController extends InputAdapter
 {
     private static final String TAG = WorldController.class.getName();
     private GameScreen app;
-    private Game main_app;
+    private DirectedGame main_app;
     private ArrayList<Balloon> balloons;
 
-    public WorldController(GameScreen app_screen,Game main_app)
+    public WorldController(GameScreen app_screen,DirectedGame main_app)
     {
         Gdx.input.setInputProcessor(this);
         this.main_app = main_app;
@@ -31,13 +32,6 @@ public class WorldController extends InputAdapter
         init();
     }
 
-/*    public WorldController(GameScreen app_screen)
-    {
-        Gdx.input.setInputProcessor(this);
-        this.app = app_screen;
-        init();
-    }
-*/
     private void init ()
     {
         balloons = new ArrayList<Balloon>();
@@ -286,7 +280,7 @@ public class WorldController extends InputAdapter
     private void backToMenu ()
     {
         // switch to menu screen
-        main_app.setScreen(new MenuScreen(main_app));
+        main_app.set_screen(new MenuScreen(main_app));
     }
 
     public int get_archer_frame()

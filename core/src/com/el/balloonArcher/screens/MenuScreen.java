@@ -2,6 +2,7 @@ package com.el.balloonArcher.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -24,6 +25,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.el.balloonArcher.screens.transitions.ScreenTransition;
+import com.el.balloonArcher.screens.transitions.ScreenTransitionFade;
 import com.el.balloonArcher.util.Assets;
 import com.el.balloonArcher.util.CharacterSkin;
 import com.el.balloonArcher.util.Constants;
@@ -64,7 +67,7 @@ public class MenuScreen extends AbstractGameScreen
     private boolean debugEnabled = false;
     private float debugRebuildStage;
 
-    public MenuScreen(Game game)
+    public MenuScreen(DirectedGame game)
     {
         super(game);
     }
@@ -103,7 +106,6 @@ public class MenuScreen extends AbstractGameScreen
     @Override public void show ()
     {
         stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        Gdx.input.setInputProcessor(stage);
         rebuildStage();
     }
 
@@ -116,6 +118,12 @@ public class MenuScreen extends AbstractGameScreen
 
     @Override public void pause () { }
 
+    @Override
+    public InputProcessor getInputProcessor ()
+    {
+        return stage;
+    }
+
     private void rebuildStage ()
     {
 
@@ -124,14 +132,6 @@ public class MenuScreen extends AbstractGameScreen
                 new TextureAtlas(Constants.TEXTURE_ATLAS_UI));*/
 
         skinBalloonArcher = new Skin();
-        /*skinBalloonArcher.add("logo",new TextureRegion(new Texture("images/main_screen_background.png"),258,0,100,47));
-        skinBalloonArcher.add("balloons",new TextureRegion(new Texture("images/main_screen_background.png"),188,71,135,61));
-        skinBalloonArcher.add("archer",new TextureRegion(new Texture("images/main_screen_background.png"),0,0,148,203));
-        skinBalloonArcher.add("info",new TextureRegion(new Texture("images/main_screen_background.png"),394,483,118,29));
-        skinBalloonArcher.add("background",new TextureRegion(new Texture("images/main_screen_background.png"),500,0,1,1));
-        skinBalloonArcher.add("play",new TextureRegion(new Texture("images/main_screen_background.png"),463,393,49,28));
-        skinBalloonArcher.add("options",new TextureRegion(new Texture("images/main_screen_background.png"),463,452,49,28));
-*/
 
         Texture menu_texture=new Texture("images/main_screen_background.png");
         menu_texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -281,7 +281,8 @@ public class MenuScreen extends AbstractGameScreen
 
     private void onPlayClicked ()
     {
-        game.setScreen(new GameScreen(game));
+        ScreenTransition transition = ScreenTransitionFade.init(0.75f);
+        game.set_screen(new GameScreen(game),transition);
     }
 
     private void onOptionsClicked ()

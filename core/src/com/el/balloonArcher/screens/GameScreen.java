@@ -3,6 +3,7 @@ package com.el.balloonArcher.screens;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -31,7 +32,7 @@ public class GameScreen extends AbstractGameScreen
     private int score=0;
     public static int GUI_WIDTH,GUI_HEIGHT;
 
-    public GameScreen(Game game)
+    public GameScreen(DirectedGame game)
     {
         super(game);
     }
@@ -50,8 +51,14 @@ public class GameScreen extends AbstractGameScreen
         player = new com.el.balloonArcher.Archer(level);
         worldController = new WorldController(this,game);
         worldRenderer = new com.el.balloonArcher.WorldRenderer(worldController);
-        Gdx.input.setCatchBackKey(false);
+        Gdx.input.setCatchBackKey(true);
         state= Constants.Game_State.ACTIVE;
+    }
+
+    @Override
+    public InputProcessor getInputProcessor ()
+    {
+        return worldController;
     }
 
     public void render(float deltaTime)
