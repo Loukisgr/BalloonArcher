@@ -62,6 +62,8 @@ public class MenuScreen extends AbstractGameScreen
     private Image imgCharSkin;
     private CheckBox chkShowFpsCounter;
     private Skin skinLibgdx;
+    private CheckBox chkUseMonoChromeShader;
+
     // debug
     private final float DEBUG_REBUILD_INTERVAL = 5.0f;
     private boolean debugEnabled = false;
@@ -304,6 +306,7 @@ public class MenuScreen extends AbstractGameScreen
         selCharSkin.setSelectedIndex(prefs.charSkin);
         onCharSkinSelected(prefs.charSkin);
         chkShowFpsCounter.setChecked(prefs.showFpsCounter);
+        chkUseMonoChromeShader.setChecked(prefs.useMonochromeShader);
     }
 
     private void saveSettings()
@@ -315,6 +318,7 @@ public class MenuScreen extends AbstractGameScreen
         //prefs.volMusic = sldMusic.getValue();
         prefs.charSkin = selCharSkin.getSelectedIndex();
         prefs.showFpsCounter = chkShowFpsCounter.isChecked();
+        prefs.useMonochromeShader = chkUseMonoChromeShader.isChecked();
         prefs.save();
     }
 
@@ -391,16 +395,23 @@ public class MenuScreen extends AbstractGameScreen
     private Table buildOptWinDebug ()
     {
         Table tbl = new Table();
-// + Title: "Debug"
+        // + Title: "Debug"
         tbl.pad(10, 10, 0, 10);
         tbl.add(new Label("Debug", skinLibgdx, "default-font", Color.RED)).colspan(3);
         tbl.row();
         tbl.columnDefaults(0).padRight(10);
         tbl.columnDefaults(1).padRight(10);
-// + Checkbox, "Show FPS Counter" label
+
+        // + Checkbox, "Show FPS Counter" label
         chkShowFpsCounter = new CheckBox("", skinLibgdx);
         tbl.add(new Label("Show FPS Counter", skinLibgdx));
         tbl.add(chkShowFpsCounter);
+        tbl.row();
+
+        // + Checkbox, "Use Monochrome Shader" label
+        chkUseMonoChromeShader = new CheckBox("", skinLibgdx);
+        tbl.add(new Label("Use Monochrome Shader", skinLibgdx));
+        tbl.add(chkUseMonoChromeShader);
         tbl.row();
         return tbl;
     }
@@ -440,6 +451,8 @@ public class MenuScreen extends AbstractGameScreen
                 onCancelClicked();
             }
         });
+
+
         return tbl;
     }
 

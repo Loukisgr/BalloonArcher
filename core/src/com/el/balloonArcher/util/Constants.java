@@ -46,6 +46,9 @@ public class Constants
     public static final String TEXTURE_ATLAS_LIBGDX_UI = "images/uiskin.atlas";
     public static final String PREFERENCES ="pref.txt";
 
+    public static final String shaderMonochromeVertex = "shaders/monochrome.vs";
+    public static final String shaderMonochromeFragment = "shaders/monochrome.fs";
+
     public enum Game_State
     {
         PAUSED,LOADING,ACTIVE,GAME_OVER,GAME_WINNER

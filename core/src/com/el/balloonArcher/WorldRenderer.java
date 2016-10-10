@@ -3,12 +3,15 @@ package com.el.balloonArcher;
 /**
  * Created by Louki on 20/9/2016.
  */
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StringBuilder;
 import com.el.balloonArcher.screens.GameScreen;
 import com.el.balloonArcher.util.Assets;
@@ -25,6 +28,7 @@ public class WorldRenderer implements Disposable
     private BitmapFont bitmap_font;
     private Color info_color;
     private Color batchColor;
+    private ShaderProgram shader_monochrome;
 
     public WorldRenderer (WorldController worldController)
     {
@@ -39,6 +43,16 @@ public class WorldRenderer implements Disposable
         batch = new SpriteBatch();
         info_color= new Color(Color.BLACK);
         batchColor = batch.getColor();
+
+        shader_monochrome= new ShaderProgram(Gdx.files.internal(Constants.shaderMonochromeVertex),
+                Gdx.files.internal(Constants.shaderMonochromeFragment));
+
+        if (!shader_monochrome.isCompiled())
+        {
+            String msg = "Could not compile shader program: "
+                    + shader_monochrome.getLog();
+            throw new GdxRuntimeException(msg);
+        }
     }
 
     public void render(float deltaTime)
@@ -48,6 +62,13 @@ public class WorldRenderer implements Disposable
             init();
         }
         batch.begin();
+
+        if (GamePreferences.instance.useMonochromeShader)
+        {
+            batch.setShader(shader_monochrome);
+            shader_monochrome.setUniformf("u_amount", 1.0f);
+        }
+
         paint_game_background();
         print_text();
         paint_archer();
@@ -55,6 +76,7 @@ public class WorldRenderer implements Disposable
         paint_balloons();
         //if (GamePreferences.instance.showFpsCounter)
         //    renderGuiFpsCounter(batch);
+        batch.setShader(null);
         batch.end();
     }
 
@@ -167,5 +189,6 @@ public class WorldRenderer implements Disposable
     {
         batch.dispose();
         bitmap_font.dispose();
+        shader_monochrome.dispose();
     }
 }
