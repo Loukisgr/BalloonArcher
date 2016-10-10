@@ -76,7 +76,8 @@ public class WorldRenderer implements Disposable
         {
             if (arrow.is_shot() && !arrow.to_remove())
             {
-                arrow.get_DustParticles().draw(batch);
+                arrow.get_down_dust_particle().draw(batch);
+                arrow.get_up_dust_particle().draw(batch);
                 batch.draw(Assets.instance.asset_arrow.arrow_texture,arrow.get_x(),arrow.get_y(),Constants.ARROW_WIDTH,Constants.ARROW_HEIGHT);
             }
         }

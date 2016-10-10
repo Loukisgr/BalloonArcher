@@ -18,22 +18,26 @@ public class Arrow
     private boolean shot;
     private boolean remove=false;
     private Rectangle body;
-    private ParticleEffect dustParticles;
+    private ParticleEffect down_dust_particle;
+    private ParticleEffect up_dust_particle;
 
     public Arrow(float speed)
     {
         this.speed=speed+ Constants.ARROW_STARTING_SPEED;
         this.body = new Rectangle();
-        dustParticles = new ParticleEffect();
+        down_dust_particle = new ParticleEffect();
+        up_dust_particle = new ParticleEffect();
         shot=false;
-        dustParticles.load(Gdx.files.internal("particles/dust.pfx"), Gdx.files.internal("particles"));
+        down_dust_particle.load(Gdx.files.internal("particles/dust.pfx"), Gdx.files.internal("particles"));
+        up_dust_particle.load(Gdx.files.internal("particles/dust.pfx"), Gdx.files.internal("particles"));
     }
 
     public void shoot(float y)
     {
         this.shot=true;
         this.y=y;
-        dustParticles.start();
+        down_dust_particle.start();
+        up_dust_particle.start();
     }
 
     public boolean is_shot()
@@ -53,14 +57,17 @@ public class Arrow
             if(x> GameScreen.GUI_WIDTH)
             {
                 remove=true;
-                dustParticles.allowCompletion();
+                down_dust_particle.allowCompletion();
+                up_dust_particle.allowCompletion();
             }
             else
             {
                 x=x+speed*deltaTime;
                 body.set(x+Constants.ARROW_WIDTH,y,Constants.ARROW_WIDTH/4,Constants.ARROW_HEIGHT);
-                dustParticles.setPosition(x,y);
-                dustParticles.update(deltaTime);
+                down_dust_particle.setPosition(x,y);
+                down_dust_particle.update(deltaTime);
+                up_dust_particle.setPosition(x,y+Constants.ARROW_HEIGHT);
+                up_dust_particle.update(deltaTime);
             }
         }
     }
@@ -80,8 +87,14 @@ public class Arrow
         return body;
     }
 
-    public ParticleEffect get_DustParticles()
+    public ParticleEffect get_down_dust_particle()
     {
-        return dustParticles;
+        return down_dust_particle;
     }
+
+    public ParticleEffect get_up_dust_particle()
+    {
+        return up_dust_particle;
+    }
+
 }
