@@ -77,6 +77,7 @@ public class GameScreen extends AbstractGameScreen
             if(is_won())
             {
                 worldRenderer.set_text_to_display(new StringBuilder("Starting Next Level..."));
+                score+=player.remaining_arrows();
                 this.add_level();
                 player.init_level(get_level());
                 worldController.load_level();

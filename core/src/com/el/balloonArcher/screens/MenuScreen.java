@@ -411,7 +411,7 @@ public class MenuScreen extends AbstractGameScreen
 
         // + Checkbox, "Use Monochrome Shader" label
         chkUseMonoChromeShader = new CheckBox("", skinLibgdx);
-        tbl.add(new Label("Use Monochrome Shader", skinLibgdx));
+        tbl.add(new Label("Monochrome", skinLibgdx));
         tbl.add(chkUseMonoChromeShader);
         tbl.row();
         return tbl;
