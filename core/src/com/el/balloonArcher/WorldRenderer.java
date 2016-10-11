@@ -107,7 +107,7 @@ public class WorldRenderer implements Disposable
     private void paint_balloons()
     {
 
-        for (Balloon b: worldController.get_baloons())
+        for (Balloon b: worldController.get_balloons())
         {
             if (!b.is_hit())
             {

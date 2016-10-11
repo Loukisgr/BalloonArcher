@@ -46,14 +46,14 @@ public class Constants
     public static final String SKIN_BALLOONARCHER_UI = "images/balloonarcher-ui.json";
     //public static final String TEXTURE_ATLAS_UI = "images/canyonbunny-ui.pack";
     public static final String TEXTURE_ATLAS_LIBGDX_UI = "images/uiskin.atlas";
-    public static final String PREFERENCES ="pref.txt";
+    public static final String PREFERENCES ="BalloonArcher_pref.txt";
 
     public static final String shaderMonochromeVertex = "shaders/monochrome.vs";
     public static final String shaderMonochromeFragment = "shaders/monochrome.fs";
 
     public enum Game_State
     {
-        PAUSED,LOADING,ACTIVE,GAME_OVER,GAME_WINNER
+        PAUSED,LOADING,ACTIVE,GAME_OVER,GAME_WINNER,HIGH_SCORE
 
     }
 

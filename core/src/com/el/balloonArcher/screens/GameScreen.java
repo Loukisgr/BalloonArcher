@@ -88,6 +88,10 @@ public class GameScreen extends AbstractGameScreen
             {
                 worldRenderer.set_text_to_display(new StringBuilder("GAME OVER! Tap for New Game"), Color.RED);
             }
+            else if(is_high_score())
+            {
+                worldRenderer.set_text_to_display(new StringBuilder("NEW HIGH SCORE! "+score), Color.GOLDENROD);
+            }
 
         }
     }
@@ -138,6 +142,10 @@ public class GameScreen extends AbstractGameScreen
         return state.equals(Constants.Game_State.GAME_OVER);
     }
 
+    public boolean is_high_score()
+    {
+        return state.equals(Constants.Game_State.HIGH_SCORE);
+    }
 
     public int get_level()
     {
