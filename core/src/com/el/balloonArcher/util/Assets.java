@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
@@ -28,6 +29,7 @@ public class Assets implements Disposable,AssetErrorListener
     public Asset_Bonus_Balloon asset_bonus_balloon;
     public Asset_Morning_Background asset_morning_background;
     public Asset_Sounds sounds;
+    public Asset_Fonts fonts;
 
 
     private Assets(){}
@@ -60,6 +62,7 @@ public class Assets implements Disposable,AssetErrorListener
         }
 
         // create game resource objects
+        fonts = new Asset_Fonts();
         asset_archer = new Asset_Archer(textures.get(2));
         asset_arrow = new Asset_Arrow(textures.get(1));
         asset_normal_balloon = new Asset_Normal_Balloon(textures.get(1));
@@ -143,10 +146,39 @@ public class Assets implements Disposable,AssetErrorListener
     }
 
 
+    public class Asset_Fonts
+    {
+        public final BitmapFont defaultSmall;
+        public final BitmapFont defaultNormal;
+        public final BitmapFont defaultBig;
+
+        public Asset_Fonts ()
+        {
+            // create three fonts using Libgdx's 15px bitmap font
+            defaultSmall = new BitmapFont(Gdx.files.internal("fonts/arial-15.fnt"), false);
+            defaultNormal = new BitmapFont(Gdx.files.internal("fonts/arial-15.fnt"), false);
+            defaultBig = new BitmapFont(Gdx.files.internal("fonts/arial-15.fnt"), false);
+
+            // set font sizes
+            defaultSmall.getData().setScale(0.75f);
+            defaultNormal.getData().setScale(1.0f);
+            defaultBig.getData().setScale(2.0f);
+
+            // enable linear texture filtering for smooth fonts
+            defaultSmall.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+            defaultNormal.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+            defaultBig.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+        }
+    }
+
+
     @Override
     public void dispose()
     {
         assetManager.dispose();
+        fonts.defaultSmall.dispose();
+        fonts.defaultNormal.dispose();
+        fonts.defaultBig.dispose();
     }
 
     @Override

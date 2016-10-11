@@ -24,7 +24,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.el.balloonArcher.screens.transitions.ScreenTransition;
 import com.el.balloonArcher.screens.transitions.ScreenTransitionFade;
 import com.el.balloonArcher.util.Assets;
@@ -72,6 +74,7 @@ public class MenuScreen extends AbstractGameScreen
     public MenuScreen(DirectedGame game)
     {
         super(game);
+        //stage.setViewport(new FitViewport((int)Constants.VIEWPORT_GUI_WIDTH,(int)Constants.VIEWPORT_GUI_HEIGHT));
     }
 
     @Override
@@ -107,7 +110,8 @@ public class MenuScreen extends AbstractGameScreen
 
     @Override public void show ()
     {
-        stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        //stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        stage = new Stage(new StretchViewport(Constants.VIEWPORT_GUI_WIDTH,Constants.VIEWPORT_GUI_HEIGHT));
         rebuildStage();
     }
 
@@ -128,10 +132,6 @@ public class MenuScreen extends AbstractGameScreen
 
     private void rebuildStage ()
     {
-
-      /*  skinBalloonArcher = new Skin(
-                Gdx.files.internal(Constants.SKIN_BALLOONARCHER_UI),
-                new TextureAtlas(Constants.TEXTURE_ATLAS_UI));*/
 
         skinBalloonArcher = new Skin();
 
@@ -159,7 +159,7 @@ public class MenuScreen extends AbstractGameScreen
         stage.clear();
         Stack stack = new Stack();
         stage.addActor(stack);
-        stack.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        stack.setSize(Constants.VIEWPORT_GUI_WIDTH,Constants.VIEWPORT_GUI_HEIGHT);
         stack.add(layerBackground);
         stack.add(layerObjects);
         stack.add(layerLogos);
@@ -172,9 +172,9 @@ public class MenuScreen extends AbstractGameScreen
         Table layer = new Table();
         imgBackground = new Image(skinBalloonArcher.getRegion("background"));
         layer.left().bottom();
-        imgBackground.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        imgBackground.scaleBy(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        layer.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        imgBackground.setSize(Constants.VIEWPORT_GUI_WIDTH,Constants.VIEWPORT_GUI_HEIGHT);
+        imgBackground.scaleBy(Constants.VIEWPORT_GUI_WIDTH,Constants.VIEWPORT_GUI_HEIGHT);
+        layer.setSize(Constants.VIEWPORT_GUI_WIDTH,Constants.VIEWPORT_GUI_HEIGHT);
         layer.add(imgBackground );
         return layer;
     }
@@ -184,17 +184,17 @@ public class MenuScreen extends AbstractGameScreen
         Table layer = new Table();
         imgBalloons = new Image(skinBalloonArcher.getRegion("balloons"));
         layer.addActor(imgBalloons);
-        imgBalloons.scaleBy(-0.2f);
-        imgBalloons.setPosition(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/8 * 5);
-        //imgBalloons.setPosition(135, 80);
+        imgBalloons.scaleBy(-0.1f);
+        //imgBalloons.setPosition(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/8 * 5);
+        imgBalloons.setPosition(225, 400);
 
 
         imgArcher = new Image(skinBalloonArcher.getRegion("archer"));
         layer.addActor(imgArcher);
         //imgArcher.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/3);
-        imgArcher.scaleBy(-0.3f);
-        imgArcher.setPosition(0,Gdx.graphics.getHeight()/2);
-        //imgArcher.setPosition(355, 40);
+        imgArcher.scaleBy(-0.2f);
+        //imgArcher.setPosition(0,Gdx.graphics.getHeight()/2);
+        imgArcher.setPosition(0, 250);
         return layer;
     }
 
@@ -276,9 +276,10 @@ public class MenuScreen extends AbstractGameScreen
         if (debugEnabled) winOptions.debug();
 // Let TableLayout recalculate widget sizes and positions
         winOptions.pack();
-       // winOptions.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+        //winOptions.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
 // Move options window to bottom right corner
-        winOptions.setPosition(Constants.VIEWPORT_GUI_WIDTH - winOptions.getWidth() - 50, 50);
+        //winOptions.setPosition(Constants.VIEWPORT_GUI_WIDTH - winOptions.getWidth() - 50, 50);
+        winOptions.setPosition((Constants.VIEWPORT_GUI_WIDTH /2 )- winOptions.getWidth()/2 , (Constants.VIEWPORT_GUI_HEIGHT /2 )- winOptions.getHeight()/2);
         return winOptions;
     }
 
@@ -353,18 +354,20 @@ public class MenuScreen extends AbstractGameScreen
         tbl.columnDefaults(1).padRight(10);
 // + Checkbox, "Sound" label, sound volume slider
         chkSound = new CheckBox("", skinLibgdx);
-        tbl.add(chkSound);
+        chkSound.getImage().scaleBy(0.4f);
+        chkSound.setSize(chkSound.getImage().getWidth(),chkSound.getImage().getHeight());
+        tbl.add(chkSound);//.width(chkSound.getImage().getWidth());
         tbl.add(new Label("Sound", skinLibgdx));
         sldSound = new Slider(0.0f, 1.0f, 0.1f, false, skinLibgdx);
         tbl.add(sldSound);
         tbl.row();
 // + Checkbox, "Music" label, music volume slider
-        chkMusic = new CheckBox("", skinLibgdx);
+/*        chkMusic = new CheckBox("", skinLibgdx);
         tbl.add(chkMusic);
         tbl.add(new Label("Music", skinLibgdx));
         sldMusic = new Slider(0.0f, 1.0f, 0.1f, false, skinLibgdx);
         tbl.add(sldMusic);
-        tbl.row();
+        tbl.row();*/
         return tbl;
     }
 
@@ -405,13 +408,17 @@ public class MenuScreen extends AbstractGameScreen
 
         // + Checkbox, "Show FPS Counter" label
         chkShowFpsCounter = new CheckBox("", skinLibgdx);
+        chkShowFpsCounter.getImage().scaleBy(0.4f);
+        chkShowFpsCounter.setSize(chkShowFpsCounter.getImage().getWidth(),chkShowFpsCounter.getImage().getHeight());
         tbl.add(new Label("Show FPS Counter", skinLibgdx));
         tbl.add(chkShowFpsCounter);
         tbl.row();
 
         // + Checkbox, "Use Monochrome Shader" label
         chkUseMonoChromeShader = new CheckBox("", skinLibgdx);
-        tbl.add(new Label("Use Monochrome Shader", skinLibgdx));
+        chkUseMonoChromeShader.getImage().scaleBy(0.4f);
+        chkUseMonoChromeShader.setSize(chkUseMonoChromeShader.getImage().getWidth(),chkUseMonoChromeShader.getImage().getHeight());
+        tbl.add(new Label("Monochrome", skinLibgdx));
         tbl.add(chkUseMonoChromeShader);
         tbl.row();
         return tbl;

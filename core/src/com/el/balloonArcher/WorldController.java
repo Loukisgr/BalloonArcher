@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.Preferences;
 import com.el.balloonArcher.screens.DirectedGame;
 import com.el.balloonArcher.screens.GameScreen;
 import com.el.balloonArcher.screens.MenuScreen;
@@ -159,7 +160,7 @@ public class WorldController extends InputAdapter
         return app.get_Archer().get_arrows();
     }
 
-    public ArrayList<Balloon> get_baloons()
+    public ArrayList<Balloon> get_balloons()
     {
         return balloons;
     }
@@ -214,7 +215,7 @@ public class WorldController extends InputAdapter
     private boolean is_game_over()
     {
         //if balloon exists but no arrows
-        return app.get_game_state().equals((Constants.Game_State.GAME_OVER));
+        return app.get_game_state().equals((Constants.Game_State.GAME_OVER)) || app.get_game_state().equals((Constants.Game_State.HIGH_SCORE));
 
     }
 
@@ -223,9 +224,25 @@ public class WorldController extends InputAdapter
         if( app.get_game_state().equals(Constants.Game_State.ACTIVE))
         {
             //if balloon exists but no arrows
-            if ((!app.get_Archer().has_remaining_arrows()) && (has_remaining_balloons())) {
-                app.set_game_state(Constants.Game_State.GAME_OVER);
-            } else if ((app.get_Archer().has_remaining_arrows()) && (!has_remaining_balloons())) {
+            if ((!app.get_Archer().has_remaining_arrows()) && (has_remaining_balloons()))
+            {
+                //check for high Score
+                Preferences prefs = Gdx.app.getPreferences("BalloonArcher");
+
+                if ((!prefs.contains("highScore")) || (prefs.getInteger("highScore") < app.get_score()))
+                {
+                    prefs.putInteger("highScore", app.get_score());
+                    prefs.flush();
+                    app.set_game_state(Constants.Game_State.HIGH_SCORE);
+                }
+                else
+                {
+                    app.set_game_state(Constants.Game_State.GAME_OVER);
+                }
+
+            }
+            else if ((app.get_Archer().has_remaining_arrows()) && (!has_remaining_balloons()))
+            {
                 app.set_game_state(Constants.Game_State.GAME_WINNER);
             }
         }
