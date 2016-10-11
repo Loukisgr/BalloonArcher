@@ -129,10 +129,6 @@ public class MenuScreen extends AbstractGameScreen
     private void rebuildStage ()
     {
 
-      /*  skinBalloonArcher = new Skin(
-                Gdx.files.internal(Constants.SKIN_BALLOONARCHER_UI),
-                new TextureAtlas(Constants.TEXTURE_ATLAS_UI));*/
-
         skinBalloonArcher = new Skin();
 
         Texture menu_texture=new Texture("images/main_screen_background.png");
@@ -276,9 +272,10 @@ public class MenuScreen extends AbstractGameScreen
         if (debugEnabled) winOptions.debug();
 // Let TableLayout recalculate widget sizes and positions
         winOptions.pack();
-       // winOptions.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+        //winOptions.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
 // Move options window to bottom right corner
-        winOptions.setPosition(Constants.VIEWPORT_GUI_WIDTH - winOptions.getWidth() - 50, 50);
+        //winOptions.setPosition(Constants.VIEWPORT_GUI_WIDTH - winOptions.getWidth() - 50, 50);
+        winOptions.setPosition((Gdx.graphics.getWidth() /2 )- winOptions.getWidth()/2 , (Gdx.graphics.getHeight() /2 )- winOptions.getHeight()/2);
         return winOptions;
     }
 
@@ -353,18 +350,20 @@ public class MenuScreen extends AbstractGameScreen
         tbl.columnDefaults(1).padRight(10);
 // + Checkbox, "Sound" label, sound volume slider
         chkSound = new CheckBox("", skinLibgdx);
-        tbl.add(chkSound);
+        chkSound.getImage().scaleBy(0.4f);
+        chkSound.setSize(chkSound.getImage().getWidth(),chkSound.getImage().getHeight());
+        tbl.add(chkSound);//.width(chkSound.getImage().getWidth());
         tbl.add(new Label("Sound", skinLibgdx));
         sldSound = new Slider(0.0f, 1.0f, 0.1f, false, skinLibgdx);
         tbl.add(sldSound);
         tbl.row();
 // + Checkbox, "Music" label, music volume slider
-        chkMusic = new CheckBox("", skinLibgdx);
+/*        chkMusic = new CheckBox("", skinLibgdx);
         tbl.add(chkMusic);
         tbl.add(new Label("Music", skinLibgdx));
         sldMusic = new Slider(0.0f, 1.0f, 0.1f, false, skinLibgdx);
         tbl.add(sldMusic);
-        tbl.row();
+        tbl.row();*/
         return tbl;
     }
 
@@ -386,10 +385,10 @@ public class MenuScreen extends AbstractGameScreen
                 onCharSkinSelected(((SelectBox<CharacterSkin>) actor).getSelectedIndex());
             }
         });
-        tbl.add(selCharSkin).width(120).padRight(20);
+        tbl.add(selCharSkin).width(Gdx.graphics.getWidth()/4).padRight(20);
 // + Skin preview image
         imgCharSkin = new Image(Assets.instance.asset_archer.archer_texture[0]);
-        tbl.add(imgCharSkin).width(50).height(50);
+        tbl.add(imgCharSkin).width(Gdx.graphics.getWidth()/7).height(Gdx.graphics.getHeight()/8);
         return tbl;
     }
 
@@ -405,12 +404,16 @@ public class MenuScreen extends AbstractGameScreen
 
         // + Checkbox, "Show FPS Counter" label
         chkShowFpsCounter = new CheckBox("", skinLibgdx);
+        chkShowFpsCounter.getImage().scaleBy(0.4f);
+        chkShowFpsCounter.setSize(chkShowFpsCounter.getImage().getWidth(),chkShowFpsCounter.getImage().getHeight());
         tbl.add(new Label("Show FPS Counter", skinLibgdx));
         tbl.add(chkShowFpsCounter);
         tbl.row();
 
         // + Checkbox, "Use Monochrome Shader" label
         chkUseMonoChromeShader = new CheckBox("", skinLibgdx);
+        chkUseMonoChromeShader.getImage().scaleBy(0.4f);
+        chkUseMonoChromeShader.setSize(chkUseMonoChromeShader.getImage().getWidth(),chkUseMonoChromeShader.getImage().getHeight());
         tbl.add(new Label("Monochrome", skinLibgdx));
         tbl.add(chkUseMonoChromeShader);
         tbl.row();
@@ -426,13 +429,13 @@ public class MenuScreen extends AbstractGameScreen
         lbl.setColor(0.75f, 0.75f, 0.75f, 1);
         lbl.setStyle(new LabelStyle(lbl.getStyle()));
         lbl.getStyle().background = skinLibgdx.newDrawable("white");
-        tbl.add(lbl).colspan(2).height(1).width(220).pad(0, 0, 0, 1);
+        tbl.add(lbl).colspan(2).height(1).width(Gdx.graphics.getWidth()/2).pad(0, 0, 0, 1);
         tbl.row();
         lbl = new Label("", skinLibgdx);
         lbl.setColor(0.5f, 0.5f, 0.5f, 1);
         lbl.setStyle(new LabelStyle(lbl.getStyle()));
         lbl.getStyle().background = skinLibgdx.newDrawable("white");
-        tbl.add(lbl).colspan(2).height(1).width(220).pad(0, 1, 5, 0);
+        tbl.add(lbl).colspan(2).height(1).width(Gdx.graphics.getWidth()/2).pad(0, 1, 5, 0);
         tbl.row();
 // + Save Button with event handler
         btnWinOptSave = new TextButton("Save", skinLibgdx);
