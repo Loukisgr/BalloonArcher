@@ -24,7 +24,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.el.balloonArcher.screens.transitions.ScreenTransition;
 import com.el.balloonArcher.screens.transitions.ScreenTransitionFade;
 import com.el.balloonArcher.util.Assets;
@@ -72,6 +74,7 @@ public class MenuScreen extends AbstractGameScreen
     public MenuScreen(DirectedGame game)
     {
         super(game);
+        //stage.setViewport(new FitViewport((int)Constants.VIEWPORT_GUI_WIDTH,(int)Constants.VIEWPORT_GUI_HEIGHT));
     }
 
     @Override
@@ -107,7 +110,8 @@ public class MenuScreen extends AbstractGameScreen
 
     @Override public void show ()
     {
-        stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        //stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        stage = new Stage(new StretchViewport(Constants.VIEWPORT_GUI_WIDTH,Constants.VIEWPORT_GUI_HEIGHT));
         rebuildStage();
     }
 
@@ -155,7 +159,7 @@ public class MenuScreen extends AbstractGameScreen
         stage.clear();
         Stack stack = new Stack();
         stage.addActor(stack);
-        stack.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        stack.setSize(Constants.VIEWPORT_GUI_WIDTH,Constants.VIEWPORT_GUI_HEIGHT);
         stack.add(layerBackground);
         stack.add(layerObjects);
         stack.add(layerLogos);
@@ -168,9 +172,9 @@ public class MenuScreen extends AbstractGameScreen
         Table layer = new Table();
         imgBackground = new Image(skinBalloonArcher.getRegion("background"));
         layer.left().bottom();
-        imgBackground.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        imgBackground.scaleBy(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        layer.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        imgBackground.setSize(Constants.VIEWPORT_GUI_WIDTH,Constants.VIEWPORT_GUI_HEIGHT);
+        imgBackground.scaleBy(Constants.VIEWPORT_GUI_WIDTH,Constants.VIEWPORT_GUI_HEIGHT);
+        layer.setSize(Constants.VIEWPORT_GUI_WIDTH,Constants.VIEWPORT_GUI_HEIGHT);
         layer.add(imgBackground );
         return layer;
     }
@@ -180,17 +184,17 @@ public class MenuScreen extends AbstractGameScreen
         Table layer = new Table();
         imgBalloons = new Image(skinBalloonArcher.getRegion("balloons"));
         layer.addActor(imgBalloons);
-        imgBalloons.scaleBy(-0.2f);
-        imgBalloons.setPosition(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/8 * 5);
-        //imgBalloons.setPosition(135, 80);
+        imgBalloons.scaleBy(-0.1f);
+        //imgBalloons.setPosition(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/8 * 5);
+        imgBalloons.setPosition(225, 400);
 
 
         imgArcher = new Image(skinBalloonArcher.getRegion("archer"));
         layer.addActor(imgArcher);
         //imgArcher.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/3);
-        imgArcher.scaleBy(-0.3f);
-        imgArcher.setPosition(0,Gdx.graphics.getHeight()/2);
-        //imgArcher.setPosition(355, 40);
+        imgArcher.scaleBy(-0.2f);
+        //imgArcher.setPosition(0,Gdx.graphics.getHeight()/2);
+        imgArcher.setPosition(0, 250);
         return layer;
     }
 
@@ -275,7 +279,7 @@ public class MenuScreen extends AbstractGameScreen
         //winOptions.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
 // Move options window to bottom right corner
         //winOptions.setPosition(Constants.VIEWPORT_GUI_WIDTH - winOptions.getWidth() - 50, 50);
-        winOptions.setPosition((Gdx.graphics.getWidth() /2 )- winOptions.getWidth()/2 , (Gdx.graphics.getHeight() /2 )- winOptions.getHeight()/2);
+        winOptions.setPosition((Constants.VIEWPORT_GUI_WIDTH /2 )- winOptions.getWidth()/2 , (Constants.VIEWPORT_GUI_HEIGHT /2 )- winOptions.getHeight()/2);
         return winOptions;
     }
 
@@ -385,10 +389,10 @@ public class MenuScreen extends AbstractGameScreen
                 onCharSkinSelected(((SelectBox<CharacterSkin>) actor).getSelectedIndex());
             }
         });
-        tbl.add(selCharSkin).width(Gdx.graphics.getWidth()/4).padRight(20);
+        tbl.add(selCharSkin).width(120).padRight(20);
 // + Skin preview image
         imgCharSkin = new Image(Assets.instance.asset_archer.archer_texture[0]);
-        tbl.add(imgCharSkin).width(Gdx.graphics.getWidth()/7).height(Gdx.graphics.getHeight()/8);
+        tbl.add(imgCharSkin).width(50).height(50);
         return tbl;
     }
 
@@ -429,13 +433,13 @@ public class MenuScreen extends AbstractGameScreen
         lbl.setColor(0.75f, 0.75f, 0.75f, 1);
         lbl.setStyle(new LabelStyle(lbl.getStyle()));
         lbl.getStyle().background = skinLibgdx.newDrawable("white");
-        tbl.add(lbl).colspan(2).height(1).width(Gdx.graphics.getWidth()/2).pad(0, 0, 0, 1);
+        tbl.add(lbl).colspan(2).height(1).width(220).pad(0, 0, 0, 1);
         tbl.row();
         lbl = new Label("", skinLibgdx);
         lbl.setColor(0.5f, 0.5f, 0.5f, 1);
         lbl.setStyle(new LabelStyle(lbl.getStyle()));
         lbl.getStyle().background = skinLibgdx.newDrawable("white");
-        tbl.add(lbl).colspan(2).height(1).width(Gdx.graphics.getWidth()/2).pad(0, 1, 5, 0);
+        tbl.add(lbl).colspan(2).height(1).width(220).pad(0, 1, 5, 0);
         tbl.row();
 // + Save Button with event handler
         btnWinOptSave = new TextButton("Save", skinLibgdx);

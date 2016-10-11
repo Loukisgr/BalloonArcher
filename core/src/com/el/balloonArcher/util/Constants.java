@@ -13,9 +13,9 @@ public class Constants
     // Visible game world is 5 meters tall
    // public static final float VIEWPORT_HEIGHT = 5.0f;
     // GUI Width
-    public static final float VIEWPORT_GUI_WIDTH = 800.0f;
+    public static final int VIEWPORT_GUI_WIDTH = 480;
     // GUI Height
-    public static final float VIEWPORT_GUI_HEIGHT = 480.0f;
+    public static final int VIEWPORT_GUI_HEIGHT = 800;
     public static final float ANIMATION_TIMER  = 1f;
     public static final int ARCHER_ANIMATION_SPLITS = 4;
     //public static final float ARCHER_SPEED = 200f;
