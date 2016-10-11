@@ -25,7 +25,6 @@ public class WorldRenderer implements Disposable
     private WorldController worldController;
     private StringBuilder text;
     private StringBuilder info_text;
-    private BitmapFont bitmap_font;
     private Color info_color;
     private Color batchColor;
     private ShaderProgram shader_monochrome;
@@ -39,7 +38,6 @@ public class WorldRenderer implements Disposable
     {
         text = new StringBuilder();
         info_text = new StringBuilder();
-        bitmap_font = new BitmapFont();
         batch = new SpriteBatch();
         info_color= new Color(Color.BLACK);
         batchColor = batch.getColor();
@@ -137,18 +135,18 @@ public class WorldRenderer implements Disposable
 
         if(fps<30)
         {
-            bitmap_font.setColor(180, 0, 0, 1.0f);
+            Assets.instance.fonts.defaultNormal.setColor(180, 0, 0, 1.0f);
         }
         else if (fps < 45)
         {
-            bitmap_font.setColor(255, 255, 0, 1.0f);
+            Assets.instance.fonts.defaultNormal.setColor(255, 255, 0, 1.0f);
         }
         else
         {
-            bitmap_font.setColor(0, 200, 0, 1.0f);
+            Assets.instance.fonts.defaultNormal.setColor(0, 200, 0, 1.0f);
         }
 
-        bitmap_font.draw(batch,"FPS: "+fps,Constants.FPS_TEXT_X,Constants.FPS_TEXT_Y);
+        Assets.instance.fonts.defaultNormal.draw(batch,"FPS: "+fps,Constants.FPS_TEXT_X,Constants.FPS_TEXT_Y);
     }
 
     public void resize (int width, int height) { }
@@ -158,8 +156,8 @@ public class WorldRenderer implements Disposable
         //level
         text.delete(0,text.length());
         text.insert(0,"Level:"+worldController.get_level());
-        bitmap_font.setColor(180, 0, 0, 1.0f);
-        bitmap_font.draw(batch, text, Constants.LEVEL_TEXT_X, Constants.LEVEL_TEXT_Y);
+        Assets.instance.fonts.defaultNormal.setColor(180, 0, 0, 1.0f);
+        Assets.instance.fonts.defaultNormal.draw(batch, text, Constants.LEVEL_TEXT_X, Constants.LEVEL_TEXT_Y);
 
         text.delete(0,text.length());
         text.insert(0,worldController.get_no_of_left_arrows());
@@ -167,20 +165,20 @@ public class WorldRenderer implements Disposable
         //score
         text.delete(0,text.length());
         text.insert(0,"Score: "+worldController.get_score());
-        bitmap_font.setColor(0, 0, 0, 1.0f);
-        bitmap_font.draw(batch, text, Constants.SCORE_TEXT_X, Constants.SCORE_TEXT_Y);
+        Assets.instance.fonts.defaultNormal.setColor(0, 0, 0, 1.0f);
+        Assets.instance.fonts.defaultNormal.draw(batch, text, Constants.SCORE_TEXT_X, Constants.SCORE_TEXT_Y);
 
         text.delete(0,text.length());
         text.insert(0,worldController.get_no_of_left_arrows());
 
         //arrow
         batch.draw(Assets.instance.asset_arrow.arrow_texture,Constants.ARROW_TEXT_X,Constants.ARROW_TEXT_Y-(Constants.ARROW_HEIGHT*1.5f),Constants.ARROW_WIDTH*2,Constants.ARROW_HEIGHT*1.5f);
-        bitmap_font.draw(batch, text, Constants.ARROW_TEXT_X*1.6f, Constants.ARROW_TEXT_Y);
+        Assets.instance.fonts.defaultNormal.draw(batch, text, Constants.ARROW_TEXT_X*1.6f, Constants.ARROW_TEXT_Y);
 
         if(info_text.length() >0)
         {
-            bitmap_font.setColor(info_color);
-            bitmap_font.draw(batch, info_text, Constants.INFO_TEXT_X, Constants.INFO_TEXT_Y);
+            Assets.instance.fonts.defaultBig.setColor(info_color);
+            Assets.instance.fonts.defaultBig.draw(batch, info_text, Constants.INFO_TEXT_X, Constants.INFO_TEXT_Y,(int)(GameScreen.GUI_WIDTH/2),1,true);
         }
 
     }
@@ -208,7 +206,6 @@ public class WorldRenderer implements Disposable
     public void dispose()
     {
         batch.dispose();
-        bitmap_font.dispose();
         shader_monochrome.dispose();
     }
 }
