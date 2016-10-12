@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.el.balloonArcher.screens.DirectedGame;
 import com.el.balloonArcher.screens.GameScreen;
 import com.el.balloonArcher.screens.MenuScreen;
@@ -24,6 +25,7 @@ public class WorldController extends InputAdapter
     private GameScreen app;
     private DirectedGame main_app;
     private ArrayList<Balloon> balloons;
+    private ParticleEffect high_score_particle;
 
     public WorldController(GameScreen app_screen,DirectedGame main_app)
     {
@@ -36,6 +38,9 @@ public class WorldController extends InputAdapter
     private void init ()
     {
         balloons = new ArrayList<Balloon>();
+        high_score_particle = new ParticleEffect();
+        high_score_particle.load(Gdx.files.internal("particles/dust.pfx"), Gdx.files.internal("particles"));
+        high_score_particle.setPosition(GameScreen.GUI_WIDTH/2,GameScreen.GUI_HEIGHT/2);
         load_level();
     }
 
@@ -80,6 +85,7 @@ public class WorldController extends InputAdapter
         }
         else
         {
+            handle_high_score_particle(deltaTime);
             handle_game_over_Input();
         }
     }
@@ -234,6 +240,7 @@ public class WorldController extends InputAdapter
                     prefs.putInteger("highScore", app.get_score());
                     prefs.flush();
                     app.set_game_state(Constants.Game_State.HIGH_SCORE);
+                    high_score_particle.start();
                 }
                 else
                 {
@@ -289,7 +296,22 @@ public class WorldController extends InputAdapter
     {
         if ((Gdx.input.isKeyPressed(Keys.SPACE)) || (Gdx.input.isTouched()))
         {
+            if(app.get_game_state() == Constants.Game_State.HIGH_SCORE)
+            {
+                high_score_particle.allowCompletion();
+            }
+
             app.new_game();
+        }
+
+    }
+
+    private void handle_high_score_particle(float deltaTime)
+    {
+
+        if(app.get_game_state() == Constants.Game_State.HIGH_SCORE)
+        {
+            high_score_particle.update(deltaTime);
         }
 
     }
@@ -304,6 +326,8 @@ public class WorldController extends InputAdapter
     {
         return this.app.get_Archer().get_frame();
     }
+
+
 
 
 }
