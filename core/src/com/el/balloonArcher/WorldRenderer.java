@@ -73,6 +73,7 @@ public class WorldRenderer implements Disposable
         paint_arrows();
         paint_balloons();
         if (GamePreferences.instance.showFpsCounter) {paint_gui_fps_counter();}
+        paint_highscore_particle();
         batch.setShader(null);
         batch.end();
     }
@@ -200,6 +201,16 @@ public class WorldRenderer implements Disposable
     public void clear_text_to_display()
     {
         info_text.delete(0,info_text.length());
+    }
+
+    private void paint_highscore_particle()
+    {
+
+        if(worldController.get_high_score_particle()!= null)
+        {
+            worldController.get_high_score_particle().draw(batch);
+        }
+
     }
 
     @Override
