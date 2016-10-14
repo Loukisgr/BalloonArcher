@@ -39,7 +39,7 @@ public class WorldController extends InputAdapter
     {
         balloons = new ArrayList<Balloon>();
         high_score_particle = new ParticleEffect();
-        high_score_particle.load(Gdx.files.internal("particles/dust.pfx"), Gdx.files.internal("particles"));
+        high_score_particle.load(Gdx.files.internal("particles/firework.pfx"), Gdx.files.internal("particles"));
         high_score_particle.setPosition(GameScreen.GUI_WIDTH/2,GameScreen.GUI_HEIGHT/2);
         load_level();
     }
@@ -328,6 +328,16 @@ public class WorldController extends InputAdapter
     }
 
 
-
+    public ParticleEffect get_high_score_particle()
+    {
+        if(app.get_game_state() == Constants.Game_State.HIGH_SCORE)
+        {
+            return high_score_particle;
+        }
+        else
+        {
+            return null;
+        }
+    }
 
 }
