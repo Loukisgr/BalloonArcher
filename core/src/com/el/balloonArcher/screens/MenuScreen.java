@@ -1,6 +1,5 @@
 package com.el.balloonArcher.screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
@@ -23,10 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.el.balloonArcher.screens.transitions.ScreenTransition;
 import com.el.balloonArcher.screens.transitions.ScreenTransitionFade;
 import com.el.balloonArcher.util.Assets;
@@ -54,6 +50,7 @@ public class MenuScreen extends AbstractGameScreen
 // options
 
     private Window winOptions;
+    private Window winLevelChoice;
     private TextButton btnWinOptSave;
     private TextButton btnWinOptCancel;
     private CheckBox chkSound;
@@ -147,7 +144,7 @@ public class MenuScreen extends AbstractGameScreen
         skinBalloonArcher.add("options",new TextureRegion(menu_texture,926,904,98,57));
 
         skinLibgdx = new Skin(Gdx.files.internal(Constants.SKIN_LIBGDX_UI),
-                        new TextureAtlas(Constants.TEXTURE_ATLAS_LIBGDX_UI));
+                new TextureAtlas(Constants.TEXTURE_ATLAS_LIBGDX_UI));
 
 // build all layers
         Table layerBackground = buildBackgroundLayer();
@@ -155,6 +152,7 @@ public class MenuScreen extends AbstractGameScreen
         Table layerLogos = buildLogosLayer();
         Table layerControls = buildControlsLayer();
         Table layerOptionsWindow = buildOptionsWindowLayer();
+        Table layerLevelWindow = buildChooseLevel();
 // assemble stage for menu screen
         stage.clear();
         Stack stack = new Stack();
@@ -165,6 +163,7 @@ public class MenuScreen extends AbstractGameScreen
         stack.add(layerLogos);
         stack.add(layerControls);
         stage.addActor(layerOptionsWindow);
+        stage.addActor(layerLevelWindow);
     }
 
     private Table buildBackgroundLayer ()
@@ -205,7 +204,7 @@ public class MenuScreen extends AbstractGameScreen
         imgLogo = new Image(skinBalloonArcher.getRegion("logo"));
         layer.add(imgLogo);
         //imgLogo.setSize(Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/10);
-       // imgLogo.setPosition(0,Gdx.graphics.getHeight()/20 *18);
+        // imgLogo.setPosition(0,Gdx.graphics.getHeight()/20 *18);
         layer.row().expandY();
 
         imgInfo = new Image(skinBalloonArcher.getRegion("info"));
@@ -285,6 +284,12 @@ public class MenuScreen extends AbstractGameScreen
 
     private void onPlayClicked ()
     {
+        winLevelChoice.setVisible(true);
+    }
+
+    private void onStartClicked ()
+    {   // TODO: 20/10/2016  fix the transition
+        winLevelChoice.setVisible(false);
         ScreenTransition transition = ScreenTransitionFade.init(0.75f);
         game.set_screen(new GameScreen(game),transition);
     }
@@ -462,6 +467,44 @@ public class MenuScreen extends AbstractGameScreen
 
 
         return tbl;
+    }
+
+
+    private Table buildChooseLevel()
+    {
+        winLevelChoice = new Window("Choose Level", skinLibgdx);
+
+        Table tbl = new Table();
+        // + Title: "Choose level"
+        tbl.pad(10, 10, 0, 10);
+        tbl.add(new Label("Choose Level", skinLibgdx, "default-font", Color.ORANGE)).colspan(3);
+        tbl.row();
+        tbl.columnDefaults(0).padRight(10);
+        tbl.columnDefaults(1).padRight(10);
+        Button a = new Button(imgCharSkin.getDrawable());
+        a.addListener(new ChangeListener()
+        {
+            @Override
+            public void changed (ChangeEvent event, Actor actor)
+            {
+                onStartClicked();
+            }
+        });
+
+        tbl.add(a).width(50).height(50);
+        tbl.add(a).width(50).height(50);
+        tbl.add(a).width(50).height(50);
+        tbl.row();
+
+        winLevelChoice.add(tbl).row();
+        winLevelChoice.setVisible(false);
+
+        if (debugEnabled) winLevelChoice.debug();
+
+        winLevelChoice.setPosition((Constants.VIEWPORT_GUI_WIDTH /2 )- winOptions.getWidth()/2 , (Constants.VIEWPORT_GUI_HEIGHT /2 )- winOptions.getHeight()/2);
+
+
+        return  winLevelChoice;
     }
 
 }
