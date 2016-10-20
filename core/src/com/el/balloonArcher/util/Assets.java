@@ -37,14 +37,14 @@ public class Assets implements Disposable,AssetErrorListener
     public void init (AssetManager assetManager)
     {
         this.assetManager = assetManager;
-// set asset manager error handler
+        // set asset manager error handler
         assetManager.setErrorListener(this);
         // load texture
         assetManager.load("images/archer.png", Texture.class);
         assetManager.load("images/items.png", Texture.class);
         assetManager.load("images/background.png", Texture.class);
         assetManager.load("sounds/Balloon_Popping.wav", Sound.class);
-// start loading assets and wait until finished
+        // start loading assets and wait until finished
         assetManager.finishLoading();
         Gdx.app.debug(TAG, "# of assets loaded: " + assetManager.getAssetNames().size);
 
