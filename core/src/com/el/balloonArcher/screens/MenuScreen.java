@@ -137,7 +137,7 @@ public class MenuScreen extends AbstractGameScreen
 
         skinBalloonArcher.add("logo",new TextureRegion(menu_texture,493,0,250,125));
         skinBalloonArcher.add("balloons",new TextureRegion(menu_texture,446,138,264,171));
-        skinBalloonArcher.add("archer",new TextureRegion(menu_texture,0,0,296,406));
+        skinBalloonArcher.add("archer",new TextureRegion(menu_texture,0,0,296,441));
         skinBalloonArcher.add("info",new TextureRegion(menu_texture,606,867,276,99));
         skinBalloonArcher.add("background",new TextureRegion(menu_texture,500,0,1,1));
         skinBalloonArcher.add("play",new TextureRegion(menu_texture,884,665,140,101));
