@@ -3,7 +3,7 @@ package com.el.balloonArcher;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.el.balloonArcher.screens.DirectedGame;
-import com.el.balloonArcher.screens.MenuScreen;
+import com.el.balloonArcher.screens.LogoScreen;
 import com.el.balloonArcher.util.Assets;
 
 public class BalloonArcher extends DirectedGame
@@ -15,6 +15,6 @@ public class BalloonArcher extends DirectedGame
 	{
         Assets.instance.init(new AssetManager());
         // Start game at menu screen
-        set_screen(new MenuScreen(this));
+        set_screen(new LogoScreen(this));
 	}
 }
