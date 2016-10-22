@@ -135,13 +135,13 @@ public class MenuScreen extends AbstractGameScreen
         Texture menu_texture=new Texture("images/main_screen_background.png");
         menu_texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        skinBalloonArcher.add("logo",new TextureRegion(menu_texture,518,0,200,94));
-        skinBalloonArcher.add("balloons",new TextureRegion(menu_texture,376,142,270,122));
+        skinBalloonArcher.add("logo",new TextureRegion(menu_texture,493,0,250,125));
+        skinBalloonArcher.add("balloons",new TextureRegion(menu_texture,446,138,264,171));
         skinBalloonArcher.add("archer",new TextureRegion(menu_texture,0,0,296,406));
-        skinBalloonArcher.add("info",new TextureRegion(menu_texture,788,966,236,57));
+        skinBalloonArcher.add("info",new TextureRegion(menu_texture,606,867,276,99));
         skinBalloonArcher.add("background",new TextureRegion(menu_texture,500,0,1,1));
-        skinBalloonArcher.add("play",new TextureRegion(menu_texture,926,786,98,57));
-        skinBalloonArcher.add("options",new TextureRegion(menu_texture,926,904,98,57));
+        skinBalloonArcher.add("play",new TextureRegion(menu_texture,884,665,140,101));
+        skinBalloonArcher.add("options",new TextureRegion(menu_texture,883,867,140,99));
 
         skinLibgdx = new Skin(Gdx.files.internal(Constants.SKIN_LIBGDX_UI),
                 new TextureAtlas(Constants.TEXTURE_ATLAS_LIBGDX_UI));
@@ -185,7 +185,7 @@ public class MenuScreen extends AbstractGameScreen
         layer.addActor(imgBalloons);
         imgBalloons.scaleBy(-0.1f);
         //imgBalloons.setPosition(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/8 * 5);
-        imgBalloons.setPosition(225, 400);
+        imgBalloons.setPosition(235, 400);
 
 
         imgArcher = new Image(skinBalloonArcher.getRegion("archer"));

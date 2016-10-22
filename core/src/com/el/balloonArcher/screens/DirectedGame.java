@@ -39,7 +39,8 @@ public abstract class DirectedGame implements ApplicationListener
             batch = new SpriteBatch();
             init = true;
         }
-            // start new transition
+
+        // start new transition
         nextScreen = screen;
         nextScreen.show(); // activate next screen
         nextScreen.resize(w, h);

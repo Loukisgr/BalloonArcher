@@ -58,7 +58,7 @@ public class LogoScreen extends AbstractGameScreen
         Texture menu_texture=new Texture("images/main_screen_background.png");
         menu_texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        skinLogo.add("logo",new TextureRegion(menu_texture,518,0,200,94));
+        skinLogo.add("logo",new TextureRegion(menu_texture,493,0,250,125));
 
         // build all layers
         Table layerLogos = buildLogosLayer();
