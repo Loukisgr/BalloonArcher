@@ -20,7 +20,7 @@ public class Constants
     public static final int ARCHER_ANIMATION_SPLITS = 4;
     //public static final float ARCHER_SPEED = 200f;
     public static final float ARCHER_SPEED = GameScreen.GUI_HEIGHT/4;
-    public static final int ARCHER_HEIGHT = GameScreen.GUI_HEIGHT/6;
+    public static final int ARCHER_HEIGHT = GameScreen.GUI_HEIGHT/7;
     public static final int ARCHER_WIDTH = GameScreen.GUI_WIDTH/8;
     //public static final float BALLOON_STARTING_SPEED=140f;
     //public static final float ARROW_STARTING_SPEED=200f;

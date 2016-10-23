@@ -11,8 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.el.balloonArcher.screens.transitions.ScreenTransition;
-import com.el.balloonArcher.screens.transitions.ScreenTransitionFade;
 import com.el.balloonArcher.util.Constants;
 
 /**
@@ -25,8 +23,8 @@ public class LogoScreen extends AbstractGameScreen
     private Stage stage;
     private Skin skinLogo;
     private Image imgLogo;
+    private Texture menu_texture;
     private float waiting_time=2;
-    private ScreenTransition transition;
 
     public LogoScreen(DirectedGame game)
     {
@@ -43,6 +41,7 @@ public class LogoScreen extends AbstractGameScreen
     {
         stage.dispose();
         skinLogo.dispose();
+        menu_texture.dispose();
     }
 
     @Override
@@ -55,7 +54,7 @@ public class LogoScreen extends AbstractGameScreen
     {
         skinLogo = new Skin();
 
-        Texture menu_texture=new Texture("images/main_screen_background.png");
+        menu_texture=new Texture("images/main_screen_background.png");
         menu_texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         skinLogo.add("logo",new TextureRegion(menu_texture,493,0,250,125));
@@ -93,10 +92,9 @@ public class LogoScreen extends AbstractGameScreen
 
         waiting_time-=deltaTime;
 
-        if((waiting_time < 0) && (transition== null))
+        if(waiting_time < 0)
         {
-            transition = ScreenTransitionFade.init(0.75f);
-            game.set_screen(new MenuScreen(game), transition);
+            game.set_screen(new MenuScreen(game), null);
         }
         //Table.drawDebug(stage);
     }

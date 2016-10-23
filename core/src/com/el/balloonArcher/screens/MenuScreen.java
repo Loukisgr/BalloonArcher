@@ -63,6 +63,8 @@ public class MenuScreen extends AbstractGameScreen
     private Skin skinLibgdx;
     private CheckBox chkUseMonoChromeShader;
 
+    private Texture menu_texture;
+
     // debug
     private final float DEBUG_REBUILD_INTERVAL = 5.0f;
     private boolean debugEnabled = false;
@@ -117,6 +119,7 @@ public class MenuScreen extends AbstractGameScreen
         stage.dispose();
         skinBalloonArcher.dispose();
         skinLibgdx.dispose();
+        menu_texture.dispose();
     }
 
     @Override public void pause () { }
@@ -132,7 +135,7 @@ public class MenuScreen extends AbstractGameScreen
 
         skinBalloonArcher = new Skin();
 
-        Texture menu_texture=new Texture("images/main_screen_background.png");
+        menu_texture=new Texture("images/main_screen_background.png");
         menu_texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         skinBalloonArcher.add("logo",new TextureRegion(menu_texture,493,0,250,125));
@@ -288,7 +291,7 @@ public class MenuScreen extends AbstractGameScreen
     }
 
     private void onStartClicked ()
-    {   // TODO: 20/10/2016  fix the transition
+    {
         winLevelChoice.setVisible(false);
         ScreenTransition transition = ScreenTransitionFade.init(0.75f);
         game.set_screen(new GameScreen(game),transition);

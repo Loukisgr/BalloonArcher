@@ -61,7 +61,7 @@ public class Archer
             for (int i = 0; i < arrows.size(); i++) {
                 if (!arrows.get(i).is_shot())
                 {
-                    arrows.get(i).shoot(Constants.ARCHER_HEIGHT / 2 + this.y);
+                    arrows.get(i).shoot(Constants.ARCHER_HEIGHT / 3*2 + this.y);
                     shoot_timer = Constants.SHOOT_TIMER;
                     return;
                 }
