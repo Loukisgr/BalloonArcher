@@ -288,6 +288,8 @@ public class MenuScreen extends AbstractGameScreen
     private void onPlayClicked ()
     {
         winLevelChoice.setVisible(true);
+        winLevelChoice.setPosition((Constants.VIEWPORT_GUI_WIDTH /2 )- winLevelChoice.getWidth()/2 , (Constants.VIEWPORT_GUI_HEIGHT /2 )- winLevelChoice.getHeight()/2);
+
     }
 
     private void onStartClicked ()
@@ -503,8 +505,6 @@ public class MenuScreen extends AbstractGameScreen
         winLevelChoice.setVisible(false);
 
         if (debugEnabled) winLevelChoice.debug();
-
-        winLevelChoice.setPosition((Constants.VIEWPORT_GUI_WIDTH /2 )- winOptions.getWidth()/2 , (Constants.VIEWPORT_GUI_HEIGHT /2 )- winOptions.getHeight()/2);
 
 
         return  winLevelChoice;
