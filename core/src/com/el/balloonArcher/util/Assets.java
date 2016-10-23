@@ -95,7 +95,7 @@ public class Assets implements Disposable,AssetErrorListener
         public Asset_Normal_Balloon(Texture  t)
         {
             normal_balloon_img=t;
-            balloon_texture = new TextureRegion(normal_balloon_img, 65, 1, 25, 27);
+            balloon_texture = new TextureRegion(normal_balloon_img, 100, 1, 37, 42);
         }
     }
 
@@ -107,7 +107,7 @@ public class Assets implements Disposable,AssetErrorListener
         public Asset_Bonus_Balloon(Texture  t)
         {
             bonus_balloon_img=t;
-            balloon_texture = new TextureRegion(bonus_balloon_img, 92, 1, 25, 27);
+            balloon_texture = new TextureRegion(bonus_balloon_img, 139, 0, 36, 42);
         }
     }
 
@@ -119,7 +119,7 @@ public class Assets implements Disposable,AssetErrorListener
         public Asset_Arrow(Texture  t)
         {
             arrow_img=t;
-            arrow_texture = new TextureRegion(arrow_img, 4, 7, 54, 13);
+            arrow_texture = new TextureRegion(arrow_img, 0, 5, 84, 34);
         }
     }
 
