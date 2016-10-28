@@ -145,7 +145,7 @@ public class Assets implements Disposable,AssetErrorListener
         public Asset_Morning_Background(Texture  t)
         {
             background_img=t;
-            background_texture = new TextureRegion(background_img, 0, 0, 255, 512);
+            background_texture = new TextureRegion(background_img, 0, 0, 672, 1120);
         }
     }
 
