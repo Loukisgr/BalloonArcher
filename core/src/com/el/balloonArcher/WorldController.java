@@ -79,6 +79,15 @@ public class WorldController extends InputAdapter
         if(!is_game_over())
         {
             app.get_Archer().update_timers(deltaTime);
+
+            for (Balloon i : balloons)
+            {
+                if (i.is_hit() && i.get_destroy_timer()>0)
+                {
+                    i.update_timers(deltaTime);
+                }
+            }
+
             handle_Input(deltaTime);
             move_objects(deltaTime);
             check_collisions();
@@ -150,7 +159,7 @@ public class WorldController extends InputAdapter
                     {
                         app.get_Archer().move(-Constants.ARCHER_SPEED * deltaTime);
                     }
-                    System.out.println(app.get_Archer().get_pos()+" y="+(GameScreen.GUI_HEIGHT - Gdx.input.getY()));
+                    //System.out.println(app.get_Archer().get_pos()+" y="+(GameScreen.GUI_HEIGHT - Gdx.input.getY()));
                 }
             }
         }

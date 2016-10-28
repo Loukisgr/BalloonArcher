@@ -26,6 +26,8 @@ public class Constants
     //public static final float ARROW_STARTING_SPEED=200f;
     public static final float BALLOON_STARTING_SPEED=GameScreen.GUI_HEIGHT/6;
     public static final float ARROW_STARTING_SPEED=GameScreen.GUI_WIDTH/2;
+    public static final float BALLOON_DESTROY_TIMER=0.1f;
+    public static final int BALLOON_ANIMATION_SPLITS = 4;
     public static final int NO_OF_ARROW_LIMIT=100;
     public static final int BALLOON_WIDTH= GameScreen.GUI_WIDTH/20;
     public static final int BALLOON_HEIGHT= GameScreen.GUI_HEIGHT/24;

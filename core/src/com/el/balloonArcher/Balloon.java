@@ -19,6 +19,7 @@ public class Balloon
     private float x = GameScreen.GUI_WIDTH /3 *2;
     private Rectangle body;
     private float show_timer=0;
+    private float destroy_timer=Constants.BALLOON_DESTROY_TIMER;
 
 
     public Balloon(boolean has_gift, float speed)
@@ -29,6 +30,7 @@ public class Balloon
 
         Random rnd = new Random();
         x=rnd.nextInt(GameScreen.GUI_WIDTH /6)+ GameScreen.GUI_WIDTH /3 *2 ;
+        destroy_timer=Constants.BALLOON_DESTROY_TIMER;
     }
 
     public Balloon(boolean has_gift, float speed, float show_timer)
@@ -40,6 +42,7 @@ public class Balloon
         Random rnd = new Random();
         x=rnd.nextInt(GameScreen.GUI_WIDTH /6)+ GameScreen.GUI_WIDTH /3 *2 ;
         this.show_timer=show_timer;
+        destroy_timer=Constants.BALLOON_DESTROY_TIMER;
     }
 
     public Balloon(boolean has_gift, float speed, float show_timer,float x)
@@ -49,6 +52,7 @@ public class Balloon
         this.body= new Rectangle();
         this.x=x;
         this.show_timer=show_timer;
+        destroy_timer=Constants.BALLOON_DESTROY_TIMER;
     }
 
     public boolean get_has_gift()
@@ -117,6 +121,43 @@ public class Balloon
         }
 
         return false;
+    }
+
+    public void update_timers(float deltaTime)
+    {
+        if (destroy_timer>0)
+        {
+            this.destroy_timer -= deltaTime;
+            if (this.destroy_timer<0)
+            {
+                this.destroy_timer=0;
+            }
+        }
+    }
+
+    public float get_destroy_timer()
+    {
+        return destroy_timer;
+    }
+
+    public int get_frame()
+    {
+        if(destroy_timer>0)
+        {
+            float temp = Constants.BALLOON_DESTROY_TIMER/(Constants.BALLOON_ANIMATION_SPLITS-1);
+            int i=Constants.BALLOON_ANIMATION_SPLITS-1;
+
+            while((temp <= destroy_timer) && (i>0))
+            {
+                temp+=Constants.BALLOON_DESTROY_TIMER/(Constants.BALLOON_ANIMATION_SPLITS-1);
+                i--;
+            }
+
+            return i;
+        }
+
+        return 0;
+
     }
 
 }

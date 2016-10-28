@@ -118,9 +118,21 @@ public class WorldRenderer implements Disposable
                 }
                 else
                 {
-                    batch.draw(Assets.instance.asset_normal_balloon.balloon_texture, b.get_x(),b.get_y(),Constants.BALLOON_WIDTH,Constants.BALLOON_HEIGHT);
+                    batch.draw(Assets.instance.asset_normal_balloon.balloon_texture[0], b.get_x(),b.get_y(),Constants.BALLOON_WIDTH,Constants.BALLOON_HEIGHT);
                 }
             }
+            //paint if is not yet fully destroyed
+            else if(b.get_destroy_timer()>0)
+            {
+                if(b.get_has_gift())
+                {
+                    batch.draw(Assets.instance.asset_bonus_balloon.balloon_texture, b.get_x(),b.get_y(),Constants.BALLOON_WIDTH,Constants.BALLOON_HEIGHT);
+                }
+                else
+                {
+                    batch.draw(Assets.instance.asset_normal_balloon.balloon_texture[b.get_frame()], b.get_x(),b.get_y(),Constants.BALLOON_WIDTH,Constants.BALLOON_HEIGHT);
+                }
+           }
         }
 
     }
