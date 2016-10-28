@@ -80,10 +80,12 @@ public class Assets implements Disposable,AssetErrorListener
         {
             archer_img = t;
             archer_texture = new TextureRegion[Constants.ARCHER_ANIMATION_SPLITS];
-            archer_texture[0] = new TextureRegion(t, 457, 0, 300, 442);
-            archer_texture[1] = new TextureRegion(t, 0, 572, 300, 436);
-            archer_texture[2] = new TextureRegion(t, 460, 571, 302, 436);
-            archer_texture[3] = new TextureRegion(t, 0, 0, 306, 442);
+            archer_texture[0] = new TextureRegion(t, 702,   0, 332, 495);
+            archer_texture[1] = new TextureRegion(t, 0,   654, 324, 492);
+            archer_texture[2] = new TextureRegion(t, 348, 652, 323, 492);
+            archer_texture[3] = new TextureRegion(t, 695, 653, 343, 492);
+            archer_texture[4] = new TextureRegion(t, 6,   5,   344, 495);
+            archer_texture[5] = new TextureRegion(t, 358, 0,   328, 495);
         }
     }
 

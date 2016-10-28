@@ -17,7 +17,7 @@ public class Constants
     // GUI Height
     public static final int VIEWPORT_GUI_HEIGHT = 800;
     public static final float ANIMATION_TIMER  = 1f;
-    public static final int ARCHER_ANIMATION_SPLITS = 4;
+    public static final int ARCHER_ANIMATION_SPLITS = 6;
     //public static final float ARCHER_SPEED = 200f;
     public static final float ARCHER_SPEED = GameScreen.GUI_HEIGHT/4;
     public static final int ARCHER_HEIGHT = GameScreen.GUI_HEIGHT/7;
