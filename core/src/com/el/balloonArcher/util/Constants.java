@@ -55,7 +55,7 @@ public class Constants
 
     public enum Game_State
     {
-        PAUSED,LOADING,ACTIVE,GAME_OVER,GAME_WINNER,HIGH_SCORE
+        PAUSED,LOADING,ACTIVE,GAME_OVER,GAME_WINNER,HIGH_SCORE,LEVEL_PASSED
 
     }
 

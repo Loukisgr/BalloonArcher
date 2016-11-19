@@ -1,20 +1,16 @@
 package com.el.balloonArcher;
 
-import com.badlogic.gdx.Game;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.el.balloonArcher.screens.DirectedGame;
 import com.el.balloonArcher.screens.GameScreen;
 import com.el.balloonArcher.screens.MenuScreen;
-import com.el.balloonArcher.util.Assets;
 import com.el.balloonArcher.util.Constants;
-import com.el.balloonArcher.util.AudioManager;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by Loukis on 20/9/2016.
@@ -24,7 +20,7 @@ public class WorldController extends InputAdapter
     private static final String TAG = WorldController.class.getName();
     private GameScreen app;
     private DirectedGame main_app;
-    private ArrayList<Balloon> balloons;
+    //private ArrayList<Balloon> balloons;
     private ParticleEffect high_score_particle;
 
     public WorldController(GameScreen app_screen,DirectedGame main_app)
@@ -37,7 +33,7 @@ public class WorldController extends InputAdapter
 
     private void init ()
     {
-        balloons = new ArrayList<Balloon>();
+       // balloons = new ArrayList<Balloon>();
         high_score_particle = new ParticleEffect();
         high_score_particle.load(Gdx.files.internal("particles/firework.pfx"), Gdx.files.internal("particles"));
         high_score_particle.setPosition(GameScreen.GUI_WIDTH/2,GameScreen.GUI_HEIGHT/2);
@@ -46,7 +42,8 @@ public class WorldController extends InputAdapter
 
     public void load_level()
     {
-        balloons.clear();
+        app.get_game_type().load_level();
+       /* balloons.clear();
 
         int i = app.get_level();
         Random rnd = new Random();
@@ -69,28 +66,34 @@ public class WorldController extends InputAdapter
 
             i-=1;
             base+=1;
-        }
+        }*/
     }
 
     public void update (float deltaTime)
     {
+        app.get_game_type().update(deltaTime);
 
-        game_status();
+        if ((app.get_game_state() == Constants.Game_State.HIGH_SCORE) || (app.get_game_state() == Constants.Game_State.GAME_WINNER))
+        {
+            high_score_particle.start();
+        }
+
+        //game_status();
         if(!is_game_over())
         {
             app.get_Archer().update_timers(deltaTime);
 
-            for (Balloon i : balloons)
+     /*       for (Balloon i : balloons)
             {
                 if (i.is_hit() && i.get_destroy_timer()>0)
                 {
                     i.update_timers(deltaTime);
                 }
             }
-
+*/
             handle_Input(deltaTime);
-            move_objects(deltaTime);
-            check_collisions();
+            //move_objects(deltaTime);
+            //check_collisions();
         }
         else
         {
@@ -177,7 +180,8 @@ public class WorldController extends InputAdapter
 
     public ArrayList<Balloon> get_balloons()
     {
-        return balloons;
+        return app.get_game_type().get_balloons();
+        //return balloons;
     }
 
     public int get_score()
@@ -185,17 +189,17 @@ public class WorldController extends InputAdapter
         return app.get_score();
     }
 
-    public int get_no_of_balloons()
+   /* public int get_no_of_balloons()
     {
         return balloons.size();
     }
-
+*/
     public int get_no_of_left_arrows()
     {
         return app.get_Archer().remaining_arrows();
     }
 
-    private void move_objects(float deltaTime)
+  /*  private void move_objects(float deltaTime)
     {
         //move balloons
         for (Balloon i : balloons)
@@ -211,8 +215,8 @@ public class WorldController extends InputAdapter
         app.get_Archer().move_arrows(deltaTime);
 
     }
-
-    private boolean  has_remaining_balloons()
+*/
+/*    private boolean  has_remaining_balloons()
     {
 
         for (Balloon b : balloons)
@@ -225,16 +229,18 @@ public class WorldController extends InputAdapter
 
         return false;
     }
-
+*/
 
     private boolean is_game_over()
     {
         //if balloon exists but no arrows
-        return app.get_game_state().equals((Constants.Game_State.GAME_OVER)) || app.get_game_state().equals((Constants.Game_State.HIGH_SCORE));
+        return app.get_game_type().is_game_over();
+
+               // app.get_game_state().equals((Constants.Game_State.GAME_OVER)) || app.get_game_state().equals((Constants.Game_State.HIGH_SCORE));
 
     }
 
-    private void game_status()
+ /*   private void game_status()
     {
         if( app.get_game_state().equals(Constants.Game_State.ACTIVE))
         {
@@ -264,8 +270,8 @@ public class WorldController extends InputAdapter
         }
 
     }
-
-    private void check_collisions()
+*/
+/*    private void check_collisions()
     {
         if((app.get_Archer().has_remaining_arrows()) && (has_remaining_balloons()))
         {
@@ -294,7 +300,7 @@ public class WorldController extends InputAdapter
             }
 
         }
-    }
+    }*/
 
     public int get_level()
     {
@@ -305,7 +311,7 @@ public class WorldController extends InputAdapter
     {
         if ((Gdx.input.isKeyPressed(Keys.SPACE)) || (Gdx.input.isTouched()))
         {
-            if(app.get_game_state() == Constants.Game_State.HIGH_SCORE)
+            if((app.get_game_state() == Constants.Game_State.HIGH_SCORE) || (app.get_game_state() == Constants.Game_State.GAME_WINNER))
             {
                 high_score_particle.allowCompletion();
             }
@@ -318,7 +324,7 @@ public class WorldController extends InputAdapter
     private void handle_high_score_particle(float deltaTime)
     {
 
-        if(app.get_game_state() == Constants.Game_State.HIGH_SCORE)
+        if((app.get_game_state() == Constants.Game_State.HIGH_SCORE) || (app.get_game_state() == Constants.Game_State.GAME_WINNER))
         {
             high_score_particle.update(deltaTime);
         }
@@ -339,7 +345,7 @@ public class WorldController extends InputAdapter
 
     public ParticleEffect get_high_score_particle()
     {
-        if(app.get_game_state() == Constants.Game_State.HIGH_SCORE)
+        if((app.get_game_state() == Constants.Game_State.HIGH_SCORE) || (app.get_game_state() == Constants.Game_State.GAME_WINNER))
         {
             return high_score_particle;
         }

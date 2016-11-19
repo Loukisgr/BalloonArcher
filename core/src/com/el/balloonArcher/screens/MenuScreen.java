@@ -23,6 +23,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.el.balloonArcher.game.GameType;
+import com.el.balloonArcher.game.SimpleGame;
+import com.el.balloonArcher.game.SimpleGameTill20;
 import com.el.balloonArcher.screens.transitions.ScreenTransition;
 import com.el.balloonArcher.screens.transitions.ScreenTransitionFade;
 import com.el.balloonArcher.util.Assets;
@@ -292,14 +295,14 @@ public class MenuScreen extends AbstractGameScreen
 
     }
 
-    private void onStartClicked ()
+    private void onStartClicked(GameType gametype)
     {
         winLevelChoice.setVisible(false);
         ScreenTransition transition = ScreenTransitionFade.init(0.75f);
-        game.set_screen(new GameScreen(game),transition);
+        game.set_screen(new GameScreen(game,gametype),transition);
     }
 
-    private void onOptionsClicked ()
+    private void onOptionsClicked()
     {
         loadSettings();
         btnMenuPlay.setVisible(false);
@@ -482,24 +485,33 @@ public class MenuScreen extends AbstractGameScreen
         Table tbl = new Table();
         // + Title: "Choose level"
         tbl.pad(10, 10, 0, 10);
-        tbl.add(new Label("Choose Level", skinLibgdx, "default-font", Color.ORANGE)).colspan(3);
+        tbl.add(new Label("Choose Level", skinLibgdx, "default-font", Color.ORANGE)).colspan(5);
         tbl.row();
         tbl.columnDefaults(0).padRight(10);
         tbl.columnDefaults(1).padRight(10);
-        Button a = new Button(imgCharSkin.getDrawable());
-        a.addListener(new ChangeListener()
+        Button simplegame20 = new Button(new Image(Assets.instance.asset_archer.archer_texture[0]).getDrawable());
+        Button simplegame = new Button(new Image(Assets.instance.asset_archer.archer_texture[1]).getDrawable());
+        simplegame20.addListener(new ChangeListener()
         {
             @Override
             public void changed (ChangeEvent event, Actor actor)
             {
-                onStartClicked();
+                onStartClicked(new SimpleGameTill20());
             }
         });
 
-        tbl.add(a).width(50).height(50);
-        tbl.add(a).width(50).height(50);
-        tbl.add(a).width(50).height(50);
-        tbl.row();
+        simplegame.addListener(new ChangeListener()
+        {
+            @Override
+            public void changed (ChangeEvent event, Actor actor)
+            {
+                onStartClicked(new SimpleGame());
+            }
+        });
+
+        tbl.add(simplegame20).width(50).height(50);
+        tbl.add(simplegame).width(50).height(50);
+        //tbl.row();
 
         winLevelChoice.add(tbl).row();
         winLevelChoice.setVisible(false);

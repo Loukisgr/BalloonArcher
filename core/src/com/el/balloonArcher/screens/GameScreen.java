@@ -12,6 +12,7 @@ import com.el.balloonArcher.Archer;
 import com.el.balloonArcher.BalloonArcher;
 import com.el.balloonArcher.WorldController;
 import com.el.balloonArcher.WorldRenderer;
+import com.el.balloonArcher.game.GameType;
 import com.el.balloonArcher.util.Assets;
 import com.el.balloonArcher.util.Constants;
 import com.el.balloonArcher.util.GamePreferences;
@@ -31,10 +32,13 @@ public class GameScreen extends AbstractGameScreen
     private int level=1;
     private int score=0;
     public static int GUI_WIDTH,GUI_HEIGHT;
+    private GameType game_type;
 
-    public GameScreen(DirectedGame game)
+    public GameScreen(DirectedGame game, GameType game_type)
     {
         super(game);
+        this.game_type=game_type;
+        this.game_type.set_app(this);
     }
 
     @Override
@@ -74,7 +78,7 @@ public class GameScreen extends AbstractGameScreen
             // Render game world to screen
             worldRenderer.render(Gdx.graphics.getDeltaTime());
 
-            if(is_won())
+            if(level_passed())
             {
                 worldRenderer.set_text_to_display(new StringBuilder("Starting Next Level..."));
                 score+=player.remaining_arrows();
@@ -92,7 +96,10 @@ public class GameScreen extends AbstractGameScreen
             {
                 worldRenderer.set_text_to_display(new StringBuilder("NEW HIGH SCORE! "+score), Color.GOLDENROD);
             }
-
+            else if(is_won())
+            {
+                worldRenderer.set_text_to_display(new StringBuilder("STAGE PASSED!!"), Color.GOLDENROD);
+            }
         }
     }
 
@@ -135,6 +142,11 @@ public class GameScreen extends AbstractGameScreen
     public boolean is_won()
     {
         return state.equals(Constants.Game_State.GAME_WINNER);
+    }
+
+    public boolean level_passed()
+    {
+        return state.equals(Constants.Game_State.LEVEL_PASSED);
     }
 
     public boolean is_game_over()
@@ -197,6 +209,11 @@ public class GameScreen extends AbstractGameScreen
         }
 
         state= Constants.Game_State.ACTIVE;
+    }
+
+    public GameType get_game_type()
+    {
+        return game_type;
     }
 
 }
