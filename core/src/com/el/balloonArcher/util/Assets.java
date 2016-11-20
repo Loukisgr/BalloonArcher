@@ -24,6 +24,7 @@ public class Assets implements Disposable,AssetErrorListener
     private AssetManager assetManager;
     public static final String TAG = Assets.class.getName();
     public Asset_Archer asset_archer;
+    public Asset_Game_Choice asset_game_choice;
     public Asset_Arrow asset_arrow;
     public Asset_Normal_Balloon asset_normal_balloon;
     public Asset_Bonus_Balloon asset_bonus_balloon;
@@ -40,6 +41,7 @@ public class Assets implements Disposable,AssetErrorListener
         // set asset manager error handler
         assetManager.setErrorListener(this);
         // load texture
+        assetManager.load("images/game_choice.png", Texture.class);
         assetManager.load("images/archer.png", Texture.class);
         assetManager.load("images/items.png", Texture.class);
         assetManager.load("images/background.png", Texture.class);
@@ -63,11 +65,12 @@ public class Assets implements Disposable,AssetErrorListener
 
         // create game resource objects
         fonts = new Asset_Fonts();
-        asset_archer = new Asset_Archer(textures.get(2));
+        asset_archer = new Asset_Archer(textures.get(3));
         asset_arrow = new Asset_Arrow(textures.get(1));
         asset_normal_balloon = new Asset_Normal_Balloon(textures.get(1));
         asset_bonus_balloon = new Asset_Bonus_Balloon(textures.get(1));
         asset_morning_background = new Asset_Morning_Background(textures.get(0));
+        asset_game_choice = new Asset_Game_Choice(textures.get(2));
         sounds = new Asset_Sounds(assetManager);
     }
 
@@ -86,6 +89,42 @@ public class Assets implements Disposable,AssetErrorListener
             archer_texture[3] = new TextureRegion(t, 695, 653, 343, 492);
             archer_texture[4] = new TextureRegion(t, 6,   5,   344, 495);
             archer_texture[5] = new TextureRegion(t, 358, 0,   328, 495);
+        }
+    }
+
+    public class Asset_Game_Choice
+    {
+        public final Texture asset_game_choice_img;
+        public final TextureRegion[] game_choice_texture;
+        public final TextureRegion[] game_locked_choice_texture;
+        public final TextureRegion[] game_passed_choice_texture;
+
+        public Asset_Game_Choice(Texture  t)
+        {
+            asset_game_choice_img = t;
+            game_choice_texture = new TextureRegion[Constants.NO_OF_GAMES];
+            game_choice_texture[0] = new TextureRegion(t, 0,   0, 132, 117);
+            game_choice_texture[1] = new TextureRegion(t, 134, 1, 132, 117);
+            game_choice_texture[2] = new TextureRegion(t, 270, 1, 132, 117);
+            game_choice_texture[3] = new TextureRegion(t, 407, 1, 132, 117);
+            game_choice_texture[4] = new TextureRegion(t, 543, 1, 132, 117);
+            game_choice_texture[5] = new TextureRegion(t, 681, 1, 132, 117);
+
+            game_locked_choice_texture = new TextureRegion[Constants.NO_OF_GAMES];
+            game_locked_choice_texture[0] = new TextureRegion(t, 0,   0, 132, 117);
+            game_locked_choice_texture[1] = new TextureRegion(t, 134, 130, 132, 117);
+            game_locked_choice_texture[2] = new TextureRegion(t, 270, 130, 132, 117);
+            game_locked_choice_texture[3] = new TextureRegion(t, 407, 130, 132, 117);
+            game_locked_choice_texture[4] = new TextureRegion(t, 543, 130, 132, 117);
+            game_locked_choice_texture[5] = new TextureRegion(t, 681, 130, 132, 117);
+
+            game_passed_choice_texture = new TextureRegion[Constants.NO_OF_GAMES];
+            game_passed_choice_texture[0] = new TextureRegion(t, 0,   256, 132, 117);
+            game_passed_choice_texture[1] = new TextureRegion(t, 134, 256, 132, 117);
+            game_passed_choice_texture[2] = new TextureRegion(t, 270, 256, 132, 117);
+            game_passed_choice_texture[3] = new TextureRegion(t, 407, 256, 132, 117);
+            game_passed_choice_texture[4] = new TextureRegion(t, 543, 256, 132, 117);
+            game_passed_choice_texture[5] = new TextureRegion(t, 681, 1, 132, 117);
         }
     }
 

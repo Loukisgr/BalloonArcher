@@ -2,6 +2,7 @@ package com.el.balloonArcher.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -25,12 +26,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.el.balloonArcher.game.GameType;
 import com.el.balloonArcher.game.SimpleGame;
-import com.el.balloonArcher.game.SimpleGameTill20;
+import com.el.balloonArcher.game.SimpleGameLevelLimit;
 import com.el.balloonArcher.screens.transitions.ScreenTransition;
 import com.el.balloonArcher.screens.transitions.ScreenTransitionFade;
 import com.el.balloonArcher.util.Assets;
 import com.el.balloonArcher.util.CharacterSkin;
 import com.el.balloonArcher.util.Constants;
+import com.el.balloonArcher.util.ExtendedChangeListener;
 import com.el.balloonArcher.util.GamePreferences;
 
 /**
@@ -489,28 +491,82 @@ public class MenuScreen extends AbstractGameScreen
         tbl.row();
         tbl.columnDefaults(0).padRight(10);
         tbl.columnDefaults(1).padRight(10);
-        Button simplegame20 = new Button(new Image(Assets.instance.asset_archer.archer_texture[0]).getDrawable());
-        Button simplegame = new Button(new Image(Assets.instance.asset_archer.archer_texture[1]).getDrawable());
-        simplegame20.addListener(new ChangeListener()
-        {
-            @Override
-            public void changed (ChangeEvent event, Actor actor)
-            {
-                onStartClicked(new SimpleGameTill20());
-            }
-        });
 
-        simplegame.addListener(new ChangeListener()
-        {
-            @Override
-            public void changed (ChangeEvent event, Actor actor)
-            {
-                onStartClicked(new SimpleGame());
-            }
-        });
+        //check for high Score
+        Preferences prefs = Gdx.app.getPreferences("BalloonArcher");
+        Button simplegame[] = new Button[Constants.NO_OF_GAMES];
 
-        tbl.add(simplegame20).width(50).height(50);
-        tbl.add(simplegame).width(50).height(50);
+        for (int i=0; i < Constants.NO_OF_GAMES-1; i++)
+        {
+            if ((prefs.contains("SimpleGameTill" + (i * 10 + 10))) && (prefs.getBoolean("SimpleGameTill" + (i * 10 + 10)) == true))
+            {
+                simplegame[i] = new Button(new Image(Assets.instance.asset_game_choice.game_passed_choice_texture[i]).getDrawable());
+
+                simplegame[i].addListener(new ExtendedChangeListener(i) {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        onStartClicked(new SimpleGameLevelLimit((get_numeric_parameter() * 10 + 10)));
+                    }
+                });
+
+
+                if(i==Constants.NO_OF_GAMES-2)
+                {
+                    simplegame[Constants.NO_OF_GAMES-1] = new Button(new Image(Assets.instance.asset_game_choice.game_choice_texture[Constants.NO_OF_GAMES-1]).getDrawable());
+                    simplegame[Constants.NO_OF_GAMES-1].addListener(new ChangeListener() {
+                        @Override
+                        public void changed(ChangeEvent event, Actor actor) {
+                            onStartClicked(new SimpleGame());
+                        }
+                    });
+                }
+            }
+            else
+            {
+                if (i == 0)
+                {
+                    simplegame[i] = new Button(new Image(Assets.instance.asset_game_choice.game_choice_texture[i]).getDrawable());
+
+                    simplegame[i].addListener(new ExtendedChangeListener(i) {
+                        @Override
+                        public void changed(ChangeEvent event, Actor actor) {
+                            onStartClicked(new SimpleGameLevelLimit((get_numeric_parameter() * 10 + 10)));
+                        }
+                    });
+                }
+                else if ((prefs.contains("SimpleGameTill" + ((i-1) * 10 + 10))) && (prefs.getBoolean("SimpleGameTill" + ((i-1) * 10 + 10)) == true))
+                {
+                    simplegame[i] = new Button(new Image(Assets.instance.asset_game_choice.game_choice_texture[i]).getDrawable());
+
+                    simplegame[i].addListener(new ExtendedChangeListener(i) {
+                        @Override
+                        public void changed(ChangeEvent event, Actor actor) {
+                            onStartClicked(new SimpleGameLevelLimit((get_numeric_parameter() * 10 + 10)));
+                        }
+                    });
+                }
+                else
+                {
+                    simplegame[i] = new Button(new Image(Assets.instance.asset_game_choice.game_locked_choice_texture[i]).getDrawable());
+
+                    if(i==Constants.NO_OF_GAMES-2)
+                    {
+                        simplegame[Constants.NO_OF_GAMES-1] = new Button(new Image(Assets.instance.asset_game_choice.game_locked_choice_texture[Constants.NO_OF_GAMES-1]).getDrawable());
+                    }
+                }
+            }
+            //TOdo fix the length of the box
+            if(i<2)
+            {
+                tbl.add(simplegame[i]).width(50).height(50);
+            }
+
+            if(i==Constants.NO_OF_GAMES-2)
+            {
+                tbl.add(simplegame[Constants.NO_OF_GAMES-1]).width(50).height(50);
+            }
+        }
+
         //tbl.row();
 
         winLevelChoice.add(tbl).row();

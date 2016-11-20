@@ -8,13 +8,20 @@ import com.el.balloonArcher.util.Constants;
  * Created by Louki on 12/11/2016.
  */
 
-public class SimpleGameTill20 extends SimpleGame
+public class SimpleGameLevelLimit extends SimpleGame
 {
+    private int level_limit=10;
+
+    public SimpleGameLevelLimit(int level_limit)
+    {
+        super();
+        this.level_limit=level_limit;
+    }
 
     @Override
     public void load_level()
     {
-        if(app.get_level()<=2)
+        if(app.get_level()<=level_limit)
         {
             super.load_level();
         }
@@ -31,9 +38,9 @@ public class SimpleGameTill20 extends SimpleGame
                 //check for high Score
                 Preferences prefs = Gdx.app.getPreferences("BalloonArcher");
 
-                if ((!prefs.contains("highScoreSimpleGameTill20")) || (prefs.getInteger("highScoreSimpleGameTill20") < app.get_score()))
+                if ((!prefs.contains("highScoreSimpleGameTill"+level_limit)) || (prefs.getInteger("highScoreSimpleGameTill"+level_limit) < app.get_score()))
                 {
-                    prefs.putInteger("highScoreSimpleGameTill20", app.get_score());
+                    prefs.putInteger("highScoreSimpleGameTill"+level_limit, app.get_score());
                     prefs.flush();
                     app.set_game_state(Constants.Game_State.HIGH_SCORE);
                 }
@@ -45,17 +52,17 @@ public class SimpleGameTill20 extends SimpleGame
             }
             else if ((app.get_Archer().has_remaining_arrows()) && (!has_remaining_balloons()))
             {
-                if(app.get_level()>2)
+                if(app.get_level()>level_limit)
                 {
                     app.set_game_state(Constants.Game_State.GAME_WINNER);
 
                     //check for high Score
                     Preferences prefs = Gdx.app.getPreferences("BalloonArcher");
-                    prefs.putBoolean("SimpleGameTill20", true);
+                    prefs.putBoolean("SimpleGameTill"+level_limit, true);
 
-                    if ((!prefs.contains("highScoreSimpleGameTill20")) || (prefs.getInteger("highScoreSimpleGameTill20") < app.get_score()))
+                    if ((!prefs.contains("highScoreSimpleGameTill"+level_limit)) || (prefs.getInteger("highScoreSimpleGameTill"+level_limit) < app.get_score()))
                     {
-                        prefs.putInteger("highScoreSimpleGameTill20", app.get_score());
+                        prefs.putInteger("highScoreSimpleGameTill"+level_limit, app.get_score());
                         prefs.flush();
                         app.set_game_state(Constants.Game_State.HIGH_SCORE);
                     }
@@ -69,6 +76,9 @@ public class SimpleGameTill20 extends SimpleGame
         }
     }
 
-
+    public int get_level_limit()
+    {
+        return level_limit;
+    }
 
 }
