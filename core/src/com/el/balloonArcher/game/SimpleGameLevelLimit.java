@@ -21,6 +21,11 @@ public class SimpleGameLevelLimit extends SimpleGame
     @Override
     public void load_level()
     {
+        if ((app.get_level() ==1) && (level_limit>10))
+        {
+            app.set_level(level_limit-9);
+        }
+
         if(app.get_level()<=level_limit)
         {
             super.load_level();

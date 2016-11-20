@@ -487,33 +487,38 @@ public class MenuScreen extends AbstractGameScreen
         Table tbl = new Table();
         // + Title: "Choose level"
         tbl.pad(10, 10, 0, 10);
-        tbl.add(new Label("Choose Level", skinLibgdx, "default-font", Color.ORANGE)).colspan(5);
+        tbl.add(new Label("Choose Level", skinLibgdx, "default-font", Color.ORANGE)).colspan(7);
         tbl.row();
         tbl.columnDefaults(0).padRight(10);
         tbl.columnDefaults(1).padRight(10);
+        tbl.columnDefaults(2).padRight(10);
+        tbl.columnDefaults(3).padRight(10);
+        tbl.columnDefaults(4).padRight(10);
+        tbl.columnDefaults(5).padRight(10);
+        tbl.columnDefaults(6).padRight(10);
 
         //check for high Score
         Preferences prefs = Gdx.app.getPreferences("BalloonArcher");
-        Button simplegame[] = new Button[Constants.NO_OF_GAMES];
+        Button simplegameLevelLimit[] = new Button[Constants.NO_OF_GAMES];
 
         for (int i=0; i < Constants.NO_OF_GAMES-1; i++)
         {
-            if ((prefs.contains("SimpleGameTill" + (i * 10 + 10))) && (prefs.getBoolean("SimpleGameTill" + (i * 10 + 10)) == true))
+            if ((prefs.contains("SimpleGameTill" + (i * Constants.SIMPLE_GAME_LEVEL_LIMIT_FACTOR + Constants.SIMPLE_GAME_LEVEL_LIMIT_FACTOR ))) && (prefs.getBoolean("SimpleGameTill" + (i * Constants.SIMPLE_GAME_LEVEL_LIMIT_FACTOR  + Constants.SIMPLE_GAME_LEVEL_LIMIT_FACTOR )) == true))
             {
-                simplegame[i] = new Button(new Image(Assets.instance.asset_game_choice.game_passed_choice_texture[i]).getDrawable());
+                simplegameLevelLimit[i] = new Button(new Image(Assets.instance.asset_game_choice.game_passed_choice_texture[i]).getDrawable());
 
-                simplegame[i].addListener(new ExtendedChangeListener(i) {
+                simplegameLevelLimit[i].addListener(new ExtendedChangeListener(i) {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
-                        onStartClicked(new SimpleGameLevelLimit((get_numeric_parameter() * 10 + 10)));
+                        onStartClicked(new SimpleGameLevelLimit((get_numeric_parameter() * Constants.SIMPLE_GAME_LEVEL_LIMIT_FACTOR + Constants.SIMPLE_GAME_LEVEL_LIMIT_FACTOR)));
                     }
                 });
 
 
                 if(i==Constants.NO_OF_GAMES-2)
                 {
-                    simplegame[Constants.NO_OF_GAMES-1] = new Button(new Image(Assets.instance.asset_game_choice.game_choice_texture[Constants.NO_OF_GAMES-1]).getDrawable());
-                    simplegame[Constants.NO_OF_GAMES-1].addListener(new ChangeListener() {
+                    simplegameLevelLimit[Constants.NO_OF_GAMES-1] = new Button(new Image(Assets.instance.asset_game_choice.game_choice_texture[Constants.NO_OF_GAMES-1]).getDrawable());
+                    simplegameLevelLimit[Constants.NO_OF_GAMES-1].addListener(new ChangeListener() {
                         @Override
                         public void changed(ChangeEvent event, Actor actor) {
                             onStartClicked(new SimpleGame());
@@ -525,45 +530,43 @@ public class MenuScreen extends AbstractGameScreen
             {
                 if (i == 0)
                 {
-                    simplegame[i] = new Button(new Image(Assets.instance.asset_game_choice.game_choice_texture[i]).getDrawable());
+                    simplegameLevelLimit[i] = new Button(new Image(Assets.instance.asset_game_choice.game_choice_texture[i]).getDrawable());
 
-                    simplegame[i].addListener(new ExtendedChangeListener(i) {
+                    simplegameLevelLimit[i].addListener(new ExtendedChangeListener(i) {
                         @Override
                         public void changed(ChangeEvent event, Actor actor) {
-                            onStartClicked(new SimpleGameLevelLimit((get_numeric_parameter() * 10 + 10)));
+                            onStartClicked(new SimpleGameLevelLimit((get_numeric_parameter() * Constants.SIMPLE_GAME_LEVEL_LIMIT_FACTOR  + Constants.SIMPLE_GAME_LEVEL_LIMIT_FACTOR )));
                         }
                     });
                 }
-                else if ((prefs.contains("SimpleGameTill" + ((i-1) * 10 + 10))) && (prefs.getBoolean("SimpleGameTill" + ((i-1) * 10 + 10)) == true))
+                else if ((prefs.contains("SimpleGameTill" + ((i-1) * Constants.SIMPLE_GAME_LEVEL_LIMIT_FACTOR  + Constants.SIMPLE_GAME_LEVEL_LIMIT_FACTOR ))) && (prefs.getBoolean("SimpleGameTill" + ((i-1) * Constants.SIMPLE_GAME_LEVEL_LIMIT_FACTOR  + Constants.SIMPLE_GAME_LEVEL_LIMIT_FACTOR )) == true))
                 {
-                    simplegame[i] = new Button(new Image(Assets.instance.asset_game_choice.game_choice_texture[i]).getDrawable());
+                    simplegameLevelLimit[i] = new Button(new Image(Assets.instance.asset_game_choice.game_choice_texture[i]).getDrawable());
 
-                    simplegame[i].addListener(new ExtendedChangeListener(i) {
+                    simplegameLevelLimit[i].addListener(new ExtendedChangeListener(i) {
                         @Override
                         public void changed(ChangeEvent event, Actor actor) {
-                            onStartClicked(new SimpleGameLevelLimit((get_numeric_parameter() * 10 + 10)));
+                            onStartClicked(new SimpleGameLevelLimit((get_numeric_parameter() * Constants.SIMPLE_GAME_LEVEL_LIMIT_FACTOR  + Constants.SIMPLE_GAME_LEVEL_LIMIT_FACTOR )));
                         }
                     });
                 }
                 else
                 {
-                    simplegame[i] = new Button(new Image(Assets.instance.asset_game_choice.game_locked_choice_texture[i]).getDrawable());
+                    simplegameLevelLimit[i] = new Button(new Image(Assets.instance.asset_game_choice.game_locked_choice_texture[i]).getDrawable());
 
                     if(i==Constants.NO_OF_GAMES-2)
                     {
-                        simplegame[Constants.NO_OF_GAMES-1] = new Button(new Image(Assets.instance.asset_game_choice.game_locked_choice_texture[Constants.NO_OF_GAMES-1]).getDrawable());
+                        simplegameLevelLimit[Constants.NO_OF_GAMES-1] = new Button(new Image(Assets.instance.asset_game_choice.game_locked_choice_texture[Constants.NO_OF_GAMES-1]).getDrawable());
                     }
                 }
             }
-            //TOdo fix the length of the box
-            if(i<2)
-            {
-                tbl.add(simplegame[i]).width(50).height(50);
-            }
+
+            tbl.add(simplegameLevelLimit[i]).width(50).height(50);
+
 
             if(i==Constants.NO_OF_GAMES-2)
             {
-                tbl.add(simplegame[Constants.NO_OF_GAMES-1]).width(50).height(50);
+                tbl.add(simplegameLevelLimit[Constants.NO_OF_GAMES-1]).width(50).height(50);
             }
         }
 
@@ -571,7 +574,7 @@ public class MenuScreen extends AbstractGameScreen
 
         winLevelChoice.add(tbl).row();
         winLevelChoice.setVisible(false);
-
+        winLevelChoice.setWidth(Constants.VIEWPORT_GUI_WIDTH-50);
         if (debugEnabled) winLevelChoice.debug();
 
 

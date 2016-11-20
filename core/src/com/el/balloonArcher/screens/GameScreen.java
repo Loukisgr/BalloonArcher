@@ -52,8 +52,8 @@ public class GameScreen extends AbstractGameScreen
         // Set Libgdx log level to DEBU
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         // Initialize controller and renderer
-        player = new com.el.balloonArcher.Archer(level);
         worldController = new WorldController(this,game);
+        player = new com.el.balloonArcher.Archer(level);
         worldRenderer = new com.el.balloonArcher.WorldRenderer(worldController);
         Gdx.input.setCatchBackKey(true);
         state= Constants.Game_State.ACTIVE;
@@ -83,8 +83,8 @@ public class GameScreen extends AbstractGameScreen
                 worldRenderer.set_text_to_display(new StringBuilder("Starting Next Level..."));
                 score+=player.remaining_arrows();
                 this.add_level();
-                player.init_level(get_level());
                 worldController.load_level();
+                player.init_level(get_level());
                 this.state=Constants.Game_State.ACTIVE;
                 worldRenderer.clear_text_to_display();
             }
@@ -162,6 +162,11 @@ public class GameScreen extends AbstractGameScreen
     public int get_level()
     {
         return level;
+    }
+
+    public void set_level(int level)
+    {
+        this.level=level;
     }
 
     public void add_level()
